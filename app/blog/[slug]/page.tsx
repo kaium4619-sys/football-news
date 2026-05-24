@@ -11,6 +11,17 @@ const supabase = createClient(
 
 export const dynamic = "force-dynamic";
 
+function cleanContent(html: string): string {
+  return html
+    .replace(/<img[^>]*>/gi, '')
+    .replace(/style="[^"]*"/gi, '')
+    .replace(/style='[^']*'/gi, '')
+    .replace(/<div[^>]*>\s*<\/div>/gi, '')
+    .replace(/<p[^>]*>\s*<\/p>/gi, '')
+    .replace(/Photo by.*?Unsplash<\/a>/gis, '')
+    .replace(/via <a[^>]*>Unsplash<\/a>/gis, '');
+}
+
 export default async function BlogPost({
   params,
 }: {
@@ -28,19 +39,16 @@ export default async function BlogPost({
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
-      {/* Back button */}
       <Link href="/news" className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary mb-8 transition-colors">
         <ArrowLeft className="w-4 h-4" /> Back to News
       </Link>
 
-      {/* Hero Image */}
       {post.image_url && (
         <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden mb-8 border border-border">
           <Image src={post.image_url} alt={post.title} fill className="object-cover" />
         </div>
       )}
 
-      {/* Tags */}
       {post.tags?.length > 0 && (
         <div className="flex gap-2 flex-wrap mb-4">
           {post.tags.map((tag: string) => (
@@ -51,15 +59,12 @@ export default async function BlogPost({
         </div>
       )}
 
-      {/* Title */}
       <h1 className="text-3xl md:text-5xl font-black leading-tight mb-4">{post.title}</h1>
 
-      {/* Meta description */}
       {post.meta_description && (
         <p className="text-muted-foreground text-lg border-l-4 border-primary pl-4 mb-6">{post.meta_description}</p>
       )}
 
-      {/* Date */}
       <div className="flex items-center gap-2 text-muted-foreground text-sm mb-8">
         <Clock className="w-4 h-4" />
         {new Date(post.created_at).toLocaleDateString("en-US", {
@@ -69,18 +74,17 @@ export default async function BlogPost({
 
       <hr className="border-border mb-8" />
 
-     
-
-{/* Content */}
       <div
-        className="prose prose-invert prose-lg max-w-none prose-headings:font-black prose-headings:text-foreground prose-p:text-muted-foreground prose-p:leading-relaxed prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-blockquote:border-primary prose-blockquote:text-muted-foreground"
-        dangerouslySetInnerHTML={{
-          __html: post.content
-            .replace(/<img[^>]*>/gi, '')
-            .replace(/<div[^>]*style="[^"]*text-align:\s*center[^"]*"[^>]*>.*?<\/div>/gis, '')
-            .replace(/Photo by.*?<\/a>/gis, '')
-            .replace(/<p[^>]*>\s*<\/p>/gi, '')
-        }}
+        className="prose prose-invert prose-lg max-w-none
+          [&_*]:!color-inherit
+          [&_h1]:text-foreground [&_h1]:font-black
+          [&_h2]:text-foreground [&_h2]:font-black
+          [&_h3]:text-foreground [&_h3]:font-bold
+          [&_p]:text-muted-foreground [&_p]:leading-relaxed
+          [&_a]:text-primary [&_a]:no-underline
+          [&_blockquote]:border-l-4 [&_blockquote]:border-primary [&_blockquote]:pl-4 [&_blockquote]:text-muted-foreground
+          [&_strong]:text-foreground"
+        dangerouslySetInnerHTML={{ __html: cleanContent(post.content) }}
       />
     </div>
   );
