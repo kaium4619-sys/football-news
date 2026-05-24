@@ -73,24 +73,24 @@ export default async function TeamPage({ params }: PageProps) {
 
   const infoRows: { label: string; value: string }[] = team.isNational
     ? [
-        { label: "Full Name", value: team.name + " National Team" },
-        { label: "Founded", value: String(team.founded) },
-        { label: "Confederation", value: getConfederation(team.name) },
-        { label: "Head Coach", value: team.manager },
-        { label: "Home Ground", value: team.stadium },
-        { label: "Base City", value: team.stadiumCity },
-        ...(team.stadiumCapacity > 0 ? [{ label: "Stadium Cap.", value: team.stadiumCapacity.toLocaleString() }] : []),
-      ]
+      { label: "Full Name", value: team.name + " National Team" },
+      { label: "Founded", value: String(team.founded) },
+      { label: "Confederation", value: getConfederation(team.name) },
+      { label: "Head Coach", value: team.manager },
+      { label: "Home Ground", value: team.stadium },
+      { label: "Base City", value: team.stadiumCity },
+      ...(team.stadiumCapacity > 0 ? [{ label: "Stadium Cap.", value: team.stadiumCapacity.toLocaleString() }] : []),
+    ]
     : [
-        { label: "Full Name", value: team.name },
-        { label: "Founded", value: String(team.founded) },
-        { label: "Country", value: team.country },
-        { label: "Stadium", value: team.stadium },
-        { label: "City", value: team.stadiumCity },
-        ...(team.stadiumCapacity > 0 ? [{ label: "Capacity", value: team.stadiumCapacity.toLocaleString() }] : []),
-        { label: "Manager", value: team.manager },
-        ...(team.league ? [{ label: "League", value: team.league }] : []),
-      ];
+      { label: "Full Name", value: team.name },
+      { label: "Founded", value: String(team.founded) },
+      { label: "Country", value: team.country },
+      { label: "Stadium", value: team.stadium },
+      { label: "City", value: team.stadiumCity },
+      ...(team.stadiumCapacity > 0 ? [{ label: "Capacity", value: team.stadiumCapacity.toLocaleString() }] : []),
+      { label: "Manager", value: team.manager },
+      ...(team.league ? [{ label: "League", value: team.league }] : []),
+    ];
 
   return (
     <div className="min-h-screen">

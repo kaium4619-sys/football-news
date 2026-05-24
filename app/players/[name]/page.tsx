@@ -27,7 +27,7 @@ export default async function PlayerPage({ params }: PageProps) {
 
   // Find player from FAMOUS_PLAYERS
   let playerInfo = FAMOUS_PLAYERS.find(p => p.name.toLowerCase() === decodedName.toLowerCase());
-  
+
   if (!playerInfo) {
     // Search in TEAM_DETAILS
     for (const teamId in TEAM_DETAILS) {
@@ -59,16 +59,16 @@ export default async function PlayerPage({ params }: PageProps) {
   // Pseudo-random deterministic stats based on name length so they don't jump around on re-render
   const seed = playerInfo.name.length;
   const matchesPlayed = (seed * 3) % 15 + 20;
-  
+
   const stats = [
     { label: "Matches Played", value: matchesPlayed, icon: Calendar },
-    { 
-      label: isGoalkeeper ? "Clean Sheets" : (isDefender ? "Tackles Won" : "Goals"), 
+    {
+      label: isGoalkeeper ? "Clean Sheets" : (isDefender ? "Tackles Won" : "Goals"),
       value: isGoalkeeper ? (seed % 10) + 5 : (isDefender ? (seed * 4 % 30) + 20 : (seed * 2 % 20) + 5),
       icon: Star
     },
-    { 
-      label: isGoalkeeper ? "Saves" : (isDefender ? "Interceptions" : "Assists"), 
+    {
+      label: isGoalkeeper ? "Saves" : (isDefender ? "Interceptions" : "Assists"),
       value: isGoalkeeper ? (seed * 5 % 50) + 30 : (isDefender ? (seed * 3 % 40) + 15 : (seed % 15) + 3),
       icon: Trophy
     },
@@ -100,10 +100,10 @@ export default async function PlayerPage({ params }: PageProps) {
         {/* Background gradient effects */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-background z-0" />
         <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent opacity-50 z-0" />
-        
+
         <div className="absolute inset-0 z-10 container mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-end pb-12">
-          <Link 
-            href="/competitions" 
+          <Link
+            href="/competitions"
             className="absolute top-6 left-4 sm:left-6 lg:left-8 flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors group z-50 bg-background/50 backdrop-blur-md px-4 py-2 rounded-full"
           >
             <ChevronLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
@@ -113,12 +113,12 @@ export default async function PlayerPage({ params }: PageProps) {
           <div className="flex flex-col md:flex-row items-center md:items-end gap-8 relative z-20">
             {/* Player Avatar */}
             <div className="relative w-48 h-48 sm:w-64 sm:h-64 rounded-full border-4 border-background shadow-2xl overflow-hidden bg-muted/20 flex-shrink-0 group">
-              <Image 
-                src={playerInfo.image} 
-                alt={playerInfo.name} 
-                fill 
+              <Image
+                src={playerInfo.image}
+                alt={playerInfo.name}
+                fill
                 sizes="(max-width: 640px) 192px, 256px"
-                className="object-cover group-hover:scale-110 transition-transform duration-700" 
+                className="object-cover group-hover:scale-110 transition-transform duration-700"
               />
             </div>
 
@@ -131,7 +131,7 @@ export default async function PlayerPage({ params }: PageProps) {
               <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tighter mb-4 text-transparent bg-clip-text bg-gradient-to-r from-foreground to-foreground/60 drop-shadow-sm">
                 {playerInfo.name}
               </h1>
-              
+
               <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 sm:gap-6 text-sm sm:text-base font-bold text-muted-foreground">
                 <div className="flex items-center gap-2 bg-background/50 backdrop-blur-sm px-4 py-2 rounded-xl border border-border/50">
                   <Shield className="w-5 h-5 text-primary" />
@@ -149,7 +149,7 @@ export default async function PlayerPage({ params }: PageProps) {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 mt-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          
+
           {/* Main Content Column */}
           <div className="lg:col-span-2 space-y-8">
             {/* Stats Overview */}

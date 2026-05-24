@@ -7,7 +7,7 @@ export const revalidate = 60; // 1 min cache
 export default async function MatchDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const fixtureId = parseInt(id, 10);
-  
+
   if (isNaN(fixtureId)) {
     notFound();
   }

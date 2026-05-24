@@ -77,10 +77,10 @@ export default async function CompetitionPage({ params }: { params: Promise<{ id
       {/* ── MAIN BODY ────────────────────────────────────────────────────────── */}
       <div className="container mx-auto px-4 py-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          
+
           {/* LEFT — Matches */}
           <div className="lg:col-span-8 flex flex-col gap-10">
-            
+
             {/* Live/Recent Matches */}
             <section>
               <div className="flex items-center gap-3 mb-6">
@@ -94,35 +94,35 @@ export default async function CompetitionPage({ params }: { params: Promise<{ id
                       <div key={match.fixture.id} className="p-4 rounded-2xl border border-primary/50 bg-primary/5 flex flex-col sm:flex-row items-center justify-between gap-4 relative overflow-hidden">
                         <div className="absolute top-0 right-0 px-3 py-1 bg-primary text-primary-foreground text-[10px] font-black uppercase tracking-widest rounded-bl-xl">LIVE {match.fixture.status.elapsed}&apos;</div>
                         <div className="flex items-center justify-center gap-6 w-full sm:w-auto mt-4 sm:mt-0 flex-1">
-                           <div className="flex flex-col items-center gap-2 flex-1">
-                              <Image src={match.teams.home.logo} alt={match.teams.home.name} width={40} height={40} className="object-contain" />
-                              <span className="text-xs font-bold text-center">{match.teams.home.name}</span>
-                           </div>
-                           <div className="flex flex-col items-center px-4">
-                              <span className="text-3xl font-black text-primary">{match.goals.home} - {match.goals.away}</span>
-                           </div>
-                           <div className="flex flex-col items-center gap-2 flex-1">
-                              <Image src={match.teams.away.logo} alt={match.teams.away.name} width={40} height={40} className="object-contain" />
-                              <span className="text-xs font-bold text-center">{match.teams.away.name}</span>
-                           </div>
+                          <div className="flex flex-col items-center gap-2 flex-1">
+                            <Image src={match.teams.home.logo} alt={match.teams.home.name} width={40} height={40} className="object-contain" />
+                            <span className="text-xs font-bold text-center">{match.teams.home.name}</span>
+                          </div>
+                          <div className="flex flex-col items-center px-4">
+                            <span className="text-3xl font-black text-primary">{match.goals.home} - {match.goals.away}</span>
+                          </div>
+                          <div className="flex flex-col items-center gap-2 flex-1">
+                            <Image src={match.teams.away.logo} alt={match.teams.away.name} width={40} height={40} className="object-contain" />
+                            <span className="text-xs font-bold text-center">{match.teams.away.name}</span>
+                          </div>
                         </div>
                       </div>
                     ))}
                     {results.map((match: any) => (
                       <div key={match.fixture.id} className="p-4 rounded-2xl border border-border bg-card flex flex-col sm:flex-row items-center justify-between gap-4">
                         <div className="flex items-center justify-center gap-6 w-full sm:w-auto flex-1">
-                           <div className="flex flex-col items-center gap-2 flex-1">
-                              <Image src={match.teams.home.logo} alt={match.teams.home.name} width={40} height={40} className="object-contain" />
-                              <span className="text-xs font-bold text-center">{match.teams.home.name}</span>
-                           </div>
-                           <div className="flex flex-col items-center px-4">
-                              <span className="text-2xl font-black">{match.goals.home} - {match.goals.away}</span>
-                              <span className="text-[10px] text-muted-foreground font-bold uppercase">{match.fixture.status.short}</span>
-                           </div>
-                           <div className="flex flex-col items-center gap-2 flex-1">
-                              <Image src={match.teams.away.logo} alt={match.teams.away.name} width={40} height={40} className="object-contain" />
-                              <span className="text-xs font-bold text-center">{match.teams.away.name}</span>
-                           </div>
+                          <div className="flex flex-col items-center gap-2 flex-1">
+                            <Image src={match.teams.home.logo} alt={match.teams.home.name} width={40} height={40} className="object-contain" />
+                            <span className="text-xs font-bold text-center">{match.teams.home.name}</span>
+                          </div>
+                          <div className="flex flex-col items-center px-4">
+                            <span className="text-2xl font-black">{match.goals.home} - {match.goals.away}</span>
+                            <span className="text-[10px] text-muted-foreground font-bold uppercase">{match.fixture.status.short}</span>
+                          </div>
+                          <div className="flex flex-col items-center gap-2 flex-1">
+                            <Image src={match.teams.away.logo} alt={match.teams.away.name} width={40} height={40} className="object-contain" />
+                            <span className="text-xs font-bold text-center">{match.teams.away.name}</span>
+                          </div>
                         </div>
                       </div>
                     ))}
