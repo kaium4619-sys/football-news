@@ -69,7 +69,8 @@ export default async function BlogPost({
 
       <hr className="border-border mb-8" />
 
-      {/* Content */}
+     
+     {/* Content - remove first img tag since we show hero separately */}
       <div
         className="prose prose-invert prose-lg max-w-none
           prose-headings:font-black prose-headings:text-foreground
@@ -77,8 +78,9 @@ export default async function BlogPost({
           prose-a:text-primary prose-a:no-underline hover:prose-a:underline
           prose-img:rounded-xl prose-img:border prose-img:border-border
           prose-blockquote:border-primary prose-blockquote:text-muted-foreground"
-        dangerouslySetInnerHTML={{ __html: post.content }}
+        dangerouslySetInnerHTML={{ 
+          __html: post.content.replace(/<div[^>]*>[\s]*<img[^>]*>[\s]*<\/div>/i, '').replace(/<img[^>]*>/i, '')
+        }}
       />
-    </div>
   );
 }
