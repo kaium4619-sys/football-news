@@ -70,10 +70,17 @@ export default async function BlogPost({
       <hr className="border-border mb-8" />
 
      
+
 {/* Content */}
       <div
-        className="prose prose-invert prose-lg max-w-none prose-headings:font-black prose-headings:text-foreground prose-p:text-muted-foreground prose-p:leading-relaxed prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-img:border prose-img:border-border prose-blockquote:border-primary prose-blockquote:text-muted-foreground"
-        dangerouslySetInnerHTML={{ __html: post.content.replace(/<img[^>]*>/gi, '') }}
+        className="prose prose-invert prose-lg max-w-none prose-headings:font-black prose-headings:text-foreground prose-p:text-muted-foreground prose-p:leading-relaxed prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-blockquote:border-primary prose-blockquote:text-muted-foreground"
+        dangerouslySetInnerHTML={{
+          __html: post.content
+            .replace(/<img[^>]*>/gi, '')
+            .replace(/<div[^>]*style="[^"]*text-align:\s*center[^"]*"[^>]*>.*?<\/div>/gis, '')
+            .replace(/Photo by.*?<\/a>/gis, '')
+            .replace(/<p[^>]*>\s*<\/p>/gi, '')
+        }}
       />
     </div>
   );
