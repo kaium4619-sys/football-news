@@ -9,23 +9,26 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
 
-const API_SECRET = process.env.POST_API_SECRET!;
-
 export async function POST(req: NextRequest) {
-  // Auth check
   const authHeader = req.headers.get("x-api-key");
-  if (authHeader !== API_SECRET) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const expected = process.env.POST_API_SECRET;
+
+  // Debug log
+  console.log("Received key:", authHeader);
+  console.log("Expected key:", expected);
+
+  if (authHeader !== expected) {
+    return NextResponse.json(
+      { error: "Unauthorized", received: authHeader, expected: expected },
+      { status: 401 }
+    );
   }
 
   const body = await req.json();
   const { title, slug, meta_description, content, image_url, tags } = body;
 
   if (!title || !slug || !content) {
-    return NextResponse.json(
-      { error: "title, slug and content are required" },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: "title, slug and content are required" }, { status: 400 });
   }
 
   const { data, error } = await supabase
