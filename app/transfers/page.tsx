@@ -1,107 +1,124 @@
-import { ArrowRightLeft, Search, TrendingUp, DollarSign, Info } from "lucide-react";
+import { LiveScoreWidget } from "@/components/matches/LiveScoreWidget";
+import { StandingsWidget } from "@/components/matches/StandingsWidget";
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, Flame } from "lucide-react";
+import { createClient } from "@supabase/supabase-js";
 
-const MOCK_TRANSFERS = [
-  {
-    id: 1,
-    player: "Kylian Mbappé",
-    from: { name: "Paris Saint Germain", logo: "https://media.api-sports.io/football/teams/85.png" },
-    to: { name: "Real Madrid", logo: "https://media.api-sports.io/football/teams/541.png" },
-    value: "€180M",
-    type: "Confirmed",
-  },
-  {
-    id: 2,
-    player: "Victor Osimhen",
-    from: { name: "Napoli", logo: "https://media.api-sports.io/football/teams/492.png" },
-    to: { name: "Chelsea", logo: "https://media.api-sports.io/football/teams/49.png" },
-    value: "€120M",
-    type: "Rumour",
-  },
-  {
-    id: 3,
-    player: "Bruno Guimarães",
-    from: { name: "Newcastle", logo: "https://media.api-sports.io/football/teams/34.png" },
-    to: { name: "Manchester City", logo: "https://media.api-sports.io/football/teams/50.png" },
-    value: "€100M",
-    type: "Rumour",
-  },
-  {
-    id: 4,
-    player: "Florian Wirtz",
-    from: { name: "Bayer Leverkusen", logo: "https://media.api-sports.io/football/teams/168.png" },
-    to: { name: "Bayern Munich", logo: "https://media.api-sports.io/football/teams/157.png" },
-    value: "€110M",
-    type: "Interest",
-  }
-];
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
-export default function TransfersPage() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const { data: posts } = await supabase
+    .from("posts")
+    .select("*")
+    .eq("published", true)
+    .order("created_at", { ascending: false })
+    .limit(5);
+
+  const featuredPost = posts?.[0];
+  const otherPosts = posts?.slice(1, 5) ?? [];
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex flex-col gap-10">
-        
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <div className="max-w-2xl">
-            <h1 className="text-4xl font-black uppercase tracking-tighter mb-2 flex items-center gap-3">
-              <ArrowRightLeft className="h-10 w-10 text-primary" /> Transfer Center
-            </h1>
-            <p className="text-muted-foreground text-lg">Latest confirmed deals, trending rumours, and market value updates from the world of football.</p>
+    <div className="container mx-auto px-4 py-6 md:py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+      {/* Main Content Area */}
+      <div className="lg:col-span-8 flex flex-col gap-8">
+
+        {/* Featured Hero Story */}
+        {featuredPost ? (
+          <Link href={`/blog/${featuredPost.slug}`}>
+            <section className="relative rounded-2xl overflow-hidden aspect-[4/3] md:aspect-[21/9] group block cursor-pointer border border-border">
+              {featuredPost.image_url ? (
+                <Image
+                  src={featuredPost.image_url}
+                  alt={featuredPost.title}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              ) : (
+                <div className="w-full h-full bg-muted" />
+              )}
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-6 md:p-8 w-full flex flex-col gap-3">
+                {featuredPost.tags?.[0] && (
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-bold uppercase tracking-wider w-max">
+                    <Flame className="w-3.5 h-3.5" /> {featuredPost.tags[0]}
+                  </span>
+                )}
+                <h1 className="text-2xl md:text-4xl font-black tracking-tight text-foreground leading-tight max-w-3xl">
+                  {featuredPost.title}
+                </h1>
+                {featuredPost.meta_description && (
+                  <p className="text-muted-foreground line-clamp-2 md:text-lg max-w-2xl">
+                    {featuredPost.meta_description}
+                  </p>
+                )}
+              </div>
+            </section>
+          </Link>
+        ) : (
+          <section className="relative rounded-2xl overflow-hidden aspect-[4/3] md:aspect-[21/9] group block cursor-pointer border border-border">
+            <Image
+              src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=1200&auto=format&fit=crop"
+              alt="Breaking News"
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+            <div className="absolute bottom-0 left-0 p-6 md:p-8 w-full flex flex-col gap-3">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-bold uppercase tracking-wider w-max">
+                <Flame className="w-3.5 h-3.5" /> Breaking
+              </span>
+              <h1 className="text-2xl md:text-4xl font-black tracking-tight text-foreground leading-tight max-w-3xl">
+                Champions League Draw: Real Madrid to face Manchester City in Quarter-Finals
+              </h1>
+            </div>
+          </section>
+        )}
+
+        {/* Top Stories Grid */}
+        <section>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-black uppercase tracking-tight">Top Stories</h2>
+            <Link href="/news" className="text-sm font-semibold text-primary hover:underline flex items-center gap-1">
+              All News <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
-          <div className="relative w-full md:w-80">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-            <input type="text" placeholder="Search player or club..." className="w-full bg-card border border-border rounded-2xl pl-12 pr-4 py-4 text-sm" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {otherPosts.length > 0 ? otherPosts.map(post => (
+              <Link key={post.id} href={`/blog/${post.slug}`} className="group flex flex-col gap-3">
+                <div className="relative aspect-[16/9] rounded-xl overflow-hidden border border-border">
+                  {post.image_url ? (
+                    <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                  ) : (
+                    <div className="w-full h-full bg-muted" />
+                  )}
+                </div>
+                <div>
+                  {post.tags?.[0] && (
+                    <span className="text-primary text-xs font-bold uppercase mb-1 block">{post.tags[0]}</span>
+                  )}
+                  <h3 className="text-lg font-bold leading-tight group-hover:text-primary transition-colors">{post.title}</h3>
+                </div>
+              </Link>
+            )) : (
+              <p className="text-muted-foreground col-span-2">No stories yet.</p>
+            )}
           </div>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-           {/* Main Feed */}
-           <div className="lg:col-span-8 space-y-6">
-              <div className="flex items-center gap-2 mb-2">
-                 <div className="px-3 py-1 bg-primary text-primary-foreground rounded-full text-[10px] font-black uppercase">Latest News</div>
-                 <div className="h-px flex-1 bg-border/50"></div>
-              </div>
-
-              <div className="bg-card border border-border rounded-3xl p-12 text-center text-muted-foreground font-bold">
-                 No recent transfer data available at this time.
-              </div>
-           </div>
-
-           {/* Sidebar */}
-           <aside className="lg:col-span-4 flex flex-col gap-8">
-              <div className="bg-card border border-border rounded-[32px] p-8">
-                 <div className="flex items-center gap-3 mb-6">
-                    <TrendingUp className="h-6 w-6 text-primary" />
-                    <h2 className="text-xl font-black uppercase tracking-tighter">Most Valuable</h2>
-                 </div>
-                 <div className="space-y-6">
-                    {[1,2,3].map(i => (
-                      <div key={i} className="flex items-center justify-between">
-                         <div className="flex items-center gap-3">
-                            <span className="text-muted-foreground font-black italic">0{i}</span>
-                            <span className="font-bold text-sm">Player Name</span>
-                         </div>
-                         <span className="text-xs font-black text-primary">€150M</span>
-                      </div>
-                    ))}
-                 </div>
-              </div>
-
-              <div className="bg-primary/5 border border-primary/20 rounded-[32px] p-8">
-                 <DollarSign className="h-8 w-8 text-primary mb-4" />
-                 <h3 className="text-xl font-black uppercase mb-2">Market Watch</h3>
-                 <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                    Premier League spending has reached record highs this season, totaling over €2.4 Billion.
-                 </p>
-                 <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-primary">
-                    <Info className="w-3.5 h-3.5" /> Read Analysis
-                 </div>
-              </div>
-           </aside>
-        </div>
-
+        </section>
       </div>
+
+      {/* Sidebar */}
+      <aside className="lg:col-span-4 flex flex-col gap-8">
+        <div className="sticky top-24 flex flex-col gap-8">
+          <LiveScoreWidget />
+          <StandingsWidget />
+        </div>
+      </aside>
     </div>
   );
 }
