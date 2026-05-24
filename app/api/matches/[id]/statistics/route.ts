@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { cacheGet, cacheSet, CacheKey, TTL, checkRateLimit } from "@/lib/redis-cache";
 import { fetchMatchStatistics } from "@/lib/football-api";
 
+export const dynamic = "force-dynamic"; // 👈 Add this line
 export const runtime = "nodejs";
 
 export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
