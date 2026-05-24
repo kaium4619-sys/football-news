@@ -91,9 +91,9 @@ export default async function MatchDetailsPage({ params }: { params: Promise<{ i
           </h3>
           <div className="space-y-4">
             {Array.isArray(stats) && stats.length === 2 ? (
-              stats[0].statistics.map((stat: any, i: number) => {
+              (stats[0] as any).statistics.map((stat: any, i: number) => {
                 const homeStat = stat.value ?? 0;
-                const awayStat = stats[1].statistics[i].value ?? 0;
+                const awayStat = (stats[1] as any).statistics[i].value ?? 0;
                 return (
                   <div key={stat.type} className="flex items-center justify-between text-sm">
                     <div className="w-16 font-bold">{homeStat}</div>
