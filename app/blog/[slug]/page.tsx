@@ -92,7 +92,7 @@ export default async function BlogPost({
           [&_a]:text-primary [&_a]:underline [&_a]:underline-offset-4 [&_a]:font-medium [&_a]:transition-colors [&_a]:hover:text-primary-foreground
           [&_blockquote]:bg-blue-50/10 [&_blockquote]:border-l-4 [&_blockquote]:border-blue-500 [&_blockquote]:pl-4 md:[&_blockquote]:pl-6 [&_blockquote]:pr-4 md:[&_blockquote]:pr-6 [&_blockquote]:py-3 md:[&_blockquote]:py-4 [&_blockquote]:rounded-2xl [&_blockquote]:italic [&_blockquote]:text-foreground/90 [&_blockquote]:my-4 md:[&_blockquote]:my-6 [&_blockquote]:shadow-sm [&_blockquote]:relative
           [&_strong]:text-foreground [&_strong]:font-bold
-          [&_ul]:!list-none [&_ul]:!pl-0 [&_ul]:grid [&_ul]:grid-cols-2 [&_ul]:md:grid-cols-3 [&_ul]:gap-3 [&_ul]:mb-6 md:[&_ul]:mb-8
+          [&_ul]:!list-none [&_ul]:!pl-0 [&_ul]:grid [&_ul]:grid-cols-1 [&_ul]:sm:grid-cols-2 [&_ul]:md:grid-cols-3 [&_ul]:gap-3 [&_ul]:mb-6 md:[&_ul]:mb-8
           [&_ul_li]:bg-card [&_ul_li]:border [&_ul_li]:border-border [&_ul_li]:rounded-xl [&_ul_li]:p-4 [&_ul_li]:shadow-sm [&_ul_li]:text-muted-foreground [&_ul_li]:leading-relaxed [&_ul_li]:text-sm [&_ul_li]:flex [&_ul_li]:flex-col [&_ul_li]:gap-2
           [&_ul_li::before]:content-['🔴'] [&_ul_li::before]:block [&_ul_li::before]:text-base
           [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:space-y-2 md:[&_ol]:space-y-3 [&_ol]:mb-6 md:[&_ol]:mb-8
