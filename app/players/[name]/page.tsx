@@ -35,7 +35,7 @@ export default async function PlayerPage({ params }: PageProps) {
       if (p) {
         const teamBase = ALL_TEAMS.find(t => t.id === Number(teamId));
         playerInfo = {
-          id: Math.random() * 100000,
+          id: p.name.length * 1000,
           name: p.name,
           team: teamBase?.name || "Unknown Team",
           country: p.nationality,

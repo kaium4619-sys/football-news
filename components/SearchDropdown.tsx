@@ -6,16 +6,11 @@ import Link from "next/link";
 import Image from "next/image";
 
 export function SearchDropdown() {
-  const [query, setQuery] = setQueryState("");
+  const [query, setQuery] = useState("");
   const [results, setResults] = useState<{ teams: any[]; leagues: any[] } | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
-
-  // Custom setQueryState to just use state
-  function setQueryState(initial: string) {
-    return useState(initial);
-  }
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
