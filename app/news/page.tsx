@@ -8,16 +8,33 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
-const NEWS_CATEGORIES = ["All", "Transfers", "Premier League", "Champions League", "La Liga", "Serie A", "International"];
+const NEWS_CATEGORIES = [
+  { label: "All", tag: null },
+  { label: "Transfers", tag: "topic:transfers" },
+  { label: "Premier League", tag: "competition:39" },
+  { label: "Champions League", tag: "competition:2" },
+  { label: "La Liga", tag: "competition:140" },
+  { label: "Serie A", tag: "competition:135" },
+  { label: "International", tag: "topic:matches" },
+];
 
 export const dynamic = "force-dynamic";
 
-export default async function NewsPage() {
-  const { data: posts } = await supabase
+export default async function NewsPage({ searchParams }: { searchParams: Promise<{ category?: string }> }) {
+  const { category } = await searchParams;
+
+  const selectedCat = NEWS_CATEGORIES.find(c => c.label === category) || NEWS_CATEGORIES[0];
+
+  let query = supabase
     .from("posts")
     .select("*")
-    .eq("published", true)
-    .order("created_at", { ascending: false });
+    .eq("published", true);
+
+  if (selectedCat.tag) {
+    query = query.contains("tags", [selectedCat.tag]);
+  }
+
+  const { data: posts } = await query.order("created_at", { ascending: false });
 
   const featuredPost = posts?.[0];
   const otherPosts = posts?.slice(1) ?? [];
@@ -35,15 +52,16 @@ export default async function NewsPage() {
             </div>
           </div>
           <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide">
-            {NEWS_CATEGORIES.map((cat, i) => (
-              <button
-                key={cat}
+            {NEWS_CATEGORIES.map((cat) => (
+              <Link
+                key={cat.label}
+                href={`/news${cat.tag ? `?category=${cat.label}` : ''}`}
                 className={`px-5 py-2 rounded-full text-sm font-bold transition-all whitespace-nowrap ${
-                  i === 0 ? "bg-primary text-primary-foreground" : "bg-card border border-border hover:border-primary/50"
+                  selectedCat.label === cat.label ? "bg-primary text-primary-foreground" : "bg-card border border-border hover:border-primary/50"
                 }`}
               >
-                {cat}
-              </button>
+                {cat.label}
+              </Link>
             ))}
           </div>
         </div>
@@ -98,7 +116,7 @@ export default async function NewsPage() {
                 ))}
               </div>
             ) : (
-              <p className="text-muted-foreground">No posts yet.</p>
+              <p className="text-muted-foreground">No posts yet in this category.</p>
             )}
           </div>
 

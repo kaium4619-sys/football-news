@@ -7,6 +7,12 @@ import {
 } from "lucide-react";
 import { ALL_TEAMS } from "@/lib/api-mock";
 import { TEAM_DETAILS, getTeamDetail } from "@/lib/team-details";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -32,6 +38,14 @@ export default async function TeamPage({ params }: PageProps) {
   if (!base) notFound();
 
   const team = getTeamDetail(numId, base);
+
+  const { data: recentNews } = await supabase
+    .from("posts")
+    .select("*")
+    .eq("published", true)
+    .contains("tags", [`team:${numId}`])
+    .order("created_at", { ascending: false })
+    .limit(5);
 
   const tagColors: Record<string, string> = {
     "Premier League": "bg-purple-500/20 text-purple-300",
@@ -219,32 +233,37 @@ export default async function TeamPage({ params }: PageProps) {
                 <h2 className="text-xl font-black uppercase tracking-tight">Latest News</h2>
               </div>
               <div className="flex flex-col gap-4">
-                {team.recentNews.map((news, i) => {
-                  const tagClass = tagColors[news.tag] ?? "bg-muted/30 text-muted-foreground";
+                {recentNews && recentNews.length > 0 ? recentNews.map((news, i) => {
+                  const primaryTag = news.tags?.[0] ?? "Club News";
+                  const tagClass = tagColors[primaryTag] ?? "bg-muted/30 text-muted-foreground";
                   return (
                     <div
                       key={i}
                       className="flex items-start gap-4 p-5 rounded-2xl border border-border bg-card hover:border-primary/30 hover:bg-muted/5 transition-all cursor-pointer group"
                     >
-                      <div
-                        className="w-10 h-10 flex-shrink-0 rounded-xl flex items-center justify-center mt-0.5"
-                        style={{ background: `${team.primaryColor}22` }}
-                      >
-                        <TrendingUp className="w-4 h-4" style={{ color: team.primaryColor }} />
-                      </div>
-                      <div className="flex flex-col gap-2 min-w-0">
-                        <h3 className="font-bold text-base group-hover:text-primary transition-colors leading-snug">
-                          {news.title}
-                        </h3>
-                        <div className="flex items-center gap-3">
-                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-widest ${tagClass}`}>
-                            {news.tag}
-                          </span>
+                      <Link href={`/blog/${news.slug}`} className="flex items-start gap-4 p-0 w-full">
+                        <div
+                          className="w-10 h-10 flex-shrink-0 rounded-xl flex items-center justify-center mt-0.5"
+                          style={{ background: `${team.primaryColor}22` }}
+                        >
+                          <TrendingUp className="w-4 h-4" style={{ color: team.primaryColor }} />
                         </div>
-                      </div>
+                        <div className="flex flex-col gap-2 min-w-0">
+                          <h3 className="font-bold text-base group-hover:text-primary transition-colors leading-snug">
+                            {news.title}
+                          </h3>
+                          <div className="flex items-center gap-3">
+                            <span className={`px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-widest ${tagClass}`}>
+                              {primaryTag}
+                            </span>
+                          </div>
+                        </div>
+                      </Link>
                     </div>
                   );
-                })}
+                }) : (
+                  <p className="text-sm text-muted-foreground italic">No news available for this team yet.</p>
+                )}
               </div>
             </section>
 

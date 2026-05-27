@@ -17,6 +17,7 @@ export default async function Home() {
     .from("posts")
     .select("*")
     .eq("published", true)
+    .contains("tags", ["topic:transfers"])
     .order("created_at", { ascending: false })
     .limit(5);
 

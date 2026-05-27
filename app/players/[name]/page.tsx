@@ -7,6 +7,12 @@ import {
 } from "lucide-react";
 import { FAMOUS_PLAYERS, ALL_TEAMS } from "@/lib/api-mock";
 import { TEAM_DETAILS } from "@/lib/team-details";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
 interface PageProps {
   params: Promise<{ name: string }>;
@@ -51,6 +57,14 @@ export default async function PlayerPage({ params }: PageProps) {
     notFound();
   }
 
+  const { data: recentNews } = await supabase
+    .from("posts")
+    .select("*")
+    .eq("published", true)
+    .contains("tags", [`player:${playerInfo.id}`])
+    .order("created_at", { ascending: false })
+    .limit(5);
+
   // Generate fake stats based on position
   const pos = playerInfo.position.toLowerCase();
   const isGoalkeeper = pos.includes('gk') || pos.includes('goalkeeper');
@@ -73,24 +87,6 @@ export default async function PlayerPage({ params }: PageProps) {
       icon: Trophy
     },
     { label: "Pass Accuracy", value: ((seed % 15) + 75).toFixed(1) + "%", icon: BarChart2 }
-  ];
-
-  const news = [
-    {
-      title: `${playerInfo.name} delivers masterclass performance in crucial fixture`,
-      tag: "Match Report",
-      tagClass: "bg-blue-500/20 text-blue-300"
-    },
-    {
-      title: `Manager praises ${playerInfo.name}'s impact on the team this season`,
-      tag: "Interview",
-      tagClass: "bg-purple-500/20 text-purple-300"
-    },
-    {
-      title: `Tactical Analysis: How ${playerInfo.name} fits into the new system`,
-      tag: "Analysis",
-      tagClass: "bg-orange-500/20 text-orange-300"
-    }
   ];
 
   return (
@@ -183,17 +179,17 @@ export default async function PlayerPage({ params }: PageProps) {
                 </div>
               </div>
               <div className="space-y-4">
-                {news.map((item, idx) => (
-                  <Link href="#" key={idx} className="block group bg-card border border-border rounded-2xl p-5 sm:p-6 hover:border-primary/50 transition-all hover:-translate-y-1">
+                {recentNews && recentNews.length > 0 ? recentNews.map((post, idx) => (
+                  <Link href={`/blog/${post.slug}`} key={idx} className="block group bg-card border border-border rounded-2xl p-5 sm:p-6 hover:border-primary/50 transition-all hover:-translate-y-1">
                     <div className="flex flex-col sm:flex-row gap-4 justify-between">
                       <div className="space-y-3">
                         <div className="flex items-center gap-3">
-                          <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${item.tagClass}`}>
-                            {item.tag}
+                          <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-primary/20 text-primary">
+                            {post.tags?.[0] ?? "Player News"}
                           </span>
                         </div>
                         <h3 className="text-lg sm:text-xl font-bold leading-tight group-hover:text-primary transition-colors">
-                          {item.title}
+                          {post.title}
                         </h3>
                       </div>
                       <div className="hidden sm:flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors shrink-0">
@@ -201,7 +197,9 @@ export default async function PlayerPage({ params }: PageProps) {
                       </div>
                     </div>
                   </Link>
-                ))}
+                )) : (
+                  <p className="text-muted-foreground italic">No news available for this player yet.</p>
+                )}
               </div>
             </section>
           </div>

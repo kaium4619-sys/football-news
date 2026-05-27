@@ -107,6 +107,11 @@ export async function searchLeagues(query: string) {
   return apiFetch<unknown[]>(`/leagues?search=${encodeURIComponent(query)}`);
 }
 
+/** Transfer data for a given league and season. */
+export async function fetchTransfers(leagueId: number, season: number) {
+  return apiFetch<unknown[]>(`/transfers?league=${leagueId}&season=${season}`);
+}
+
 // ── Normalizers for Supabase storage ─────────────────────────────────────────
 
 export function normaliseMatch(raw: Record<string, unknown>) {
