@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { TrendingUp } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
+import NewsletterForm from "@/components/NewsletterForm";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -147,10 +148,7 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
             <div className="rounded-2xl bg-primary/10 p-6 border border-primary/20">
               <h3 className="font-bold text-sm text-primary uppercase mb-2">Newsletter</h3>
               <p className="text-xs text-muted-foreground mb-4">Get the latest football news delivered to your inbox daily.</p>
-              <div className="flex gap-2">
-                <input type="email" placeholder="Email" className="bg-background border border-border rounded-lg px-3 py-2 text-xs flex-1" />
-                <button className="bg-primary text-primary-foreground px-4 py-2 rounded-lg text-xs font-bold">Join</button>
-              </div>
+              <NewsletterForm />
             </div>
           </aside>
         </div>

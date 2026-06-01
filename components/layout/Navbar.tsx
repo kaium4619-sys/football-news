@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, Trophy, Home, Newspaper, Calendar, Shield, ChevronDown, ListOrdered, CheckCircle2, ArrowRightLeft, Globe, Award, Star, Users } from "lucide-react";
@@ -9,7 +10,25 @@ import { SearchDropdown } from "@/components/SearchDropdown";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function Navbar() {
+  const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const activeLink = (href: string) => {
+    if (href === "/") return pathname === "/";
+    if (href === "/competitions") return pathname.startsWith("/competitions");
+    if (href === "/teams") return pathname.startsWith("/teams");
+    return pathname === href;
+  };
+
+  const linkClasses = (href: string) =>
+    `flex items-center gap-1 whitespace-nowrap transition-colors ${
+      activeLink(href) ? "text-primary font-bold" : "hover:text-primary"
+    }`;
+
+  const mobileLinkClasses = (href: string) =>
+    `flex flex-col items-center justify-center gap-1 transition-colors flex-1 h-full uppercase tracking-tighter ${
+      activeLink(href) ? "text-primary bg-primary/10" : "text-muted-foreground hover:text-primary"
+    }`;
 
   return (
     <>
@@ -21,22 +40,22 @@ export function Navbar() {
           </Link>
 
           <nav className="hidden xl:flex items-center gap-4 font-medium text-xs h-full">
-            <Link href="/" className="hover:text-primary transition-colors flex items-center gap-1 whitespace-nowrap">
+            <Link href="/" className={linkClasses("/")}>
               <Home className="h-3.5 w-3.5" /> Home
             </Link>
-            <Link href="/news" className="hover:text-primary transition-colors flex items-center gap-1 whitespace-nowrap">
+            <Link href="/news" className={linkClasses("/news")}>
               <Newspaper className="h-3.5 w-3.5" /> News
             </Link>
-            <Link href="/matches" className="hover:text-primary transition-colors flex items-center gap-1 whitespace-nowrap">
+            <Link href="/matches" className={linkClasses("/matches")}>
               <Calendar className="h-3.5 w-3.5" /> Matches
             </Link>
-            <Link href="/results" className="hover:text-primary transition-colors flex items-center gap-1 whitespace-nowrap">
+            <Link href="/results" className={linkClasses("/results")}>
               <CheckCircle2 className="h-3.5 w-3.5" /> Results
             </Link>
-            <Link href="/tables" className="hover:text-primary transition-colors flex items-center gap-1 whitespace-nowrap">
+            <Link href="/tables" className={linkClasses("/tables")}>
               <ListOrdered className="h-3.5 w-3.5" /> Tables
             </Link>
-            <Link href="/transfers" className="hover:text-primary transition-colors flex items-center gap-1 whitespace-nowrap">
+            <Link href="/transfers" className={linkClasses("/transfers")}>
               <ArrowRightLeft className="h-3.5 w-3.5" /> Transfers
             </Link>
 
@@ -189,11 +208,11 @@ export function Navbar() {
 
           {/* Fallback for medium screens */}
           <nav className="hidden md:flex xl:hidden items-center gap-3 font-medium text-[10px] h-full uppercase tracking-tighter">
-            <Link href="/matches" className="hover:text-primary transition-colors">Matches</Link>
-            <Link href="/results" className="hover:text-primary transition-colors">Results</Link>
-            <Link href="/tables" className="hover:text-primary transition-colors">Tables</Link>
-            <Link href="/transfers" className="hover:text-primary transition-colors">Transfers</Link>
-            <Link href="/competitions" className="hover:text-primary transition-colors text-primary font-bold">Comps</Link>
+            <Link href="/matches" className={activeLink("/matches") ? "text-primary font-bold" : "hover:text-primary transition-colors"}>Matches</Link>
+            <Link href="/results" className={activeLink("/results") ? "text-primary font-bold" : "hover:text-primary transition-colors"}>Results</Link>
+            <Link href="/tables" className={activeLink("/tables") ? "text-primary font-bold" : "hover:text-primary transition-colors"}>Tables</Link>
+            <Link href="/transfers" className={activeLink("/transfers") ? "text-primary font-bold" : "hover:text-primary transition-colors"}>Transfers</Link>
+            <Link href="/competitions" className={activeLink("/competitions") ? "text-primary font-bold" : "hover:text-primary transition-colors"}>Comps</Link>
           </nav>
 
           {/* Mobile top right icons: Search, Theme, Hamburger */}
@@ -245,23 +264,23 @@ export function Navbar() {
 
       {/* Mobile Bottom Navigation Bar */}
       <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-background/95 backdrop-blur h-16 flex items-center justify-around px-1 pb-safe">
-        <Link href="/" className="flex flex-col items-center justify-center gap-1 text-muted-foreground hover:text-primary flex-1 h-full transition-colors">
+        <Link href="/" className={mobileLinkClasses("/")}>
           <Home className="h-5 w-5" />
           <span className="text-[10px] font-bold uppercase tracking-tighter">Home</span>
         </Link>
-        <Link href="/matches" className="flex flex-col items-center justify-center gap-1 text-muted-foreground hover:text-primary flex-1 h-full transition-colors">
+        <Link href="/matches" className={mobileLinkClasses("/matches")}>
           <Calendar className="h-5 w-5" />
           <span className="text-[10px] font-bold uppercase tracking-tighter">Matches</span>
         </Link>
-        <Link href="/results" className="flex flex-col items-center justify-center gap-1 text-muted-foreground hover:text-primary flex-1 h-full transition-colors">
+        <Link href="/results" className={mobileLinkClasses("/results")}>
           <CheckCircle2 className="h-5 w-5" />
           <span className="text-[10px] font-bold uppercase tracking-tighter">Results</span>
         </Link>
-        <Link href="/tables" className="flex flex-col items-center justify-center gap-1 text-muted-foreground hover:text-primary flex-1 h-full transition-colors">
+        <Link href="/tables" className={mobileLinkClasses("/tables")}>
           <ListOrdered className="h-5 w-5" />
           <span className="text-[10px] font-bold uppercase tracking-tighter">Tables</span>
         </Link>
-        <Link href="/transfers" className="flex flex-col items-center justify-center gap-1 text-muted-foreground hover:text-primary flex-1 h-full transition-colors">
+        <Link href="/transfers" className={mobileLinkClasses("/transfers")}>
           <ArrowRightLeft className="h-5 w-5" />
           <span className="text-[10px] font-bold uppercase tracking-tighter">Transfers</span>
         </Link>
