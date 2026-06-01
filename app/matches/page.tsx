@@ -43,10 +43,19 @@ export default function MatchesPage() {
   }, [dateIndex, dates]);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    fetchMatches(false);
-    const interval = setInterval(() => fetchMatches(true), 30_000);
-    return () => clearInterval(interval);
+    // schedule initial fetch to avoid calling setState synchronously within the effect
+    const timer = setTimeout(() => {
+      void fetchMatches(false);
+    }, 0);
+
+    const interval = setInterval(() => {
+      void fetchMatches(true);
+    }, 30_000);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timer);
+    };
   }, [fetchMatches]);
 
   // Filter based on tab
