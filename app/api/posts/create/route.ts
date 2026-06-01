@@ -22,19 +22,32 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json();
-  const { title, slug, meta_description, content, image_url, tags: manualTags } = body;
+  const { title, subtitle, slug, meta_description, content, image_url, tags: manualTags, keywords, entities } = body;
 
   if (!title || !slug || !content) {
     return NextResponse.json({ error: "title, slug and content are required" }, { status: 400 });
   }
 
   // Automatically classify article and merge with manual tags
-  const autoTags = classifyArticle(title, content);
-  const combinedTags = Array.from(new Set([...(manualTags || []), ...autoTags]));
+  const classification = classifyArticle({ title, subtitle, content, keywords, entities, tags: manualTags });
+
+  const finalMeta = meta_description || classification.seoDescription;
+  const finalSeoTitle = classification.seoTitle;
 
   const { data, error } = await supabase
     .from("posts")
-    .insert([{ title, slug, meta_description, content, image_url, tags: combinedTags, published: true }])
+    .insert([{ 
+      title, 
+      subtitle,
+      slug, 
+      seo_title: finalSeoTitle,
+      meta_description: finalMeta, 
+      content, 
+      image_url, 
+      tags: classification.tags, 
+      keywords,
+      published: true 
+    }])
     .select()
     .single();
 
@@ -42,5 +55,5 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  return NextResponse.json({ success: true, post: data }, { status: 201 });
+  return NextResponse.json({ success: true, post: data, classification }, { status: 201 });
 }

@@ -28,6 +28,25 @@ export const ALL_LEAGUES = [
   { id: 16, name: "CONCACAF Champions Cup", country: "N. America", logo: "https://media.api-sports.io/football/leagues/16.png", type: "Club-Int" }
 ];
 
+export const COMPETITION_ALIASES: Record<string, number> = {
+  "premier league": 39, "epl": 39, "pl": 39, "english premier league": 39,
+  "la liga": 140, "primera division": 140,
+  "bundesliga": 78,
+  "serie a": 135,
+  "ligue 1": 61,
+  "primeira liga": 94,
+  "saudi pro league": 307,
+  "champions league": 2, "ucl": 2, "uefa champions league": 2,
+  "europa league": 3, "uel": 3, "uefa europa league": 3,
+  "world cup": 1, "fifa world cup": 1, "wc": 1,
+  "euro": 4, "euros": 4, "euro championship": 4, "european championship": 4,
+  "copa america": 9,
+  "afcon": 6, "africa cup of nations": 6,
+  "asian cup": 7, "afc asian cup": 7,
+  "gold cup": 22,
+};
+
+
 export const FAMOUS_PLAYERS = [
   // Men's Football Icons
   { id: 154, name: "Lionel Messi", team: "Inter Miami", country: "Argentina", position: "Forward", image: "https://images.weserv.nl/?url=upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Lionel_Messi_White_House_2026_%283x4_cropped%29.jpg/500px-Lionel_Messi_White_House_2026_%283x4_cropped%29.jpg" },
@@ -46,8 +65,36 @@ export const FAMOUS_PLAYERS = [
   // Women's Football Legends
   { id: 16182, name: "Leah Williamson", team: "Arsenal", country: "England", position: "Defender", image: "https://images.weserv.nl/?url=media.api-sports.io/football/players/16182.png" },
   { id: 16185, name: "Alessia Russo", team: "Arsenal", country: "England", position: "Forward", image: "https://images.weserv.nl/?url=media.api-sports.io/football/players/16185.png" },
-  { id: 16188, name: "Lauren James", team: "Chelsea", country: "England", position: "Forward", image: "https://images.weserv.nl/?url=media.api-sports.io/football/players/16188.png" }
+  { id: 16188, name: "Lauren James", team: "Chelsea", country: "England", position: "Forward", image: "https://images.weserv.nl/?url=media.api-sports.io/football/players/16188.png" },
+  // More players
+  { id: 137, name: "Lamine Yamal", team: "Barcelona", country: "Spain", position: "Forward", image: "" },
+  { id: 138, name: "Pedri", team: "Barcelona", country: "Spain", position: "Midfielder", image: "" },
+  { id: 139, name: "Gavi", team: "Barcelona", country: "Spain", position: "Midfielder", image: "" },
+  { id: 140, name: "Rodri", team: "Manchester City", country: "Spain", position: "Midfielder", image: "" },
+  { id: 141, name: "Bukayo Saka", team: "Arsenal", country: "England", position: "Forward", image: "" },
+  { id: 142, name: "Martin Ødegaard", team: "Arsenal", country: "Norway", position: "Midfielder", image: "" },
 ];
+
+export const PLAYER_ALIASES: Record<string, number> = {
+  "lionel messi": 154, "messi": 154, "leo messi": 154,
+  "cristiano ronaldo": 874, "ronaldo": 874, "cr7": 874,
+  "kylian mbappe": 276, "mbappe": 276, "kylian mbappé": 276, "mbappé": 276,
+  "erling haaland": 1100, "haaland": 1100,
+  "harry kane": 184, "kane": 184,
+  "mohamed salah": 306, "salah": 306, "mo salah": 306,
+  "kevin de bruyne": 629, "de bruyne": 629, "kdb": 629,
+  "jude bellingham": 28224, "bellingham": 28224,
+  "vinicius junior": 733, "vinicius": 733, "vini jr": 733, "vinícius júnior": 733,
+  "neymar jr": 278, "neymar": 278,
+  "marcus rashford": 909, "rashford": 909,
+  "lamine yamal": 137, "yamal": 137,
+  "pedri": 138,
+  "gavi": 139,
+  "rodri": 140,
+  "bukayo saka": 141, "saka": 141,
+  "martin odegaard": 142, "odegaard": 142, "ødegaard": 142,
+};
+
 
 
 export const ALL_TEAMS = [
@@ -88,7 +135,7 @@ export const ALL_TEAMS = [
   { id: 81, name: "Olympique de Marseille", logo: "https://media.api-sports.io/football/teams/81.png", country: "France" },
   { id: 194, name: "AFC Ajax", logo: "https://media.api-sports.io/football/teams/194.png", country: "Netherlands" },
   { id: 197, name: "PSV Eindhoven", logo: "https://media.api-sports.io/football/teams/197.png", country: "Netherlands" },
-  
+
   // Major European Clubs - Portugal
   { id: 190, name: "SL Benfica", logo: "/benfica.png", country: "Portugal" },
   { id: 192, name: "FC Porto", logo: "/porto.png", country: "Portugal" },
@@ -154,6 +201,40 @@ export const ALL_TEAMS = [
   { id: 10027, name: "Cape Verde", logo: "https://media.api-sports.io/flags/cv.svg", country: "World" },
   { id: 10028, name: "Bangladesh", logo: "https://media.api-sports.io/flags/bd.svg", country: "World" }
 ];
+
+export const TEAM_ALIASES: Record<string, number> = {
+  "manchester city": 50, "man city": 50, "city": 50, "mcfc": 50,
+  "liverpool": 40, "lfc": 40,
+  "arsenal": 42, "afc": 42,
+  "manchester united": 33, "man united": 33, "man utd": 33, "mufc": 33, "united": 33,
+  "chelsea": 49, "cfc": 49,
+  "tottenham": 47, "spurs": 47, "tottenham hotspur": 47,
+  "aston villa": 66, "villa": 66,
+  "newcastle": 34, "newcastle united": 34, "nufc": 34,
+  "west ham": 48, "west ham united": 48, "whufc": 48,
+
+  "real madrid": 541, "madrid": 541, "rmcf": 541,
+  "barcelona": 529, "barca": 529, "fcb": 529, "fc barcelona": 529,
+  "atletico madrid": 530, "atletico": 530, "atleti": 530,
+
+  "bayern munich": 157, "bayern": 157, "fc bayern": 157,
+  "borussia dortmund": 165, "dortmund": 165, "bvb": 165,
+  "bayer leverkusen": 168, "leverkusen": 168,
+
+  "juventus": 496, "juve": 496,
+  "ac milan": 489, "milan": 489,
+  "inter milan": 505, "inter": 505, "internazionale": 505,
+  "napoli": 492,
+  "roma": 497, "as roma": 497,
+
+  "psg": 85, "paris saint-germain": 85, "paris": 85,
+
+  "inter miami": 1595, "miami": 1595,
+
+  "al nassr": 2939,
+  "al hilal": 2931,
+};
+
 
 // Predefined Team Strengths for Realistic Standings Generation (2023-2024 Season Final)
 const TEAM_STRENGTHS: Record<number, { win: number; draw: number; lose: number; points: number; gd: number; goalsFor: number; goalsAgainst: number }> = {
@@ -278,6 +359,42 @@ function getTeamsForLeague(leagueId: number): typeof ALL_TEAMS {
 export function getMockStandingsForLeague(leagueId: number): Standing[] {
   const league = ALL_LEAGUES.find(l => l.id === leagueId);
   if (!league) return [];
+
+  // 2026 FIFA World Cup Special Logic (48 teams, 12 groups of 4)
+  if (leagueId === 1) {
+    const nationals = ALL_TEAMS.filter(t => t.country === "World");
+    // Duplicate some teams to reach 48 if needed (we have ~45)
+    const teamsPool = [...nationals, ...nationals].slice(0, 48);
+    const standings: Standing[] = [];
+
+    const groupLetters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"];
+    for (let g = 0; g < 12; g++) {
+      const groupName = `Group ${groupLetters[g]}`;
+      const groupTeams = teamsPool.slice(g * 4, g * 4 + 4);
+
+      groupTeams.forEach((team, idx) => {
+        standings.push({
+          rank: idx + 1,
+          team: { id: team.id, name: team.name, logo: team.logo },
+          points: [7, 4, 3, 1][idx],
+          goalsDiff: [4, 1, -1, -4][idx],
+          group: groupName,
+          form: ["WWD", "WLD", "LWD", "DLL"][idx],
+          status: "same",
+          description: idx < 2 ? "Advance to Knockout Stage" : null,
+          all: {
+            played: 3,
+            win: [2, 1, 1, 0][idx],
+            draw: [1, 1, 0, 1][idx],
+            lose: [0, 1, 2, 2][idx],
+            goals: { for: [5, 3, 2, 1][idx], against: [1, 2, 3, 5][idx] }
+          },
+          update: new Date().toISOString()
+        });
+      });
+    }
+    return standings;
+  }
 
   const teams = getTeamsForLeague(leagueId);
   const standings: Standing[] = teams.map((team, idx) => {
@@ -446,5 +563,123 @@ export const MOCK_RESULTS: Match[] = [
     teams: { home: { id: 26, name: "Argentina", logo: "https://media.api-sports.io/football/teams/26.png", winner: true }, away: { id: 2, name: "France", logo: "https://media.api-sports.io/football/teams/2.png", winner: false } },
     goals: { home: 2, away: 0 },
     score: { halftime: { home: 1, away: 0 }, fulltime: { home: 2, away: 0 }, extratime: { home: null, away: null }, penalty: { home: null, away: null } }
+  },
+  // Euro Championship (4)
+  {
+    fixture: { id: 209, referee: "Felix Zwayer", timezone: "UTC", date: "2025-06-14T19:00:00Z", timestamp: 1749930000, periods: { first: 1749930000, second: 1749933600 }, venue: { id: 19, name: "Allianz Arena", city: "Munich" }, status: { long: "Match Finished", short: "FT", elapsed: 90 } },
+    league: { id: 4, name: "Euro Championship", country: "Europe", logo: "https://media.api-sports.io/football/leagues/4.png", flag: null, season: 2024, round: "Group Stage" },
+    teams: { home: { id: 25, name: "Germany", logo: "https://media.api-sports.io/football/teams/25.png", winner: true }, away: { id: 10, name: "England", logo: "https://media.api-sports.io/football/teams/10.png", winner: false } },
+    goals: { home: 2, away: 1 },
+    score: { halftime: { home: 1, away: 0 }, fulltime: { home: 2, away: 1 }, extratime: { home: null, away: null }, penalty: { home: null, away: null } }
+  },
+  // Copa América (9)
+  {
+    fixture: { id: 210, referee: "Wilton Sampaio", timezone: "UTC", date: "2025-07-10T20:00:00Z", timestamp: 1752184800, periods: { first: 1752184800, second: 1752188400 }, venue: { id: 20, name: "Hard Rock Stadium", city: "Miami" }, status: { long: "Match Finished", short: "FT", elapsed: 90 } },
+    league: { id: 9, name: "Copa América", country: "South America", logo: "https://media.api-sports.io/football/leagues/9.png", flag: null, season: 2024, round: "Final" },
+    teams: { home: { id: 26, name: "Argentina", logo: "https://media.api-sports.io/football/teams/26.png", winner: true }, away: { id: 6, name: "Brazil", logo: "https://media.api-sports.io/football/teams/6.png", winner: false } },
+    goals: { home: 1, away: 0 },
+    score: { halftime: { home: 0, away: 0 }, fulltime: { home: 1, away: 0 }, extratime: { home: null, away: null }, penalty: { home: null, away: null } }
+  },
+  // AFC Asian Cup (7)
+  {
+    fixture: { id: 211, referee: "Abdulrahman Al-Jassim", timezone: "UTC", date: "2025-02-10T17:00:00Z", timestamp: 1739206800, periods: { first: 1739206800, second: 1739210400 }, venue: { id: 21, name: "Lusail Iconic Stadium", city: "Lusail" }, status: { long: "Match Finished", short: "FT", elapsed: 90 } },
+    league: { id: 7, name: "AFC Asian Cup", country: "Asia", logo: "https://media.api-sports.io/football/leagues/7.png", flag: null, season: 2024, round: "Final" },
+    teams: { home: { id: 12, name: "Japan", logo: "https://media.api-sports.io/football/teams/12.png", winner: true }, away: { id: 17, name: "South Korea", logo: "https://media.api-sports.io/football/teams/17.png", winner: false } },
+    goals: { home: 2, away: 1 },
+    score: { halftime: { home: 1, away: 1 }, fulltime: { home: 2, away: 1 }, extratime: { home: null, away: null }, penalty: { home: null, away: null } }
+  },
+  // Africa Cup of Nations (6)
+  {
+    fixture: { id: 212, referee: "Mustapha Ghorbal", timezone: "UTC", date: "2025-02-12T20:00:00Z", timestamp: 1739390400, periods: { first: 1739390400, second: 1739394000 }, venue: { id: 22, name: "Stade Olympique d'Abidjan", city: "Abidjan" }, status: { long: "Match Finished", short: "FT", elapsed: 90 } },
+    league: { id: 6, name: "Africa Cup of Nations", country: "Africa", logo: "https://media.api-sports.io/football/leagues/6.png", flag: null, season: 2024, round: "Final" },
+    teams: { home: { id: 31, name: "Morocco", logo: "https://media.api-sports.io/football/teams/31.png", winner: true }, away: { id: 10013, name: "Senegal", logo: "https://media.api-sports.io/flags/sn.svg", winner: false } },
+    goals: { home: 2, away: 0 },
+    score: { halftime: { home: 1, away: 0 }, fulltime: { home: 2, away: 0 }, extratime: { home: null, away: null }, penalty: { home: null, away: null } }
   }
+];
+
+// ── Mock Transfer Data ─────────────────────────────────────────────────────────
+
+export type MockTransfer = {
+  player: { name: string; flag: string; position: string; nationality: string };
+  teams: { from: { name: string; logo: string }; to: { name: string; logo: string } };
+  details: { fee: string; status: "confirmed" | "talks" | "rumour"; date: string };
+};
+
+export const MOCK_TRANSFERS: MockTransfer[] = [
+  {
+    player: { name: "Kylian Mbappé", flag: "🇫🇷", position: "FW", nationality: "France" },
+    teams: { from: { name: "PSG", logo: "https://media.api-sports.io/football/teams/85.png" }, to: { name: "Real Madrid", logo: "https://media.api-sports.io/football/teams/541.png" } },
+    details: { fee: "Free", status: "confirmed", date: "2024-06-01" }
+  },
+  {
+    player: { name: "Erling Haaland", flag: "🇳🇴", position: "FW", nationality: "Norway" },
+    teams: { from: { name: "Man City", logo: "https://media.api-sports.io/football/teams/50.png" }, to: { name: "Real Madrid", logo: "https://media.api-sports.io/football/teams/541.png" } },
+    details: { fee: "€200M", status: "rumour", date: "2025-06-01" }
+  },
+  {
+    player: { name: "Rodri", flag: "🇪🇸", position: "MF", nationality: "Spain" },
+    teams: { from: { name: "Man City", logo: "https://media.api-sports.io/football/teams/50.png" }, to: { name: "Man City", logo: "https://media.api-sports.io/football/teams/50.png" } },
+    details: { fee: "Contract Ext.", status: "confirmed", date: "2025-01-15" }
+  },
+  {
+    player: { name: "Marcus Rashford", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", position: "FW", nationality: "England" },
+    teams: { from: { name: "Man United", logo: "https://media.api-sports.io/football/teams/33.png" }, to: { name: "Barcelona", logo: "https://media.api-sports.io/football/teams/529.png" } },
+    details: { fee: "€40M", status: "talks", date: "2025-01-20" }
+  },
+  {
+    player: { name: "Victor Osimhen", flag: "🇳🇬", position: "FW", nationality: "Nigeria" },
+    teams: { from: { name: "Napoli", logo: "https://media.api-sports.io/football/teams/492.png" }, to: { name: "Chelsea", logo: "https://media.api-sports.io/football/teams/49.png" } },
+    details: { fee: "€75M", status: "talks", date: "2025-01-18" }
+  },
+  {
+    player: { name: "Jude Bellingham", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", position: "MF", nationality: "England" },
+    teams: { from: { name: "Real Madrid", logo: "https://media.api-sports.io/football/teams/541.png" }, to: { name: "Real Madrid", logo: "https://media.api-sports.io/football/teams/541.png" } },
+    details: { fee: "Contract Ext.", status: "confirmed", date: "2025-02-01" }
+  },
+  {
+    player: { name: "Harry Kane", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", position: "FW", nationality: "England" },
+    teams: { from: { name: "Tottenham", logo: "https://media.api-sports.io/football/teams/47.png" }, to: { name: "Bayern Munich", logo: "https://media.api-sports.io/football/teams/157.png" } },
+    details: { fee: "€100M", status: "confirmed", date: "2023-08-12" }
+  },
+  {
+    player: { name: "Vinícius Júnior", flag: "🇧🇷", position: "FW", nationality: "Brazil" },
+    teams: { from: { name: "Real Madrid", logo: "https://media.api-sports.io/football/teams/541.png" }, to: { name: "Al Ahli", logo: "https://media.api-sports.io/football/teams/2938.png" } },
+    details: { fee: "€300M/yr", status: "rumour", date: "2025-05-01" }
+  },
+  {
+    player: { name: "Gavi", flag: "🇪🇸", position: "MF", nationality: "Spain" },
+    teams: { from: { name: "Barcelona", logo: "https://media.api-sports.io/football/teams/529.png" }, to: { name: "Barcelona", logo: "https://media.api-sports.io/football/teams/529.png" } },
+    details: { fee: "Contract Ext.", status: "confirmed", date: "2025-03-10" }
+  },
+  {
+    player: { name: "Mohamed Salah", flag: "🇪🇬", position: "FW", nationality: "Egypt" },
+    teams: { from: { name: "Liverpool", logo: "https://media.api-sports.io/football/teams/40.png" }, to: { name: "Al Qadsiah", logo: "https://media.api-sports.io/football/teams/2943.png" } },
+    details: { fee: "Free", status: "rumour", date: "2025-06-01" }
+  },
+  {
+    player: { name: "Bukayo Saka", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", position: "FW", nationality: "England" },
+    teams: { from: { name: "Arsenal", logo: "https://media.api-sports.io/football/teams/42.png" }, to: { name: "Arsenal", logo: "https://media.api-sports.io/football/teams/42.png" } },
+    details: { fee: "Contract Ext.", status: "confirmed", date: "2025-01-05" }
+  },
+  {
+    player: { name: "Lamine Yamal", flag: "🇪🇸", position: "FW", nationality: "Spain" },
+    teams: { from: { name: "Barcelona", logo: "https://media.api-sports.io/football/teams/529.png" }, to: { name: "Barcelona", logo: "https://media.api-sports.io/football/teams/529.png" } },
+    details: { fee: "New Contract", status: "confirmed", date: "2025-04-20" }
+  },
+  {
+    player: { name: "Jadon Sancho", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", position: "FW", nationality: "England" },
+    teams: { from: { name: "Man United", logo: "https://media.api-sports.io/football/teams/33.png" }, to: { name: "Juventus", logo: "https://media.api-sports.io/football/teams/496.png" } },
+    details: { fee: "€25M", status: "talks", date: "2025-01-25" }
+  },
+  {
+    player: { name: "Trent Alexander-Arnold", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", position: "DF", nationality: "England" },
+    teams: { from: { name: "Liverpool", logo: "https://media.api-sports.io/football/teams/40.png" }, to: { name: "Real Madrid", logo: "https://media.api-sports.io/football/teams/541.png" } },
+    details: { fee: "Free", status: "confirmed", date: "2025-06-01" }
+  },
+  {
+    player: { name: "Florian Wirtz", flag: "🇩🇪", position: "MF", nationality: "Germany" },
+    teams: { from: { name: "Bayer Leverkusen", logo: "https://media.api-sports.io/football/teams/168.png" }, to: { name: "Bayern Munich", logo: "https://media.api-sports.io/football/teams/157.png" } },
+    details: { fee: "€130M", status: "confirmed", date: "2025-06-01" }
+  },
 ];

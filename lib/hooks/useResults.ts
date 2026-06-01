@@ -1,19 +1,25 @@
-import useSWR from "swr";
-import { Match } from "@/types/football";
+import useSWR from 'swr';
+import { Match } from '@/types/football';
 
-const fetcher = async (url: string): Promise<Match[]> => {
+const fetcher = async (url: string) => {
   const res = await fetch(url);
   const data = await res.json();
-  return Array.isArray(data) ? data : [];
+  if (Array.isArray(data)) {
+    return data;
+  }
+  return []; // Return empty array on error objects
 };
 
+/**
+ * Returns recent results strictly via the live API.
+ */
 export function useResults(count = 5) {
   const { data, error, isLoading } = useSWR<Match[]>(
     `/api/results?count=${count}`,
     fetcher,
     {
-      revalidateOnFocus: false,
-      dedupingInterval: 60_000, // 1 min — results don't change fast
+      refreshInterval: 60000,
+      revalidateOnFocus: true,
     }
   );
 

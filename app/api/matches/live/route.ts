@@ -1,4 +1,4 @@
-import { fetchLiveMatches } from "@/lib/football-api";
+import { fetchLiveMatches } from "@/lib/api-football";
 import { NextResponse } from "next/server";
 
 export const revalidate = 30;
@@ -6,12 +6,13 @@ export const revalidate = 30;
 export async function GET() {
   try {
     const data = await fetchLiveMatches();
-    if (!data) {
-      return NextResponse.json({ error: "Failed to fetch live matches" }, { status: 500 });
+    if (data && Array.isArray(data) && data.length > 0) {
+      return NextResponse.json(data);
     }
-    return NextResponse.json(data);
+    // Fallback: Strictly return empty array. Zero mock data.
+    return NextResponse.json([]);
   } catch (error) {
     console.error("[API-LiveMatches] Error:", error);
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    return NextResponse.json([]);
   }
 }

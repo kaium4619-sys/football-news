@@ -1,4 +1,4 @@
-import { fetchFixtures } from "@/lib/football-api";
+import { fetchFixtures } from "@/lib/api-football";
 import { NextResponse } from "next/server";
 
 export const revalidate = 3600;

@@ -17,8 +17,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "The Football Pulse | Live Football Scores, News & Stats",
-    template: "%s | The Football Pulse"
+    default: "Football Pulse | Live Football Scores, News & Stats",
+    template: "%s | Football Pulse"
   },
   description: "The ultimate football platform for real-time live scores, breaking news, detailed match stats, and league tables from around the world.",
   icons: {

@@ -277,7 +277,7 @@ export default async function TeamPage({ params }: PageProps) {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {team.keyPlayers.map((player) => (
                     <Link
-                      href={`/players/${encodeURIComponent(player.name)}`}
+                      href={`/players/name/${encodeURIComponent(player.name)}`}
                       key={player.name}
                       className="rounded-2xl border border-border bg-card overflow-hidden group hover:border-primary/40 hover:-translate-y-1 transition-all block"
                     >

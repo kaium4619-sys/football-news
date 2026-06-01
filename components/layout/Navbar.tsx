@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X, Trophy, Home, Newspaper, Calendar, Shield, Activity, ChevronDown, ListOrdered, CheckCircle2, ArrowRightLeft, Globe, Award, Star, Users } from "lucide-react";
+import { Menu, X, Trophy, Home, Newspaper, Calendar, Shield, ChevronDown, ListOrdered, CheckCircle2, ArrowRightLeft, Globe, Award, Star, Users } from "lucide-react";
 import { ALL_LEAGUES, ALL_TEAMS, FAMOUS_PLAYERS } from "@/lib/api-mock";
 import { SearchDropdown } from "@/components/SearchDropdown";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -16,8 +16,8 @@ export function Navbar() {
       <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 flex-shrink-0">
-            <Image src="/logo.png" alt="The Football Pulse Logo" width={40} height={40} className="object-contain rounded-full overflow-hidden" />
-            <span className="font-bold text-xl tracking-tight text-foreground">The Football Pulse</span>
+            <Image src="/logo.png" alt="Football Pulse Logo" width={40} height={40} className="object-contain rounded-full overflow-hidden" />
+            <span className="font-bold text-xl tracking-tight text-foreground">Football Pulse</span>
           </Link>
 
           <nav className="hidden xl:flex items-center gap-4 font-medium text-xs h-full">
@@ -42,7 +42,7 @@ export function Navbar() {
 
             {/* Competitions Dropdown - 4 Columns Mega Menu including Famous Players */}
             <div className="group relative h-full flex items-center cursor-pointer">
-              <div className="hover:text-primary transition-colors flex items-center gap-1 whitespace-nowrap font-bold text-primary">
+              <div className="hover:text-primary transition-colors flex items-center gap-1 whitespace-nowrap font-bold text-foreground">
                 <Trophy className="h-3.5 w-3.5" /> Competitions <ChevronDown className="h-3 w-3" />
               </div>
               <div className="absolute top-full right-[-200px] hidden group-hover:block w-[1000px] bg-card border border-border rounded-2xl shadow-2xl p-8 animate-in fade-in slide-in-from-top-2 duration-200 z-[100] mt-[-1px]">
@@ -220,7 +220,7 @@ export function Navbar() {
               <Link href="/news" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2 p-2 hover:bg-muted rounded-lg font-bold">
                 <Newspaper className="h-5 w-5" /> News
               </Link>
-              <Link href="/competitions" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2 p-2 hover:bg-muted rounded-lg font-bold text-primary">
+              <Link href="/competitions" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2 p-2 hover:bg-muted rounded-lg font-bold text-foreground hover:text-primary transition-colors">
                 <Trophy className="h-5 w-5" /> Competitions
               </Link>
               <Link href="/teams" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2 p-2 hover:bg-muted rounded-lg font-bold">

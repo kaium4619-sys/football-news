@@ -10,13 +10,30 @@ import { CheckCircle2, Search } from "lucide-react";
 export default function ResultsPage() {
   const { results, isLoading, isError } = useResults(6);
 
-  // Group by league
-  const grouped = results.reduce((acc, match) => {
-    const id = match.league.id;
-    if (!acc[id]) acc[id] = { league: match.league, matches: [] };
-    acc[id].matches.push(match);
+  // Group by Date first, then by League
+  const groupedByDate = results.reduce((acc, match) => {
+    // Format date as YYYY-MM-DD
+    const matchDate = new Date(match.fixture.date);
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+    
+    const dateKey = matchDate.toISOString().split("T")[0];
+    let dateLabel = dateKey;
+    
+    if (dateKey === today.toISOString().split("T")[0]) dateLabel = "Today";
+    else if (dateKey === yesterday.toISOString().split("T")[0]) dateLabel = "Yesterday";
+    else dateLabel = matchDate.toLocaleDateString(undefined, { weekday: 'long', month: 'short', day: 'numeric' });
+
+    if (!acc[dateLabel]) acc[dateLabel] = {};
+    
+    const leagueId = match.league.id;
+    if (!acc[dateLabel][leagueId]) {
+      acc[dateLabel][leagueId] = { league: match.league, matches: [] };
+    }
+    acc[dateLabel][leagueId].matches.push(match);
     return acc;
-  }, {} as Record<number, { league: { id: number; name: string; logo: string; country: string; flag: string | null; season: number; round: string }; matches: Match[] }>);
+  }, {} as Record<string, Record<number, { league: { id: number; name: string; logo: string; country: string; flag: string | null; season: number; round: string }; matches: Match[] }>>);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -26,7 +43,7 @@ export default function ResultsPage() {
             <CheckCircle2 className="h-8 w-8 text-primary" /> Recent Results
           </h1>
           <p className="text-muted-foreground">
-            Catch up on all the final scores and match statistics from the past week.
+            Catch up on all the final scores and match statistics from recent days.
           </p>
         </div>
 
@@ -68,8 +85,8 @@ export default function ResultsPage() {
             </div>
           )}
 
-          {/* Results grouped by league */}
-          {!isLoading && !isError && Object.keys(grouped).length === 0 && (
+          {/* Results grouped by Date then League */}
+          {!isLoading && !isError && Object.keys(groupedByDate).length === 0 && (
             <div className="text-muted-foreground p-10 text-center bg-card rounded-2xl border border-border font-bold">
               No recent results available.
             </div>
@@ -77,34 +94,43 @@ export default function ResultsPage() {
 
           {!isLoading && !isError && (
             <div className="space-y-12">
-              {Object.values(grouped).map((group) => (
-                <section key={group.league.id}>
-                  <div className="flex items-center gap-3 mb-6">
-                    <span className="w-2 h-6 bg-primary rounded-full" />
-                    {group.league.logo && (
-                      <div className="relative w-6 h-6">
-                        <Image
-                          src={group.league.logo}
-                          alt={group.league.name}
-                          fill
-                          sizes="24px"
-                          className="object-contain"
-                        />
+              {Object.entries(groupedByDate).map(([dateLabel, leagueGroups]) => (
+                <div key={dateLabel} className="space-y-8">
+                  <div className="sticky top-[64px] z-10 bg-background/95 backdrop-blur py-3 border-b border-border/50">
+                     <h2 className="text-2xl font-black uppercase tracking-tight text-primary">
+                       {dateLabel}
+                     </h2>
+                  </div>
+                  {Object.values(leagueGroups).map((group) => (
+                    <section key={group.league.id}>
+                      <div className="flex items-center gap-3 mb-6">
+                        <span className="w-2 h-6 bg-muted-foreground/30 rounded-full" />
+                        {group.league.logo && (
+                          <div className="relative w-6 h-6">
+                            <Image
+                              src={group.league.logo}
+                              alt={group.league.name}
+                              fill
+                              sizes="24px"
+                              className="object-contain"
+                            />
+                          </div>
+                        )}
+                        <h3 className="text-lg font-black uppercase tracking-tight text-foreground/80">
+                          {group.league.name}
+                        </h3>
+                        <span className="text-xs text-muted-foreground font-bold uppercase">
+                          {group.league.country}
+                        </span>
                       </div>
-                    )}
-                    <h2 className="text-xl font-black uppercase tracking-tight">
-                      {group.league.name}
-                    </h2>
-                    <span className="text-xs text-muted-foreground font-bold uppercase">
-                      {group.league.country}
-                    </span>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {group.matches.map((match) => (
-                      <MatchCard key={match.fixture.id} match={match} />
-                    ))}
-                  </div>
-                </section>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {group.matches.map((match) => (
+                          <MatchCard key={match.fixture.id} match={match} />
+                        ))}
+                      </div>
+                    </section>
+                  ))}
+                </div>
               ))}
             </div>
           )}
@@ -115,7 +141,7 @@ export default function ResultsPage() {
           <LiveScoreWidget />
           <div className="rounded-2xl border border-border bg-card p-6">
             <h3 className="font-bold text-sm uppercase tracking-widest mb-4">
-              Why The Football Pulse?
+              Why Football Pulse?
             </h3>
             <p className="text-xs text-muted-foreground leading-relaxed">
               We provide the fastest result updates, detailed match timelines, and post-match

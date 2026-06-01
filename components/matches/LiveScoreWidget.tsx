@@ -3,7 +3,7 @@
 import { useLiveMatches } from "@/lib/hooks/useLiveMatches";
 import { MatchCard } from "./MatchCard";
 
-export function LiveScoreWidget() {
+export function LiveScoreWidget({ maxMatches }: { maxMatches?: number }) {
   const { matches, isLoading } = useLiveMatches();
 
   if (isLoading) {
@@ -22,6 +22,8 @@ export function LiveScoreWidget() {
     return null;
   }
 
+  const displayMatches = maxMatches ? matches.slice(0, maxMatches) : matches;
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-2 px-1">
@@ -32,7 +34,7 @@ export function LiveScoreWidget() {
         <h2 className="font-bold tracking-tight text-xl uppercase">Live Now</h2>
       </div>
       <div className="grid grid-cols-1 gap-3">
-        {matches.map(match => (
+        {displayMatches.map(match => (
           <MatchCard key={match.fixture.id} match={match} />
         ))}
       </div>

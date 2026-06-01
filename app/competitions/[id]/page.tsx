@@ -1,12 +1,26 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Trophy, ChevronRight, Home, MapPin, BarChart2, Activity } from "lucide-react";
+import { Trophy, ChevronRight, Home, MapPin, BarChart2, Activity, Newspaper, Info } from "lucide-react";
+import { createClient } from "@supabase/supabase-js";
 import { ALL_LEAGUES } from "@/lib/api-mock";
-import { fetchLiveMatches, fetchRecentFixtures } from "@/lib/football-api";
+import { fetchLiveMatches, fetchRecentFixtures } from "@/lib/api-football";
 import { StandingsWidget } from "@/components/matches/StandingsWidget";
+import { WorldCup2026GroupTables } from "@/components/competitions/WorldCup2026GroupTables";
 
 export const revalidate = 60; // Cache for 60 seconds
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
+
+const COMPETITION_DESCRIPTIONS: Record<number, string> = {
+  1: "The FIFA World Cup is the most prestigious international football tournament, held every four years. The 2026 edition will be the first with 48 teams, hosted across the United States, Canada, and Mexico.",
+  2: "The UEFA Champions League is Europe's premier club football competition, featuring the top clubs from across the continent battling for European glory.",
+  39: "The Premier League is England's top tier of football, featuring 20 clubs competing in one of the most-watched leagues globally.",
+  140: "La Liga is Spain's top professional football division, home to world-renowned clubs like Real Madrid and FC Barcelona.",
+};
 
 export default async function CompetitionPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -16,13 +30,22 @@ export default async function CompetitionPage({ params }: { params: Promise<{ id
   if (!league) notFound();
 
   // Fetch real data
-  const [liveData, recentData] = await Promise.all([
+  const [liveData, recentData, { data: allArticles }] = await Promise.all([
     fetchLiveMatches(numId).catch(() => []),
-    fetchRecentFixtures(numId).catch(() => [])
+    fetchRecentFixtures(numId).catch(() => []),
+    supabase
+      .from("posts")
+      .select("id, title, slug, image_url, meta_description, created_at")
+      .eq("published", true)
+      .contains("tags", [`competition:${numId}`])
+      .order("created_at", { ascending: false })
+      .limit(6),
   ]);
 
   const liveMatches = Array.isArray(liveData) ? liveData : [];
   const results = Array.isArray(recentData) ? recentData : [];
+  const competitionArticles = allArticles ?? [];
+  const description = COMPETITION_DESCRIPTIONS[numId] ?? `Welcome to the official hub for the ${league.name}. Explore the latest news, live scores, recent results, and current standings for the ${league.country} ${league.type.toLowerCase()}.`;
 
   return (
     <div className="min-h-screen">
@@ -67,7 +90,7 @@ export default async function CompetitionPage({ params }: { params: Promise<{ id
               </h1>
 
               <p className="text-muted-foreground leading-relaxed max-w-2xl text-sm md:text-base">
-                Welcome to the official hub for the {league.name}. Explore the latest news, live scores, recent results, and current standings for the {league.country} {league.type.toLowerCase()}.
+                {description}
               </p>
             </div>
           </div>
@@ -133,6 +156,68 @@ export default async function CompetitionPage({ params }: { params: Promise<{ id
                   </div>
                 )}
               </div>
+            </section>
+
+            {/* League Information */}
+            <section className="rounded-3xl border border-border bg-card p-6">
+              <div className="flex items-center gap-3 mb-6">
+                <Info className="w-5 h-5 text-primary" />
+                <h2 className="text-xl font-black uppercase tracking-tight">League Information</h2>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-4 bg-background rounded-2xl border border-border">
+                  <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest block mb-1">Region</span>
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-primary" />
+                    <span className="font-bold">{league.country}</span>
+                  </div>
+                </div>
+                <div className="p-4 bg-background rounded-2xl border border-border">
+                  <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest block mb-1">Category</span>
+                  <div className="flex items-center gap-2">
+                    <Trophy className="w-4 h-4 text-primary" />
+                    <span className="font-bold">{league.type}</span>
+                  </div>
+                </div>
+              </div>
+              <p className="mt-4 text-muted-foreground text-sm leading-relaxed">{description}</p>
+            </section>
+
+            {numId === 1 && (
+              <div className="mb-8">
+                <WorldCup2026GroupTables />
+              </div>
+            )}
+
+            {/* League News */}
+            <section>
+              <div className="flex items-center gap-3 mb-6">
+                <Newspaper className="w-5 h-5 text-primary" />
+                <h2 className="text-xl font-black uppercase tracking-tight">League News</h2>
+              </div>
+              {competitionArticles.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {competitionArticles.map((post) => (
+                    <Link key={post.id} href={`/blog/${post.slug}`} className="group flex flex-col gap-3 p-4 bg-card border border-border rounded-2xl hover:border-primary/50 transition-all">
+                      {post.image_url && (
+                        <div className="relative w-full h-32 rounded-xl overflow-hidden mb-2">
+                          <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 640px) 100vw, 50vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                        </div>
+                      )}
+                      <h3 className="font-bold text-sm leading-snug line-clamp-2 group-hover:text-primary transition-colors">{post.title}</h3>
+                      <span className="text-[10px] text-muted-foreground uppercase font-bold mt-auto">
+                        {post.created_at ? new Date(post.created_at).toLocaleDateString() : ""}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <div className="p-8 text-center border border-border rounded-2xl bg-card">
+                  <Newspaper className="w-10 h-10 text-muted-foreground mx-auto mb-3" />
+                  <p className="text-muted-foreground text-sm font-bold">No news articles found.</p>
+                  <p className="text-muted-foreground text-xs mt-1">Articles tagged with {league.name} will appear here.</p>
+                </div>
+              )}
             </section>
           </div>
 

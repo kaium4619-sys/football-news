@@ -1,4 +1,4 @@
-import { fetchStandings } from "@/lib/football-api";
+import { fetchStandings } from "@/lib/api-football";
 import { NextResponse } from "next/server";
 
 export const revalidate = 300;
@@ -13,17 +13,18 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: "League ID is required" }, { status: 400 });
     }
 
-    const data = await fetchStandings(
-      parseInt(leagueId, 10),
-      season ? parseInt(season, 10) : 2024
-    );
+    const id = parseInt(leagueId, 10);
+    const year = season ? parseInt(season, 10) : 2024;
 
-    if (!data) {
-      return NextResponse.json({ error: "Standings not found" }, { status: 404 });
+    const data = await fetchStandings(id, year);
+    
+    if (data && Array.isArray(data) && data.length > 0) {
+      return NextResponse.json(data);
     }
-    return NextResponse.json(data);
+
+    return NextResponse.json([]);
   } catch (error) {
     console.error("[API-Standings] Error:", error);
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    return NextResponse.json([]);
   }
 }

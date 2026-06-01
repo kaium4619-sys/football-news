@@ -1,9 +1,9 @@
-import { LiveScoreWidget } from "@/components/matches/LiveScoreWidget";
-import { StandingsWidget } from "@/components/matches/StandingsWidget";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Flame } from "lucide-react";
+import { ArrowRight, TrendingUp, RefreshCcw } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
+import { MOCK_TRANSFERS } from "@/lib/api-mock";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -12,114 +12,128 @@ const supabase = createClient(
 
 export const dynamic = "force-dynamic";
 
-export default async function Home() {
+export default async function TransfersPage() {
   const { data: posts } = await supabase
     .from("posts")
     .select("*")
     .eq("published", true)
     .contains("tags", ["topic:transfers"])
-    .order("created_at", { ascending: false })
-    .limit(5);
+    .order("created_at", { ascending: false });
 
   const featuredPost = posts?.[0];
-  const otherPosts = posts?.slice(1, 5) ?? [];
+  const otherPosts = posts?.slice(1) ?? [];
 
   return (
-    <div className="container mx-auto px-4 py-6 md:py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
-      {/* Main Content Area */}
-      <div className="lg:col-span-8 flex flex-col gap-8">
+    <div className="container py-8 space-y-12">
+      {/* Header */}
+      <div>
+        <h1 className="text-4xl md:text-5xl font-black uppercase tracking-tight flex items-center gap-3">
+          <RefreshCcw className="w-10 h-10 text-primary" /> Transfer Centre
+        </h1>
+        <p className="text-lg mt-2 text-muted-foreground">
+          Confirmed deals, live negotiations and the latest gossip from across world football
+        </p>
+      </div>
 
-        {/* Featured Hero Story */}
-        {featuredPost ? (
-          <Link href={`/blog/${featuredPost.slug}`}>
-            <section className="relative rounded-2xl overflow-hidden aspect-[4/3] md:aspect-[21/9] group block cursor-pointer border border-border">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        <div className="lg:col-span-8 flex flex-col gap-10">
+          
+          {/* Featured Post */}
+          {featuredPost && (
+            <Link href={`/blog/${featuredPost.slug}`} className="group relative rounded-3xl overflow-hidden aspect-[16/9] md:aspect-[21/9] border border-border">
               {featuredPost.image_url ? (
-                <Image
-                  src={featuredPost.image_url}
-                  alt={featuredPost.title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
+                <Image src={featuredPost.image_url} alt={featuredPost.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
               ) : (
                 <div className="w-full h-full bg-muted" />
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
-              <div className="absolute bottom-0 left-0 p-6 md:p-8 w-full flex flex-col gap-3">
-                {featuredPost.tags?.[0] && (
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-bold uppercase tracking-wider w-max">
-                    <Flame className="w-3.5 h-3.5" /> {featuredPost.tags[0]}
-                  </span>
-                )}
-                <h1 className="text-2xl md:text-4xl font-black tracking-tight text-foreground leading-tight max-w-3xl">
-                  {featuredPost.title}
-                </h1>
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-8 md:p-12 w-full max-w-4xl flex flex-col gap-4">
+                <span className="px-3 py-1 bg-primary text-primary-foreground text-xs font-black uppercase rounded-lg w-fit">
+                  Latest Transfer News
+                </span>
+                <h2 className="text-3xl md:text-5xl font-black text-white leading-tight">{featuredPost.title}</h2>
                 {featuredPost.meta_description && (
-                  <p className="text-muted-foreground line-clamp-2 md:text-lg max-w-2xl">
-                    {featuredPost.meta_description}
-                  </p>
+                  <p className="text-white/70 text-lg hidden md:block line-clamp-2">{featuredPost.meta_description}</p>
                 )}
               </div>
-            </section>
-          </Link>
-        ) : (
-          <section className="relative rounded-2xl overflow-hidden aspect-[4/3] md:aspect-[21/9] group block cursor-pointer border border-border">
-            <Image
-              src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=1200&auto=format&fit=crop"
-              alt="Breaking News"
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
-            <div className="absolute bottom-0 left-0 p-6 md:p-8 w-full flex flex-col gap-3">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-bold uppercase tracking-wider w-max">
-                <Flame className="w-3.5 h-3.5" /> Breaking
-              </span>
-              <h1 className="text-2xl md:text-4xl font-black tracking-tight text-foreground leading-tight max-w-3xl">
-                Champions League Draw: Real Madrid to face Manchester City in Quarter-Finals
-              </h1>
-            </div>
-          </section>
-        )}
-
-        {/* Top Stories Grid */}
-        <section>
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-black uppercase tracking-tight">Top Stories</h2>
-            <Link href="/news" className="text-sm font-semibold text-primary hover:underline flex items-center gap-1">
-              All News <ArrowRight className="w-4 h-4" />
             </Link>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {otherPosts.length > 0 ? otherPosts.map(post => (
-              <Link key={post.id} href={`/blog/${post.slug}`} className="group flex flex-col gap-3">
-                <div className="relative aspect-[16/9] rounded-xl overflow-hidden border border-border">
-                  {post.image_url ? (
-                    <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                  ) : (
-                    <div className="w-full h-full bg-muted" />
-                  )}
-                </div>
-                <div>
-                  {post.tags?.[0] && (
-                    <span className="text-primary text-xs font-bold uppercase mb-1 block">{post.tags[0]}</span>
-                  )}
-                  <h3 className="text-lg font-bold leading-tight group-hover:text-primary transition-colors">{post.title}</h3>
-                </div>
-              </Link>
-            )) : (
-              <p className="text-muted-foreground col-span-2">No stories yet.</p>
+          )}
+
+          {/* Posts Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {otherPosts.length > 0 ? (
+              otherPosts.map(post => (
+                <Link key={post.id} href={`/blog/${post.slug}`} className="flex flex-col gap-4 group">
+                  <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-border">
+                    {post.image_url ? (
+                      <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                    ) : (
+                      <div className="w-full h-full bg-muted" />
+                    )}
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <span className="text-primary text-xs font-bold uppercase">Transfers</span>
+                    <h3 className="text-xl font-bold leading-tight group-hover:text-primary transition-colors">{post.title}</h3>
+                    {post.meta_description && (
+                      <p className="text-muted-foreground text-sm line-clamp-2">{post.meta_description}</p>
+                    )}
+                  </div>
+                </Link>
+              ))
+            ) : (
+              <div className="col-span-full p-8 text-center border border-border rounded-2xl bg-card">
+                <p className="text-muted-foreground text-sm font-bold">No other recent transfer news found.</p>
+              </div>
             )}
           </div>
-        </section>
-      </div>
-
-      {/* Sidebar */}
-      <aside className="lg:col-span-4 flex flex-col gap-8">
-        <div className="sticky top-24 flex flex-col gap-8">
-          <LiveScoreWidget />
-          <StandingsWidget />
         </div>
-      </aside>
+
+        {/* Sidebar */}
+        <aside className="lg:col-span-4 flex flex-col gap-8">
+          <div className="rounded-2xl border border-border bg-card p-6">
+            <h3 className="text-lg font-black uppercase mb-6 flex items-center gap-2">
+              <TrendingUp className="w-5 h-5 text-primary" /> Latest Rumours & Deals
+            </h3>
+            
+            <div className="space-y-6">
+              {MOCK_TRANSFERS.map((transfer, idx) => (
+                <div key={idx} className="flex flex-col gap-3 p-4 rounded-xl bg-muted/20 border border-border/50">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-sm">{transfer.player.name}</span>
+                    </div>
+                    <span className={`text-[10px] font-black uppercase px-2 py-1 rounded-full ${
+                      transfer.details.status === "confirmed" ? "bg-green-500/20 text-green-500" :
+                      transfer.details.status === "talks" ? "bg-yellow-500/20 text-yellow-500" :
+                      "bg-blue-500/20 text-blue-500"
+                    }`}>
+                      {transfer.details.status}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3 bg-background p-3 rounded-lg border border-border">
+                    <div className="flex flex-col items-center gap-1 flex-1">
+                      <Image src={transfer.teams.from.logo} alt={transfer.teams.from.name} width={24} height={24} className="object-contain" />
+                      <span className="text-[10px] text-muted-foreground font-bold uppercase truncate max-w-full">{transfer.teams.from.name}</span>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                    <div className="flex flex-col items-center gap-1 flex-1">
+                      <Image src={transfer.teams.to.logo} alt={transfer.teams.to.name} width={24} height={24} className="object-contain" />
+                      <span className="text-[10px] text-muted-foreground font-bold uppercase truncate max-w-full">{transfer.teams.to.name}</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between mt-1 text-xs text-muted-foreground">
+                    <span className="font-bold">{transfer.details.fee}</span>
+                    <span>{transfer.details.date}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p className="text-[10px] text-center mt-4 text-muted-foreground uppercase font-bold tracking-widest">
+              Example Data from Database
+            </p>
+          </div>
+        </aside>
+      </div>
     </div>
   );
 }

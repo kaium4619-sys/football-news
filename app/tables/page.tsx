@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { StandingsWidget } from "@/components/matches/StandingsWidget";
+import WorldCup2026GroupTables from "@/components/competitions/WorldCup2026GroupTables";
 import { ListOrdered, Trophy, TrendingUp } from "lucide-react";
 import Image from "next/image";
 import { ALL_LEAGUES } from "@/lib/api-mock";
@@ -68,7 +69,11 @@ export default function TablesPage() {
                   </div>
                   
                   <div className="p-4 md:p-8">
-                     <StandingsWidget leagueId={activeLeagueId} />
+                     {activeLeagueId === 1 ? (
+                        <WorldCup2026GroupTables />
+                     ) : (
+                        <StandingsWidget leagueId={activeLeagueId} />
+                     )}
                   </div>
                </div>
             </div>

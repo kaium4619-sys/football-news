@@ -1,13 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0f172a; /* slate-900 */
-  --foreground: #f8fafc; /* slate-50 */
-  --primary: #ccff00; /* Neon Green */
-  --primary-foreground: #020617; /* slate-950 */
-  --card: #1e293b; /* slate-800 */
+  --background: #0f172a;
+  /* slate-900 */
+  --foreground: #f8fafc;
+  /* slate-50 */
+  --primary: #00e676;
+  /* Neon Green */
+  --primary-foreground: #020617;
+  /* slate-950 */
+  --card: #1e293b;
+  /* slate-800 */
   --card-foreground: #f8fafc;
-  --border: #334155; /* slate-700 */
+  --border: #334155;
+  /* slate-700 */
   --muted: #334155;
   --muted-foreground: #94a3b8;
   --accent: #1e293b;
@@ -42,13 +48,38 @@ body {
   width: 8px;
   height: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: var(--background);
 }
+
 ::-webkit-scrollbar-thumb {
   background: var(--muted);
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: var(--border);
 }
+
+/* ── Infinite marquee ticker ──────────────────────────────── */
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* JS sets --ticker-duration via style; fallback = 30s */
+.ticker-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: ticker-scroll var(--ticker-duration, 30s) linear infinite;
+}
+
+.ticker-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Hide native scrollbar for date strips etc. */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

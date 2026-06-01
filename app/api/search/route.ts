@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { searchTeams, searchLeagues } from "@/lib/football-api";
+import { searchTeams, searchLeagues } from "@/lib/api-football";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);

@@ -1,4 +1,4 @@
-import { fetchMatchEvents } from "@/lib/football-api";
+import { fetchMatchEvents } from "@/lib/api-football";
 import { NextResponse } from "next/server";
 
 export const revalidate = 30;

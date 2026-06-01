@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Clock, Tag } from "lucide-react";
+import { formatTag, getTagLink, getPrimaryCategory } from "@/lib/tag-utils";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -37,6 +38,23 @@ export default async function BlogPost({
 
   if (!post) return notFound();
 
+  let relatedPosts = [];
+  if (post.tags && post.tags.length > 0) {
+    // Find related posts that share at least one tag
+    const { data } = await supabase
+      .from("posts")
+      .select("*")
+      .eq("published", true)
+      .neq("id", post.id)
+      .contains("tags", [post.tags[0]]) // simple match on first tag
+      .order("created_at", { ascending: false })
+      .limit(4);
+    
+    if (data) {
+      relatedPosts = data;
+    }
+  }
+
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       <Link href="/news" className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary mb-8 transition-colors">
@@ -47,11 +65,20 @@ export default async function BlogPost({
 
       {post.tags?.length > 0 && (
         <div className="flex gap-2 flex-wrap mb-4">
-          {post.tags.map((tag: string) => (
-            <span key={tag} className="inline-flex items-center gap-1 bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full border border-primary/20">
-              <Tag className="w-3 h-3" /> {tag}
-            </span>
-          ))}
+          {post.tags.map((tag: string) => {
+            const label = formatTag(tag);
+            const link = getTagLink(tag);
+            const content = (
+              <span className="inline-flex items-center gap-1 bg-primary/10 hover:bg-primary/20 transition-colors text-primary text-xs font-bold px-3 py-1 rounded-full border border-primary/20">
+                <Tag className="w-3 h-3" /> {label}
+              </span>
+            );
+            return link ? (
+              <Link key={tag} href={link}>{content}</Link>
+            ) : (
+              <span key={tag}>{content}</span>
+            );
+          })}
         </div>
       )}
 
@@ -218,6 +245,30 @@ export default async function BlogPost({
           [&_strong]:text-foreground [&_strong]:font-bold"
         dangerouslySetInnerHTML={{ __html: cleanContent(post.content) }}
       />
+      
+      {/* Related Articles */}
+      {relatedPosts.length > 0 && (
+        <div className="mt-16 pt-8 border-t border-border">
+          <h2 className="text-2xl font-black uppercase tracking-tight mb-6">Related News</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {relatedPosts.map((relatedPost) => (
+              <Link key={relatedPost.id} href={`/blog/${relatedPost.slug}`} className="flex gap-4 group items-center">
+                <div className="relative w-24 h-24 rounded-xl overflow-hidden border border-border flex-shrink-0 bg-muted">
+                  {relatedPost.image_url && <Image src={relatedPost.image_url} alt={relatedPost.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />}
+                </div>
+                <div className="flex flex-col gap-1">
+                  <span className="text-primary text-[10px] font-bold uppercase tracking-widest">
+                    {getPrimaryCategory(relatedPost.tags)}
+                  </span>
+                  <h3 className="font-bold text-sm leading-tight group-hover:text-primary transition-colors line-clamp-3">
+                    {relatedPost.title}
+                  </h3>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { fetchTeam } from "@/lib/football-api";
+import { fetchTeam } from "@/lib/api-football";
 import { NextResponse } from "next/server";
 
 export const revalidate = 86400;

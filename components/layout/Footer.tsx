@@ -8,8 +8,8 @@ export function Footer() {
       <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between gap-8">
         <div className="flex flex-col gap-6 max-w-sm">
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/logo.png" alt="The Football Pulse Logo" width={40} height={40} className="object-contain rounded-full overflow-hidden" />
-            <span className="font-bold text-xl tracking-tight text-foreground">The Football Pulse</span>
+            <Image src="/logo.png" alt="Football Pulse Logo" width={40} height={40} className="object-contain rounded-full overflow-hidden" />
+            <span className="font-bold text-xl tracking-tight text-foreground">Football Pulse</span>
           </Link>
           <p className="text-sm text-muted-foreground leading-relaxed">
             Your ultimate destination for live football scores, breaking news, detailed stats, and match analysis from around the globe. Join our community of millions of fans.
@@ -54,7 +54,7 @@ export function Footer() {
       </div>
       
       <div className="container mx-auto px-4 mt-8 pt-8 border-t border-border/50 text-center text-xs text-muted-foreground flex flex-col sm:flex-row justify-between items-center pb-16 md:pb-0">
-        <p>© The Football Pulse. All rights reserved.</p>
+        <p>© Football Pulse. All rights reserved.</p>
       </div>
     </footer>
   );
