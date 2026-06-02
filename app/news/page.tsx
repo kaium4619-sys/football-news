@@ -78,16 +78,11 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
             ) : (
               <div className="w-full h-full bg-muted" />
             )}
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
-            <div className="absolute bottom-0 left-0 p-8 md:p-12 w-full max-w-4xl flex flex-col gap-4">
-              {featuredPost.tags?.[0] && (
-                <span className="px-3 py-1 bg-primary text-primary-foreground text-xs font-black uppercase rounded-lg w-fit">
-                  {featuredPost.tags[0]}
-                </span>
-              )}
-              <h2 className="text-3xl md:text-5xl font-black text-white leading-tight">{featuredPost.title}</h2>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+            <div className="absolute bottom-0 left-0 p-4 sm:p-6 md:p-12 w-full max-w-4xl flex flex-col gap-3">
+              <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-white leading-tight line-clamp-3 md:line-clamp-none">{featuredPost.title}</h2>
               {featuredPost.meta_description && (
-                <p className="text-white/70 text-lg hidden md:block line-clamp-2">{featuredPost.meta_description}</p>
+                <p className="text-white/70 text-sm sm:text-base hidden md:block line-clamp-2">{featuredPost.meta_description}</p>
               )}
             </div>
           </Link>
@@ -108,9 +103,6 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
                       )}
                     </div>
                     <div className="flex flex-col gap-2">
-                      {post.tags?.[0] && (
-                        <span className="text-primary text-xs font-bold uppercase">{post.tags[0]}</span>
-                      )}
                       <h3 className="text-xl font-bold leading-tight group-hover:text-primary transition-colors">{post.title}</h3>
                       {post.meta_description && (
                         <p className="text-muted-foreground text-sm line-clamp-2">{post.meta_description}</p>
@@ -138,7 +130,6 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
                     </div>
                     <div className="flex flex-col">
                       <span className="font-bold text-sm leading-tight group-hover:text-primary transition-colors line-clamp-2">{post.title}</span>
-                      {post.tags?.[0] && <span className="text-[10px] text-muted-foreground mt-1 uppercase font-bold">{post.tags[0]}</span>}
                     </div>
                   </Link>
                 ))}

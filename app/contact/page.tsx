@@ -36,9 +36,10 @@ export default function ContactPage() {
                  <h3 className="font-bold text-lg mb-1">Social Media</h3>
                  <p className="text-muted-foreground text-sm mb-2">Follow us for live updates</p>
                  <div className="flex gap-4 font-black text-sm uppercase">
-                    <span className="hover:text-primary cursor-pointer">Twitter</span>
-                    <span className="hover:text-primary cursor-pointer">Instagram</span>
-                    <span className="hover:text-primary cursor-pointer">Facebook</span>
+                    <a href="https://x.com/football_pulse_" target="_blank" rel="noreferrer" className="hover:text-primary">X</a>
+                    <a href="https://www.instagram.com/football_pulse_official_" target="_blank" rel="noreferrer" className="hover:text-primary">Instagram</a>
+                    <a href="https://www.facebook.com/profile.php?id=61588853236976" target="_blank" rel="noreferrer" className="hover:text-primary">Facebook</a>
+                    <a href="https://fr.pinterest.com/footballpulseofficial/" target="_blank" rel="noreferrer" className="hover:text-primary">Pinterest</a>
                  </div>
                </div>
             </div>

@@ -63,24 +63,7 @@ export default async function BlogPost({
 
 
 
-      {post.tags?.length > 0 && (
-        <div className="flex gap-2 flex-wrap mb-4">
-          {post.tags.map((tag: string) => {
-            const label = formatTag(tag);
-            const link = getTagLink(tag);
-            const content = (
-              <span className="inline-flex items-center gap-1 bg-primary/10 hover:bg-primary/20 transition-colors text-primary text-xs font-bold px-3 py-1 rounded-full border border-primary/20">
-                <Tag className="w-3 h-3" /> {label}
-              </span>
-            );
-            return link ? (
-              <Link key={tag} href={link}>{content}</Link>
-            ) : (
-              <span key={tag}>{content}</span>
-            );
-          })}
-        </div>
-      )}
+
 
       <h1 className="text-3xl md:text-5xl font-black leading-tight mb-4">{post.title}</h1>
 
@@ -102,7 +85,7 @@ export default async function BlogPost({
         </div>
       )}
       <hr className="border-border mb-8" />
-
+      
  
 <style>{`
        .blog-content h1 {
@@ -245,7 +228,24 @@ export default async function BlogPost({
           [&_strong]:text-foreground [&_strong]:font-bold"
         dangerouslySetInnerHTML={{ __html: cleanContent(post.content) }}
       />
-      
+      {post.tags?.length > 0 && (
+        <div className="flex gap-2 flex-wrap mb-4">
+          {post.tags.map((tag: string) => {
+            const label = formatTag(tag);
+            const link = getTagLink(tag);
+            const content = (
+              <span className="inline-flex items-center gap-1 bg-primary/10 hover:bg-primary/20 transition-colors text-primary text-xs font-bold px-3 py-1 rounded-full border border-primary/20">
+                <Tag className="w-3 h-3" /> {label}
+              </span>
+            );
+            return link ? (
+              <Link key={tag} href={link}>{content}</Link>
+            ) : (
+              <span key={tag}>{content}</span>
+            );
+          })}
+        </div>
+      )}
       {/* Related Articles */}
       {relatedPosts.length > 0 && (
         <div className="mt-16 pt-8 border-t border-border">
@@ -270,6 +270,6 @@ export default async function BlogPost({
         </div>
       )}
     </div>
+
   );
 }
-
