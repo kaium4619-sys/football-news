@@ -1,11 +1,15 @@
+import { Metadata } from "next";
 import React from "react";
 import { fetchStandings } from "@/lib/api-football";
 import { Trophy } from "lucide-react";
 
-export const metadata = {
-  title: "League Table | Football News",
-  description: "Current standings and league tables for top football competitions.",
+export const metadata: Metadata = {
+  title: "Football League Tables & Standings | Football Pulse",
+  description: "Check the latest league tables, team standings, and form guides for the top football leagues worldwide.",
+  alternates: { canonical: "https://www.footballpulse.online/league-table" },
 };
+
+
 
 export const revalidate = 600; // Cache for 10 minutes
 

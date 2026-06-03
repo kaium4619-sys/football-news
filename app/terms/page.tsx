@@ -1,3 +1,11 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Terms of Service | Football Pulse",
+  description: "Read the Terms of Service for using Football Pulse.",
+  alternates: { canonical: "https://www.footballpulse.online/terms" },
+};
+
 export default function TermsPage() {
   return (
     <div className="container mx-auto px-4 py-16">

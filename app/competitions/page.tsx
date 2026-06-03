@@ -1,6 +1,13 @@
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Trophy, Search, Globe, Award, ShieldCheck, Users, Flame } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Football Competitions & Leagues | Football Pulse",
+  description: "Explore standings, scores, and news for all major football competitions including the Premier League, Champions League, La Liga, and World Cup.",
+  alternates: { canonical: "https://www.footballpulse.online/competitions" },
+};
 import { ALL_LEAGUES, FAMOUS_PLAYERS } from "@/lib/api-mock";
 
 import { WorldCupLogo } from "@/components/icons/WorldCupLogo";

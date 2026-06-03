@@ -1,3 +1,11 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy | Football Pulse",
+  description: "Our privacy policy outlines how we collect, use, and protect your data while using Football Pulse.",
+  alternates: { canonical: "https://www.footballpulse.online/privacy-policy" },
+};
+
 export default function PrivacyPolicyPage() {
   return (
     <div className="container mx-auto px-4 py-16">

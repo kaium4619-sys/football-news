@@ -22,6 +22,29 @@ const COMPETITION_DESCRIPTIONS: Record<number, string> = {
   140: "La Liga is Spain's top professional football division, home to world-renowned clubs like Real Madrid and FC Barcelona.",
 };
 
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const numId = parseInt(id, 10);
+  const league = ALL_LEAGUES.find((l) => l.id === numId);
+
+  if (!league) return { title: "Competition Not Found" };
+
+  return {
+    title: `${league.name} — Live Scores, Standings & News`,
+    description: COMPETITION_DESCRIPTIONS[numId] ?? `Welcome to the official hub for the ${league.name}. Explore the latest news, live scores, recent results, and current standings.`,
+    alternates: {
+      canonical: `https://www.footballpulse.online/competitions/${numId}`,
+    },
+    openGraph: {
+      title: `${league.name} — Live Scores, Standings & News`,
+      description: COMPETITION_DESCRIPTIONS[numId] ?? `Explore the latest news, live scores, recent results, and current standings for the ${league.name}.`,
+      url: `https://www.footballpulse.online/competitions/${numId}`,
+      type: "website",
+      images: league.logo ? [{ url: league.logo }] : [],
+    },
+  };
+}
+
 export default async function CompetitionPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const numId = parseInt(id, 10);
@@ -49,6 +72,18 @@ export default async function CompetitionPage({ params }: { params: Promise<{ id
 
   return (
     <div className="min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SportsEvent",
+            "name": league.name,
+            "description": description,
+            "url": `https://www.footballpulse.online/competitions/${numId}`
+          })
+        }}
+      />
       {/* ── HERO BANNER ─────────────────────────────────────────────────────── */}
       <div className="relative w-full overflow-hidden bg-gradient-to-br from-primary/10 via-background to-background border-b border-border">
         <div className="absolute inset-0 flex items-center justify-end pr-12 pointer-events-none opacity-[0.04]">
@@ -198,7 +233,7 @@ export default async function CompetitionPage({ params }: { params: Promise<{ id
               {competitionArticles.length > 0 ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {competitionArticles.map((post) => (
-                    <Link key={post.id} href={`/blog/${post.slug}`} className="group flex flex-col gap-3 p-4 bg-card border border-border rounded-2xl hover:border-primary/50 transition-all">
+                    <Link key={post.id} href={`/news/${post.slug}`} className="group flex flex-col gap-3 p-4 bg-card border border-border rounded-2xl hover:border-primary/50 transition-all">
                       {post.image_url && (
                         <div className="relative w-full h-32 rounded-xl overflow-hidden mb-2">
                           <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 640px) 100vw, 50vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />

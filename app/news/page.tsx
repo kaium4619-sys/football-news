@@ -1,6 +1,13 @@
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { TrendingUp } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Latest Football News | Breaking Stories & Analysis",
+  description: "Read the latest football news, expert analysis, and breaking stories across all major leagues worldwide.",
+  alternates: { canonical: "https://www.footballpulse.online/news" },
+};
 import { createClient } from "@supabase/supabase-js";
 import NewsletterForm from "@/components/NewsletterForm";
 
@@ -72,7 +79,7 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
 
         {/* Featured Post */}
         {featuredPost && (
-          <Link href={`/blog/${featuredPost.slug}`} className="group relative rounded-3xl overflow-hidden aspect-[16/9] md:aspect-[21/9] border border-border">
+          <Link href={`/news/${featuredPost.slug}`} className="group relative rounded-3xl overflow-hidden aspect-[16/9] md:aspect-[21/9] border border-border">
             {featuredPost.image_url ? (
               <Image src={featuredPost.image_url} alt={featuredPost.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
             ) : (
@@ -94,7 +101,7 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
             {otherPosts.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {otherPosts.map(post => (
-                  <Link key={post.id} href={`/blog/${post.slug}`} className="flex flex-col gap-4 group">
+                  <Link key={post.id} href={`/news/${post.slug}`} className="flex flex-col gap-4 group">
                     <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-border">
                       {post.image_url ? (
                         <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -124,7 +131,7 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
               </h3>
               <div className="space-y-6">
                 {posts?.slice(0, 3).map(post => (
-                  <Link key={post.id} href={`/blog/${post.slug}`} className="flex gap-4 items-center group">
+                  <Link key={post.id} href={`/news/${post.slug}`} className="flex gap-4 items-center group">
                     <div className="w-12 h-12 rounded-xl bg-muted/30 flex-shrink-0 overflow-hidden relative">
                       {post.image_url && <Image src={post.image_url} alt={post.title} fill className="object-cover" />}
                     </div>

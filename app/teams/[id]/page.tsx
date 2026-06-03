@@ -28,6 +28,15 @@ export async function generateMetadata({ params }: PageProps) {
   return {
     title: `${base.name} — GoalStream`,
     description: `Latest news, squad, stats and info for ${base.name}.`,
+    alternates: {
+      canonical: `https://www.footballpulse.online/teams/${numId}`,
+    },
+    openGraph: {
+      title: `${base.name} — GoalStream`,
+      description: `Latest news, squad, stats and info for ${base.name}.`,
+      url: `https://www.footballpulse.online/teams/${numId}`,
+      type: "website",
+    },
   };
 }
 
@@ -108,6 +117,28 @@ export default async function TeamPage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SportsTeam",
+            "name": team.name,
+            "sport": "Soccer",
+            "coach": {
+              "@type": "Person",
+              "name": team.manager
+            },
+            "url": `https://www.footballpulse.online/teams/${numId}`,
+            "logo": team.logo,
+            "location": {
+              "@type": "Place",
+              "name": team.stadium,
+              "address": team.stadiumCity
+            }
+          })
+        }}
+      />
       {/* ── HERO BANNER ─────────────────────────────────────────────────────── */}
       <div
         className="relative w-full overflow-hidden"
@@ -241,7 +272,7 @@ export default async function TeamPage({ params }: PageProps) {
                       key={i}
                       className="flex items-start gap-4 p-5 rounded-2xl border border-border bg-card hover:border-primary/30 hover:bg-muted/5 transition-all cursor-pointer group"
                     >
-                      <Link href={`/blog/${news.slug}`} className="flex items-start gap-4 p-0 w-full">
+                      <Link href={`/news/${news.slug}`} className="flex items-start gap-4 p-0 w-full">
                         <div
                           className="w-10 h-10 flex-shrink-0 rounded-xl flex items-center justify-center mt-0.5"
                           style={{ background: `${team.primaryColor}22` }}

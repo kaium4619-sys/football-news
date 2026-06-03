@@ -1,4 +1,11 @@
+import { Metadata } from "next";
 import { Mail, MessageSquare, MapPin, Send } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Contact Us | Football Pulse",
+  description: "Get in touch with the Football Pulse team for inquiries, partnerships, or support.",
+  alternates: { canonical: "https://www.footballpulse.online/contact" },
+};
 
 export default function ContactPage() {
   return (

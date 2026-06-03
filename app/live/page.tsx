@@ -1,11 +1,13 @@
+import { Metadata } from "next";
 import React from "react";
 import { fetchFootballData } from "@/lib/football-data";
 import { MatchCard } from "@/components/matches/MatchCard";
 import { Zap } from "lucide-react";
 
-export const metadata = {
-  title: "Live Football Scores",
-  description: "Live football scores updated in real-time. Follow every match from Premier League, Champions League, La Liga and more.",
+export const metadata: Metadata = {
+  title: "Live Football Scores & Real-Time Updates | Football Pulse",
+  description: "Get real-time live scores, match updates, and in-game statistics for ongoing football matches around the globe.",
+  alternates: { canonical: "https://www.footballpulse.online/live" },
 };
 
 export const revalidate = 30;

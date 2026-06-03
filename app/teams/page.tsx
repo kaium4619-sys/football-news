@@ -1,6 +1,13 @@
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Search, Shield, Globe, Users, TrendingUp } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Football Teams & Clubs Directory | Football Pulse",
+  description: "Browse detailed profiles, news, stats, and live scores for top football clubs and national teams worldwide.",
+  alternates: { canonical: "https://www.footballpulse.online/teams" },
+};
 import { ALL_TEAMS, ALL_LEAGUES } from "@/lib/api-mock";
 
 export default function TeamsPage() {

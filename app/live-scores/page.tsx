@@ -1,11 +1,13 @@
+import { Metadata } from "next";
 import React from "react";
 import { fetchLiveMatches } from "@/lib/api-football";
 import { MatchCard } from "@/components/matches/MatchCard";
 import { Activity } from "lucide-react";
 
-export const metadata = {
-  title: "Live Scores | Football News",
-  description: "Real-time football live scores from leagues around the world.",
+export const metadata: Metadata = {
+  title: "Live Scores Hub | Fast Football Updates | Football Pulse",
+  description: "Track live football scores instantly. Get real-time updates for all ongoing matches in the Premier League, La Liga, and more.",
+  alternates: { canonical: "https://www.footballpulse.online/live-scores" },
 };
 
 export const revalidate = 30; // Cache for 30 seconds

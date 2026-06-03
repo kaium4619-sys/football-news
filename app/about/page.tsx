@@ -1,4 +1,11 @@
+import { Metadata } from "next";
 import { Activity, ShieldCheck, Zap, Globe } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "About Us | Football Pulse",
+  description: "Learn more about Football Pulse, our mission, and the team bringing you the ultimate football experience.",
+  alternates: { canonical: "https://www.footballpulse.online/about" },
+};
 
 export default function AboutPage() {
   return (

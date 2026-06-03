@@ -24,6 +24,15 @@ export async function generateMetadata({ params }: PageProps) {
   return {
     title: `${decodedName} — Profile & News`,
     description: `Latest news, stats and info for ${decodedName}.`,
+    alternates: {
+      canonical: `https://www.footballpulse.online/players/${name}`,
+    },
+    openGraph: {
+      title: `${decodedName} — Profile & News`,
+      description: `Latest news, stats and info for ${decodedName}.`,
+      url: `https://www.footballpulse.online/players/${name}`,
+      type: "profile",
+    },
   };
 }
 
@@ -91,6 +100,27 @@ export default async function PlayerPage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen pb-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": playerInfo.name,
+            "jobTitle": "Soccer Player",
+            "nationality": {
+              "@type": "Country",
+              "name": playerInfo.country
+            },
+            "memberOf": {
+              "@type": "SportsOrganization",
+              "name": playerInfo.team
+            },
+            "image": playerInfo.image,
+            "url": `https://www.footballpulse.online/players/${name}`
+          })
+        }}
+      />
       {/* Hero Section */}
       <div className="relative w-full h-[50vh] sm:h-[60vh] bg-card overflow-hidden">
         {/* Background gradient effects */}
@@ -180,7 +210,7 @@ export default async function PlayerPage({ params }: PageProps) {
               </div>
               <div className="space-y-4">
                 {recentNews && recentNews.length > 0 ? recentNews.map((post, idx) => (
-                  <Link href={`/blog/${post.slug}`} key={idx} className="block group bg-card border border-border rounded-2xl p-5 sm:p-6 hover:border-primary/50 transition-all hover:-translate-y-1">
+                  <Link href={`/news/${post.slug}`} key={idx} className="block group bg-card border border-border rounded-2xl p-5 sm:p-6 hover:border-primary/50 transition-all hover:-translate-y-1">
                     <div className="flex flex-col sm:flex-row gap-4 justify-between">
                       <div className="space-y-3">
                         <div className="flex items-center gap-3">

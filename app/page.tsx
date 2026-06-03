@@ -1,6 +1,13 @@
+import { Metadata } from "next";
 import { StandingsWidget } from "@/components/matches/StandingsWidget";
 import LiveTicker, { type TickerMatch } from "@/components/matches/LiveTicker";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "Football Pulse | Live Scores, News, Transfers & Stats",
+  description: "Get the latest football news, live scores, transfer rumors, league tables, and match statistics from the Premier League, La Liga, Champions League, and more.",
+  alternates: { canonical: "https://www.footballpulse.online/" },
+};
 import Link from "next/link";
 import { ArrowRight, Flame } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
@@ -71,7 +78,7 @@ export default async function Home() {
           {/* Featured Hero Story */}
           {featuredPost && (
             <section className="relative rounded-2xl overflow-hidden aspect-[4/3] md:aspect-[21/9] group block cursor-pointer border border-border">
-              <Link href={`/blog/${featuredPost.slug}`} className="absolute inset-0 z-10">
+              <Link href={`/news/${featuredPost.slug}`} className="absolute inset-0 z-10">
                 <div className="relative w-full h-full">
                   {featuredPost.image_url ? (
                     <Image
@@ -111,7 +118,7 @@ export default async function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {topStories.length > 0 ? (
                 topStories.map(post => (
-                  <Link key={post.id} href={`/blog/${post.slug}`} className="group flex flex-col gap-3">
+                  <Link key={post.id} href={`/news/${post.slug}`} className="group flex flex-col gap-3">
                     <div className="relative aspect-[16/9] rounded-xl overflow-hidden border border-border">
                       {post.image_url ? (
                         <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -144,7 +151,7 @@ export default async function Home() {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {transferPosts.slice(0, 3).map(post => (
-                  <Link key={post.id} href={`/blog/${post.slug}`} className="group flex flex-col gap-3">
+                  <Link key={post.id} href={`/news/${post.slug}`} className="group flex flex-col gap-3">
                     <div className="relative aspect-video rounded-xl overflow-hidden border border-border">
                       {post.image_url ? (
                         <Image src={post.image_url} alt={post.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />

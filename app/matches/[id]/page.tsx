@@ -13,6 +13,15 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   return {
     title: `${match.homeTeam.name} vs ${match.awayTeam.name} — Match Details`,
     description: `Match details, score, and statistics for ${match.homeTeam.name} vs ${match.awayTeam.name}.`,
+    alternates: {
+      canonical: `https://www.footballpulse.online/matches/${id}`,
+    },
+    openGraph: {
+      title: `${match.homeTeam.name} vs ${match.awayTeam.name} — Match Details`,
+      description: `Match details, score, and statistics for ${match.homeTeam.name} vs ${match.awayTeam.name}.`,
+      url: `https://www.footballpulse.online/matches/${id}`,
+      type: "website",
+    },
   };
 }
 
@@ -41,6 +50,30 @@ export default async function MatchDetailsPage({ params }: { params: Promise<{ i
 
   return (
     <div className="min-h-screen bg-background pb-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SportsEvent",
+            "name": `${match.homeTeam.name} vs ${match.awayTeam.name}`,
+            "startDate": match.utcDate,
+            "sport": "Soccer",
+            "homeTeam": {
+              "@type": "SportsTeam",
+              "name": match.homeTeam.name
+            },
+            "awayTeam": {
+              "@type": "SportsTeam",
+              "name": match.awayTeam.name
+            },
+            "location": match.venue ? {
+              "@type": "Place",
+              "name": match.venue
+            } : undefined
+          })
+        }}
+      />
       {/* Header */}
       <div className="relative pt-20 pb-12 overflow-hidden border-b border-white/10" style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.02) 0%, var(--card) 100%)" }}>
         <div className="container relative z-10">

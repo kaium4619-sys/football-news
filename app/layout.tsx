@@ -16,6 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.footballpulse.online"),
   title: {
     default: "Football Pulse | Live Football Scores, News & Stats",
     template: "%s | Football Pulse"
@@ -24,6 +25,20 @@ export const metadata: Metadata = {
   icons: {
     icon: "/logo.png",
     apple: "/logo.png",
+  },
+  openGraph: {
+    title: "Football Pulse | Live Football Scores, News & Stats",
+    description: "The ultimate football platform for real-time live scores, breaking news, detailed match stats, and league tables from around the world.",
+    url: "https://www.footballpulse.online",
+    siteName: "Football Pulse",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Football Pulse | Live Football Scores, News & Stats",
+    description: "The ultimate football platform for real-time live scores, breaking news, detailed match stats, and league tables from around the world.",
+    creator: "@FootballPulse",
   },
 };
 
@@ -41,6 +56,34 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "name": "Football Pulse",
+                "url": "https://www.footballpulse.online",
+                "potentialAction": {
+                  "@type": "SearchAction",
+                  "target": "https://www.footballpulse.online/search?q={search_term_string}",
+                  "query-input": "required name=search_term_string"
+                }
+              })
+            }}
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                "name": "Football Pulse",
+                "url": "https://www.footballpulse.online",
+                "logo": "https://www.footballpulse.online/logo.png"
+              })
+            }}
+          />
           <Navbar />
           <main className="flex-1 flex flex-col w-full">
             {children}

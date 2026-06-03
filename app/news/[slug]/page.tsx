@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { createClient } from "@supabase/supabase-js";
 import { notFound } from "next/navigation";
 import Image from "next/image";
@@ -21,6 +22,45 @@ function cleanContent(html: string): string {
     .replace(/<p[^>]*>\s*<\/p>/gi, '')
     .replace(/^#\s+.+$/gm, "")
     .trim();
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const { data: post } = await supabase
+    .from("posts")
+    .select("*")
+    .eq("slug", slug)
+    .single();
+
+  if (!post) {
+    return {
+      title: "Post Not Found",
+    };
+  }
+
+  return {
+    title: post.title,
+    description: post.meta_description || post.title,
+    alternates: {
+      canonical: `https://www.footballpulse.online/news/${post.slug}`,
+    },
+    openGraph: {
+      title: post.title,
+      description: post.meta_description || post.title,
+      url: `https://www.footballpulse.online/news/${post.slug}`,
+      type: "article",
+      publishedTime: post.created_at,
+      modifiedTime: post.updated_at || post.created_at,
+      authors: ["Football Pulse"],
+      images: post.image_url ? [{ url: post.image_url }] : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.meta_description || post.title,
+      images: post.image_url ? [post.image_url] : [],
+    },
+  };
 }
 
 export default async function BlogPost({
@@ -57,6 +97,32 @@ export default async function BlogPost({
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "NewsArticle",
+            "headline": post.title,
+            "image": post.image_url ? [post.image_url] : [],
+            "datePublished": post.created_at,
+            "dateModified": post.updated_at || post.created_at,
+            "author": [{
+                "@type": "Organization",
+                "name": "Football Pulse",
+                "url": "https://www.footballpulse.online"
+            }],
+            "publisher": {
+              "@type": "Organization",
+              "name": "Football Pulse",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.footballpulse.online/logo.png"
+              }
+            }
+          })
+        }}
+      />
       <Link href="/news" className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary mb-8 transition-colors">
         <ArrowLeft className="w-4 h-4" /> Back to News
       </Link>
@@ -252,7 +318,7 @@ export default async function BlogPost({
           <h2 className="text-2xl font-black uppercase tracking-tight mb-6">Related News</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {relatedPosts.map((relatedPost) => (
-              <Link key={relatedPost.id} href={`/blog/${relatedPost.slug}`} className="flex gap-4 group items-center">
+              <Link key={relatedPost.id} href={`/news/${relatedPost.slug}`} className="flex gap-4 group items-center">
                 <div className="relative w-24 h-24 rounded-xl overflow-hidden border border-border flex-shrink-0 bg-muted">
                   {relatedPost.image_url && <Image src={relatedPost.image_url} alt={relatedPost.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />}
                 </div>
