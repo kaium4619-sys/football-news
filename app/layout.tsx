@@ -23,7 +23,11 @@ export const metadata: Metadata = {
   },
   description: "The ultimate football platform for real-time live scores, breaking news, detailed match stats, and league tables from around the world.",
   icons: {
-    icon: "/logo.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/logo.png", type: "image/png", sizes: "512x512" },
+    ],
+    shortcut: "/favicon.ico",
     apple: "/logo.png",
   },
   openGraph: {
@@ -80,7 +84,8 @@ export default function RootLayout({
                 "@type": "Organization",
                 "name": "Football Pulse",
                 "url": "https://www.footballpulse.online",
-                "logo": "https://www.footballpulse.online/logo.png"
+                "logo": "https://www.footballpulse.online/logo.png",
+                "image": "https://www.footballpulse.online/logo.png"
               })
             }}
           />
