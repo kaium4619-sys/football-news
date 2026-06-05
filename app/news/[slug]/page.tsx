@@ -145,9 +145,13 @@ export default async function BlogPost({
       </div>
 
       {post.image_url && (
-        <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden mb-8 border border-border">
-
-          <Image src={post.image_url} alt={post.title} fill className="object-cover" />
+        <div className="w-full rounded-2xl overflow-hidden mb-8 border border-border">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={post.image_url}
+            alt={post.title}
+            className="w-full max-h-[520px] object-cover object-top block"
+          />
         </div>
       )}
       <hr className="border-border mb-8" />

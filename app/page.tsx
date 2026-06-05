@@ -12,6 +12,7 @@ import Link from "next/link";
 import { ArrowRight, Flame } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
 import { fetchFootballData } from "@/lib/football-data";
+import { getPrimaryCategory } from "@/lib/tag-utils";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -85,7 +86,7 @@ export default async function Home() {
                       src={featuredPost.image_url}
                       alt={featuredPost.title}
                       fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                     />
                   ) : (
                     <div className="w-full h-full bg-muted" />
@@ -121,13 +122,15 @@ export default async function Home() {
                   <Link key={post.id} href={`/news/${post.slug}`} className="group flex flex-col gap-3">
                     <div className="relative aspect-[16/9] rounded-xl overflow-hidden border border-border">
                       {post.image_url ? (
-                        <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover object-top transition-transform duration-500 group-hover:scale-105" />
                       ) : (
                         <div className="w-full h-full bg-muted" />
                       )}
                     </div>
                     <div>
-                      <span className="text-primary text-xs font-bold uppercase mb-1 block">{post.tags?.[0] || "News"}</span>
+                      <span className="text-primary text-xs font-bold uppercase mb-1 block">
+                        {post.tags?.length > 0 ? getPrimaryCategory(post.tags) : "News"}
+                      </span>
                       <h3 className="text-lg font-bold leading-tight group-hover:text-primary transition-colors">{post.title}</h3>
                     </div>
                   </Link>
@@ -154,7 +157,7 @@ export default async function Home() {
                   <Link key={post.id} href={`/news/${post.slug}`} className="group flex flex-col gap-3">
                     <div className="relative aspect-video rounded-xl overflow-hidden border border-border">
                       {post.image_url ? (
-                        <Image src={post.image_url} alt={post.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <Image src={post.image_url} alt={post.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
                       ) : (
                         <div className="w-full h-full bg-muted" />
                       )}
