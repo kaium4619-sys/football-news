@@ -1,4 +1,5 @@
 import { ALL_LEAGUES, ALL_TEAMS, FAMOUS_PLAYERS } from "./api-mock";
+import { slugify } from "./slugify";
 
 export function formatTag(tag: string): string {
   if (!tag) return "";
@@ -28,11 +29,11 @@ export function getTagLink(tag: string): string | null {
   if (parts.length !== 2) return null;
   const [type, id] = parts;
 
-  if (type === "competition") return `/competitions/${id}`;
-  if (type === "team") return `/teams/${id}`;
+  if (type === "competition") return `/competitions/${slugify(formatTag(tag))}`;
+  if (type === "team") return `/teams/${slugify(formatTag(tag))}`;
   if (type === "player") {
     const player = FAMOUS_PLAYERS.find(p => p.id === parseInt(id, 10));
-    return player ? `/players/${encodeURIComponent(player.name)}` : `/players/${id}`;
+    return player ? `/players/${slugify(player.name)}` : `/players/${slugify(formatTag(tag))}`;
   }
   if (type === "topic" && id === "transfers") return `/transfers`;
   

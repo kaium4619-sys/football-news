@@ -8,6 +8,7 @@ import { Menu, X, Trophy, Home, Newspaper, Calendar, Shield, ChevronDown, ListOr
 import { ALL_LEAGUES, ALL_TEAMS, FAMOUS_PLAYERS } from "@/lib/api-mock";
 import { SearchDropdown } from "@/components/SearchDropdown";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { slugify } from "@/lib/slugify";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -73,7 +74,7 @@ export function Navbar() {
                     </div>
                     <div className="space-y-1">
                       {ALL_LEAGUES.filter(l => l.type === 'League').map(league => (
-                        <Link key={league.id} href={`/competitions/${league.id}`} className="flex items-center gap-3 p-2 rounded-xl hover:bg-muted/50 transition-all group/item">
+                        <Link key={league.id} href={`/competitions/${slugify(league.name)}`} className="flex items-center gap-3 p-2 rounded-xl hover:bg-muted/50 transition-all group/item">
                           <div className="relative w-6 h-6 flex-shrink-0 bg-muted/20 rounded-lg p-1 group-hover/item:scale-110 transition-transform flex items-center justify-center">
                             {league.logo ? (
                               <Image src={league.logo} alt={league.name} fill sizes="32px" className="object-contain" />
@@ -94,7 +95,7 @@ export function Navbar() {
                     </div>
                     <div className="space-y-1">
                       {ALL_LEAGUES.filter(l => l.type === 'International').map(comp => (
-                        <Link key={comp.id} href={`/competitions/${comp.id}`} className="flex items-center gap-3 p-2 rounded-xl hover:bg-muted/50 transition-all group/item">
+                        <Link key={comp.id} href={`/competitions/${slugify(comp.name)}`} className="flex items-center gap-3 p-2 rounded-xl hover:bg-muted/50 transition-all group/item">
                           <div className="relative w-6 h-6 flex-shrink-0 bg-muted/20 rounded-lg p-1 group-hover/item:scale-110 transition-transform flex items-center justify-center">
                             {comp.logo ? (
                               <Image src={comp.logo} alt={comp.name} fill sizes="32px" className="object-contain" />
@@ -115,7 +116,7 @@ export function Navbar() {
                     </div>
                     <div className="space-y-1">
                       {ALL_LEAGUES.filter(l => l.type === 'Club-Int').map(comp => (
-                        <Link key={comp.id} href={`/competitions/${comp.id}`} className="flex items-center gap-3 p-2 rounded-xl hover:bg-muted/50 transition-all group/item">
+                        <Link key={comp.id} href={`/competitions/${slugify(comp.name)}`} className="flex items-center gap-3 p-2 rounded-xl hover:bg-muted/50 transition-all group/item">
                           <div className="relative w-6 h-6 flex-shrink-0 bg-muted/20 rounded-lg p-1 group-hover/item:scale-110 transition-transform flex items-center justify-center">
                             {comp.logo ? (
                               <Image src={comp.logo} alt={comp.name} fill sizes="32px" className="object-contain" />
@@ -136,7 +137,7 @@ export function Navbar() {
                     </div>
                     <div className="space-y-1">
                       {FAMOUS_PLAYERS.slice(0, 7).map(player => (
-                        <Link key={player.id} href={`/players/${encodeURIComponent(player.name)}`} className="flex items-center gap-3 p-2 rounded-xl hover:bg-muted/50 transition-all group/item">
+                        <Link key={player.id} href={`/players/${slugify(player.name)}`} className="flex items-center gap-3 p-2 rounded-xl hover:bg-muted/50 transition-all group/item">
                           <div className="relative w-10 h-10 flex-shrink-0 rounded-xl overflow-hidden border-2 border-border/50 group-hover/item:border-primary/50 transition-all shadow-sm">
                             <Image src={player.image} alt={player.name} fill sizes="40px" className="object-cover" />
                           </div>
@@ -168,7 +169,7 @@ export function Navbar() {
                     <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground mb-4 border-b border-border/50 pb-2">Top Clubs</h4>
                     <div className="grid grid-cols-1 gap-y-1">
                       {ALL_TEAMS.filter(t => t.country !== "World").slice(0, 8).map(team => (
-                        <Link key={team.id} href={`/teams/${team.id}`} className="flex items-center gap-3 p-2 rounded-xl hover:bg-muted/50 transition-all group/item">
+                        <Link key={team.id} href={`/teams/${slugify(team.name)}`} className="flex items-center gap-3 p-2 rounded-xl hover:bg-muted/50 transition-all group/item">
                           <div className="relative w-8 h-8 flex-shrink-0 bg-muted/20 rounded-lg p-1 group-hover/item:scale-110 transition-transform">
                             <Image src={team.logo} alt={team.name} fill sizes="32px" className="object-contain" />
                           </div>
@@ -184,7 +185,7 @@ export function Navbar() {
                     <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground mb-4 border-b border-border/50 pb-2">National Teams</h4>
                     <div className="grid grid-cols-1 gap-y-1">
                       {ALL_TEAMS.filter(t => t.country === "World").slice(0, 8).map(team => (
-                        <Link key={team.id} href={`/teams/${team.id}`} className="flex items-center gap-3 p-2 rounded-xl hover:bg-muted/50 transition-all group/item">
+                        <Link key={team.id} href={`/teams/${slugify(team.name)}`} className="flex items-center gap-3 p-2 rounded-xl hover:bg-muted/50 transition-all group/item">
                           <div className="relative w-8 h-8 flex-shrink-0 bg-muted/20 rounded-lg p-1 group-hover/item:scale-110 transition-transform">
                             <Image src={team.logo} alt={team.name} fill sizes="32px" className="object-contain" />
                           </div>

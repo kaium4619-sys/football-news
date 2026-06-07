@@ -8,6 +8,7 @@ import {
 import { FAMOUS_PLAYERS, ALL_TEAMS } from "@/lib/api-mock";
 import { TEAM_DETAILS } from "@/lib/team-details";
 import { createClient } from "@supabase/supabase-js";
+import { slugify } from "@/lib/slugify";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -15,38 +16,38 @@ const supabase = createClient(
 );
 
 interface PageProps {
-  params: Promise<{ name: string }>;
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateMetadata({ params }: PageProps) {
-  const { name } = await params;
-  const decodedName = decodeURIComponent(name);
+  const { slug } = await params;
+  const player = FAMOUS_PLAYERS.find(p => slugify(p.name) === slug);
+  const displayName = player?.name ?? slug.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
   return {
-    title: `${decodedName} — Profile & News`,
-    description: `Latest news, stats and info for ${decodedName}.`,
+    title: `${displayName} — Profile & News`,
+    description: `Latest news, stats and info for ${displayName}.`,
     alternates: {
-      canonical: `https://www.footballpulse.online/players/${name}`,
+      canonical: `https://www.footballpulse.online/players/${slug}`,
     },
     openGraph: {
-      title: `${decodedName} — Profile & News`,
-      description: `Latest news, stats and info for ${decodedName}.`,
-      url: `https://www.footballpulse.online/players/${name}`,
+      title: `${displayName} — Profile & News`,
+      description: `Latest news, stats and info for ${displayName}.`,
+      url: `https://www.footballpulse.online/players/${slug}`,
       type: "profile",
     },
   };
 }
 
 export default async function PlayerPage({ params }: PageProps) {
-  const { name } = await params;
-  const decodedName = decodeURIComponent(name);
+  const { slug } = await params;
 
-  // Find player from FAMOUS_PLAYERS
-  let playerInfo = FAMOUS_PLAYERS.find(p => p.name.toLowerCase() === decodedName.toLowerCase());
+  // Find player from FAMOUS_PLAYERS by slug match
+  let playerInfo = FAMOUS_PLAYERS.find(p => slugify(p.name) === slug);
 
   if (!playerInfo) {
-    // Search in TEAM_DETAILS
+    // Search in TEAM_DETAILS by slug match
     for (const teamId in TEAM_DETAILS) {
-      const p = TEAM_DETAILS[teamId as any].keyPlayers.find(p => p.name.toLowerCase() === decodedName.toLowerCase());
+      const p = TEAM_DETAILS[teamId as any].keyPlayers.find(p => slugify(p.name) === slug);
       if (p) {
         const teamBase = ALL_TEAMS.find(t => t.id === Number(teamId));
         playerInfo = {
@@ -117,7 +118,7 @@ export default async function PlayerPage({ params }: PageProps) {
               "name": playerInfo.team
             },
             "image": playerInfo.image,
-            "url": `https://www.footballpulse.online/players/${name}`
+            "url": `https://www.footballpulse.online/players/${slugify(playerInfo.name)}`
           })
         }}
       />

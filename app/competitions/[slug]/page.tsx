@@ -7,6 +7,7 @@ import { ALL_LEAGUES } from "@/lib/api-mock";
 import { fetchLiveMatches, fetchRecentFixtures } from "@/lib/api-football";
 import { StandingsWidget } from "@/components/matches/StandingsWidget";
 import { WorldCup2026GroupTables } from "@/components/competitions/WorldCup2026GroupTables";
+import { slugify } from "@/lib/slugify";
 
 export const revalidate = 60; // Cache for 60 seconds
 
@@ -22,35 +23,35 @@ const COMPETITION_DESCRIPTIONS: Record<number, string> = {
   140: "La Liga is Spain's top professional football division, home to world-renowned clubs like Real Madrid and FC Barcelona.",
 };
 
-export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
-  const numId = parseInt(id, 10);
-  const league = ALL_LEAGUES.find((l) => l.id === numId);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const league = ALL_LEAGUES.find((l) => slugify(l.name) === slug);
 
   if (!league) return { title: "Competition Not Found" };
 
   return {
     title: `${league.name} — Live Scores, Standings & News`,
-    description: COMPETITION_DESCRIPTIONS[numId] ?? `Welcome to the official hub for the ${league.name}. Explore the latest news, live scores, recent results, and current standings.`,
+    description: COMPETITION_DESCRIPTIONS[league.id] ?? `Welcome to the official hub for the ${league.name}. Explore the latest news, live scores, recent results, and current standings.`,
     alternates: {
-      canonical: `https://www.footballpulse.online/competitions/${numId}`,
+      canonical: `https://www.footballpulse.online/competitions/${slugify(league.name)}`,
     },
     openGraph: {
       title: `${league.name} — Live Scores, Standings & News`,
-      description: COMPETITION_DESCRIPTIONS[numId] ?? `Explore the latest news, live scores, recent results, and current standings for the ${league.name}.`,
-      url: `https://www.footballpulse.online/competitions/${numId}`,
+      description: COMPETITION_DESCRIPTIONS[league.id] ?? `Explore the latest news, live scores, recent results, and current standings for the ${league.name}.`,
+      url: `https://www.footballpulse.online/competitions/${slugify(league.name)}`,
       type: "website",
       images: league.logo ? [{ url: league.logo }] : [],
     },
   };
 }
 
-export default async function CompetitionPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
-  const numId = parseInt(id, 10);
-  const league = ALL_LEAGUES.find((l) => l.id === numId);
+export default async function CompetitionPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const league = ALL_LEAGUES.find((l) => slugify(l.name) === slug);
 
   if (!league) notFound();
+
+  const numId = league.id;
 
   // Fetch real data
   const [liveData, recentData, { data: allArticles }] = await Promise.all([
@@ -80,7 +81,7 @@ export default async function CompetitionPage({ params }: { params: Promise<{ id
             "@type": "SportsEvent",
             "name": league.name,
             "description": description,
-            "url": `https://www.footballpulse.online/competitions/${numId}`
+            "url": `https://www.footballpulse.online/competitions/${slugify(league.name)}`
           })
         }}
       />
@@ -218,14 +219,8 @@ export default async function CompetitionPage({ params }: { params: Promise<{ id
               <p className="mt-4 text-muted-foreground text-sm leading-relaxed">{description}</p>
             </section>
 
-            {numId === 1 && (
-              <div className="mb-8">
-                <WorldCup2026GroupTables />
-              </div>
-            )}
-
             {/* League News */}
-            <section>
+            <section className="mb-8">
               <div className="flex items-center gap-3 mb-6">
                 <Newspaper className="w-5 h-5 text-primary" />
                 <h2 className="text-xl font-black uppercase tracking-tight">League News</h2>
@@ -254,6 +249,12 @@ export default async function CompetitionPage({ params }: { params: Promise<{ id
                 </div>
               )}
             </section>
+
+            {numId === 1 && (
+              <div className="mb-8">
+                <WorldCup2026GroupTables />
+              </div>
+            )}
           </div>
 
           {/* RIGHT — Table */}

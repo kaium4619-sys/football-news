@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://www.footballpulse.online/teams" },
 };
 import { ALL_TEAMS, ALL_LEAGUES } from "@/lib/api-mock";
+import { slugify } from "@/lib/slugify";
 
 export default function TeamsPage() {
   return (
@@ -50,7 +51,7 @@ export default function TeamsPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {ALL_TEAMS.filter(t => t.country !== "World").map(team => (
-                  <Link key={team.id} href={`/teams/${team.id}`} className="flex items-center justify-between p-5 rounded-2xl bg-card border border-border hover:border-primary/30 hover:bg-muted/5 transition-all group">
+                  <Link key={team.id} href={`/teams/${slugify(team.name)}`} className="flex items-center justify-between p-5 rounded-2xl bg-card border border-border hover:border-primary/30 hover:bg-muted/5 transition-all group">
                     <div className="flex items-center gap-4">
                       <div className="relative w-12 h-12 flex-shrink-0 group-hover:scale-110 transition-transform">
                         <Image src={team.logo} alt={team.name} fill sizes="48px" className="object-contain" />
@@ -84,7 +85,7 @@ export default function TeamsPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {ALL_TEAMS.filter(t => t.country === "World").map(team => (
-                  <Link key={team.id} href={`/teams/${team.id}`} className="flex items-center justify-between p-5 rounded-2xl bg-card border border-border hover:border-primary/30 hover:bg-muted/5 transition-all group">
+                  <Link key={team.id} href={`/teams/${slugify(team.name)}`} className="flex items-center justify-between p-5 rounded-2xl bg-card border border-border hover:border-primary/30 hover:bg-muted/5 transition-all group">
                     <div className="flex items-center gap-4">
                       <div className="relative w-12 h-12 flex-shrink-0 group-hover:scale-110 transition-transform">
                         <Image src={team.logo} alt={team.name} fill sizes="48px" className="object-contain" />

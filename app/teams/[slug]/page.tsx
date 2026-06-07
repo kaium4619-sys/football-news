@@ -8,6 +8,7 @@ import {
 import { ALL_TEAMS } from "@/lib/api-mock";
 import { TEAM_DETAILS, getTeamDetail } from "@/lib/team-details";
 import { createClient } from "@supabase/supabase-js";
+import { slugify } from "@/lib/slugify";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -15,37 +16,36 @@ const supabase = createClient(
 );
 
 interface PageProps {
-  params: Promise<{ id: string }>;
+  params: Promise<{ slug: string }>;
 }
 
 // generateStaticParams removed in dev for performance — pages build on demand
 
 export async function generateMetadata({ params }: PageProps) {
-  const { id } = await params;
-  const numId = parseInt(id, 10);
-  const base = ALL_TEAMS.find((t) => t.id === numId);
+  const { slug } = await params;
+  const base = ALL_TEAMS.find((t) => slugify(t.name) === slug);
   if (!base) return { title: "Team Not Found" };
   return {
     title: `${base.name} — GoalStream`,
     description: `Latest news, squad, stats and info for ${base.name}.`,
     alternates: {
-      canonical: `https://www.footballpulse.online/teams/${numId}`,
+      canonical: `https://www.footballpulse.online/teams/${slugify(base.name)}`,
     },
     openGraph: {
       title: `${base.name} — GoalStream`,
       description: `Latest news, squad, stats and info for ${base.name}.`,
-      url: `https://www.footballpulse.online/teams/${numId}`,
+      url: `https://www.footballpulse.online/teams/${slugify(base.name)}`,
       type: "website",
     },
   };
 }
 
 export default async function TeamPage({ params }: PageProps) {
-  const { id } = await params;
-  const numId = parseInt(id, 10);
-  const base = ALL_TEAMS.find((t) => t.id === numId);
+  const { slug } = await params;
+  const base = ALL_TEAMS.find((t) => slugify(t.name) === slug);
   if (!base) notFound();
 
+  const numId = base.id;
   const team = getTeamDetail(numId, base);
 
   const { data: recentNews } = await supabase
@@ -129,7 +129,7 @@ export default async function TeamPage({ params }: PageProps) {
               "@type": "Person",
               "name": team.manager
             },
-            "url": `https://www.footballpulse.online/teams/${numId}`,
+            "url": `https://www.footballpulse.online/teams/${slugify(team.name)}`,
             "logo": team.logo,
             "location": {
               "@type": "Place",
@@ -308,7 +308,7 @@ export default async function TeamPage({ params }: PageProps) {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {team.keyPlayers.map((player) => (
                     <Link
-                      href={`/players/name/${encodeURIComponent(player.name)}`}
+                      href={`/players/${slugify(player.name)}`}
                       key={player.name}
                       className="rounded-2xl border border-border bg-card overflow-hidden group hover:border-primary/40 hover:-translate-y-1 transition-all block"
                     >

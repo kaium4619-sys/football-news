@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { Search, User, Trophy, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { slugify } from "@/lib/slugify";
 
 export default function SearchPage() {
   const [query, setQuery] = useState("");
@@ -62,7 +63,7 @@ export default function SearchPage() {
               results.teams.map((team: any) => (
                 <Link
                   key={team.team.id}
-                  href={`/teams/${team.team.id}`}
+                  href={`/teams/${slugify(team.team.name)}`}
                   className="p-4 rounded-2xl border border-border bg-card hover:border-primary/50 hover:bg-primary/5 transition-all flex items-center justify-between group"
                 >
                   <div className="flex items-center gap-4">
@@ -93,7 +94,7 @@ export default function SearchPage() {
               results.leagues.map((league: any) => (
                 <Link
                   key={league.league.id}
-                  href={`/competitions/${league.league.id}`}
+                  href={`/competitions/${slugify(league.league.name)}`}
                   className="p-4 rounded-2xl border border-border bg-card hover:border-primary/50 hover:bg-primary/5 transition-all flex items-center justify-between group"
                 >
                   <div className="flex items-center gap-4">

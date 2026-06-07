@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import { createClient } from "@supabase/supabase-js";
-import { fetchFootballDataCompetitions } from "@/lib/football-data";
+import { ALL_LEAGUES } from "@/lib/api-mock";
+import { slugify } from "@/lib/slugify";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.footballpulse.online';
@@ -54,9 +55,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
 
   // Competitions
-  const competitions = await fetchFootballDataCompetitions();
-  const compRoutes = (competitions || []).map((comp: any) => ({
-    url: `${baseUrl}/competitions/${comp.code || comp.id}`,
+  const compRoutes = ALL_LEAGUES.map((comp: any) => ({
+    url: `${baseUrl}/competitions/${slugify(comp.name)}`,
     lastModified: new Date(),
     changeFrequency: 'daily' as const,
     priority: 0.8,

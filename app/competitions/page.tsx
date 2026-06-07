@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 import { ALL_LEAGUES, FAMOUS_PLAYERS } from "@/lib/api-mock";
 
 import { WorldCupLogo } from "@/components/icons/WorldCupLogo";
+import { slugify } from "@/lib/slugify";
 
 export default function CompetitionsPage() {
   const leagues = ALL_LEAGUES.filter(l => l.type === 'League');
@@ -64,7 +65,7 @@ export default function CompetitionsPage() {
                   <span className="text-green-500">México</span>
                 </div>
                 <p className="text-muted-foreground max-w-xl text-lg mt-2">The pinnacle of world football returns. Catch all the action, history, and updates for the first-ever 48-team global tournament.</p>
-                <Link href={`/competitions/1`} className="mt-4 px-10 py-5 bg-primary text-primary-foreground font-black uppercase tracking-widest rounded-2xl hover:scale-105 transition-transform inline-flex items-center gap-3 shadow-[0_10px_40px_-10px_rgba(204,255,0,0.5)]">
+                <Link href={`/competitions/fifa-world-cup`} className="mt-4 px-10 py-5 bg-primary text-primary-foreground font-black uppercase tracking-widest rounded-2xl hover:scale-105 transition-transform inline-flex items-center gap-3 shadow-[0_10px_40px_-10px_rgba(204,255,0,0.5)]">
                   Explore 2026 Tournament <WorldCupLogo className="w-5 h-5" />
                 </Link>
               </div>
@@ -85,7 +86,7 @@ export default function CompetitionsPage() {
           </div>
           <div className="flex overflow-x-auto gap-6 pb-6 scrollbar-hide">
             {FAMOUS_PLAYERS.map(player => (
-              <Link href={`/players/${encodeURIComponent(player.name)}`} key={player.id} className="flex-shrink-0 w-64 bg-card border border-border rounded-[32px] p-6 group hover:border-primary/50 hover:-translate-y-1 transition-all block">
+              <Link href={`/players/${slugify(player.name)}`} key={player.id} className="flex-shrink-0 w-64 bg-card border border-border rounded-[32px] p-6 group hover:border-primary/50 hover:-translate-y-1 transition-all block">
                 <div className="relative w-full aspect-square rounded-2xl overflow-hidden mb-6">
                   <Image src={player.image} alt={player.name} fill sizes="(max-width: 640px) 50vw, 25vw" className="object-cover group-hover:scale-110 transition-transform duration-500" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
@@ -114,7 +115,7 @@ export default function CompetitionsPage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {international.filter(c => c.id !== 1).map(comp => (
-                <Link key={comp.id} href={`/competitions/${comp.id}`} className="group flex items-center gap-4 bg-card border border-border rounded-2xl p-4 hover:border-primary/50 transition-all">
+                <Link key={comp.id} href={`/competitions/${slugify(comp.name)}`} className="group flex items-center gap-4 bg-card border border-border rounded-2xl p-4 hover:border-primary/50 transition-all">
                   <div className="relative w-12 h-12 flex-shrink-0 group-hover:scale-110 transition-transform flex items-center justify-center bg-muted/20 rounded-xl">
                     {comp.logo ? (
                       <Image src={comp.logo} alt={comp.name} fill sizes="64px" className="object-contain" />
@@ -139,7 +140,7 @@ export default function CompetitionsPage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {clubIntl.map(comp => (
-                <Link key={comp.id} href={`/competitions/${comp.id}`} className="group flex items-center gap-4 bg-card border border-border rounded-2xl p-4 hover:border-primary/50 transition-all">
+                <Link key={comp.id} href={`/competitions/${slugify(comp.name)}`} className="group flex items-center gap-4 bg-card border border-border rounded-2xl p-4 hover:border-primary/50 transition-all">
                   <div className="relative w-12 h-12 flex-shrink-0 group-hover:scale-110 transition-transform flex items-center justify-center bg-muted/20 rounded-xl">
                     {comp.logo ? (
                       <Image src={comp.logo} alt={comp.name} fill sizes="64px" className="object-contain" />
@@ -165,7 +166,7 @@ export default function CompetitionsPage() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-5 gap-4">
             {leagues.map(comp => (
-              <Link key={comp.id} href={`/competitions/${comp.id}`} className="group flex flex-col items-center gap-4 p-6 rounded-3xl bg-card border border-border hover:border-primary transition-all text-center">
+              <Link key={comp.id} href={`/competitions/${slugify(comp.name)}`} className="group flex flex-col items-center gap-4 p-6 rounded-3xl bg-card border border-border hover:border-primary transition-all text-center">
                 <div className="relative w-10 h-10 group-hover:scale-110 transition-transform flex items-center justify-center bg-muted/20 rounded-xl">
                   {comp.logo ? (
                     <Image src={comp.logo} alt={comp.name} fill sizes="40px" className="object-contain" />
