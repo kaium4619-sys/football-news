@@ -11,7 +11,7 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600; // revalidate every 1 hour
 
 function cleanContent(html: string): string {
   return html
@@ -24,12 +24,29 @@ function cleanContent(html: string): string {
     .trim();
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+export async function generateStaticParams() {
+  const { data: posts } = await supabase
+    .from("posts")
+    .select("slug")
+    .eq("published", true)
+    .order("created_at", { ascending: false })
+    .limit(100); // pre-render top 100 posts
+
+  return posts?.map((post) => ({ slug: post.slug })) ?? [];
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
   const { slug } = await params;
+
   const { data: post } = await supabase
     .from("posts")
     .select("*")
     .eq("slug", slug)
+    .eq("published", true)
     .single();
 
   if (!post) {
@@ -74,6 +91,7 @@ export default async function BlogPost({
     .from("posts")
     .select("*")
     .eq("slug", slug)
+    .eq("published", true)
     .single();
 
   if (!post) return notFound();
