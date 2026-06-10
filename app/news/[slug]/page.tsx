@@ -11,7 +11,7 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
-export const revalidate = 3600; // revalidate every 1 hour
+export const revalidate = 0; // always fetch fresh data
 
 function cleanContent(html: string): string {
   return html
