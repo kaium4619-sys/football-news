@@ -81,7 +81,7 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
         {featuredPost && (
           <Link href={`/news/${featuredPost.slug}`} className="group relative rounded-3xl overflow-hidden aspect-[16/9] md:aspect-[21/9] border border-border">
             {featuredPost.image_url ? (
-              <Image src={featuredPost.image_url} alt={featuredPost.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+              <Image src={featuredPost.image_url} alt={featuredPost.title} fill sizes="100vw" priority className="object-cover transition-transform duration-700 group-hover:scale-105" />
             ) : (
               <div className="w-full h-full bg-muted" />
             )}

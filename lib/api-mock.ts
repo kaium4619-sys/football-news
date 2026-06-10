@@ -181,7 +181,7 @@ export const ALL_TEAMS = [
   { id: 10007, name: "Turkey", logo: "https://media.api-sports.io/flags/tr.svg", country: "World" },
   { id: 10008, name: "Norway", logo: "https://media.api-sports.io/flags/no.svg", country: "World" },
   { id: 10009, name: "Austria", logo: "https://media.api-sports.io/flags/at.svg", country: "World" },
-  { id: 10010, name: "Scotland", logo: "https://media.api-sports.io/flags/gb.svg", country: "World" },
+  { id: 10010, name: "Scotland", logo: "https://flagcdn.com/gb-sct.svg", country: "World" },
   { id: 10011, name: "Nigeria", logo: "https://media.api-sports.io/flags/ng.svg", country: "World" },
   { id: 10012, name: "Egypt", logo: "https://media.api-sports.io/flags/eg.svg", country: "World" },
   { id: 10013, name: "Senegal", logo: "https://media.api-sports.io/flags/sn.svg", country: "World" },

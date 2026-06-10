@@ -21,6 +21,8 @@ function cleanContent(html: string): string {
     .replace(/<div[^>]*>\s*<\/div>/gi, '')
     .replace(/<p[^>]*>\s*<\/p>/gi, '')
     .replace(/^#\s+.+$/gm, "")
+    // Convert relative hrefs (not starting with /, http, #, mailto) to absolute paths
+    .replace(/href="(?!\/|https?:|mailto:|#)([^"]+)"/gi, 'href="/$1"')
     .trim();
 }
 
@@ -107,7 +109,7 @@ export default async function BlogPost({
       .contains("tags", [post.tags[0]]) // simple match on first tag
       .order("created_at", { ascending: false })
       .limit(4);
-    
+
     if (data) {
       relatedPosts = data;
     }
@@ -126,9 +128,9 @@ export default async function BlogPost({
             "datePublished": post.created_at,
             "dateModified": post.updated_at || post.created_at,
             "author": [{
-                "@type": "Organization",
-                "name": "Football Pulse",
-                "url": "https://www.footballpulse.online"
+              "@type": "Organization",
+              "name": "Football Pulse",
+              "url": "https://www.footballpulse.online"
             }],
             "publisher": {
               "@type": "Organization",
@@ -173,9 +175,9 @@ export default async function BlogPost({
         </div>
       )}
       <hr className="border-border mb-8" />
-      
- 
-<style>{`
+
+
+      <style>{`
        .blog-content h1 {
           font-size: 1.75rem;
           font-weight: 900;
