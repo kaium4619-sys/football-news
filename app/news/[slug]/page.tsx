@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { createClient } from "@supabase/supabase-js";
 import { notFound } from "next/navigation";
+import { draftMode } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Clock, Tag } from "lucide-react";
@@ -43,13 +44,18 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
+  const draft = await draftMode();
 
-  const { data: post } = await supabase
+  let query = supabase
     .from("posts")
     .select("*")
-    .eq("slug", slug)
-    .eq("published", true)
-    .single();
+    .eq("slug", slug);
+
+  if (!draft.isEnabled) {
+    query = query.eq("published", true);
+  }
+
+  const { data: post } = await query.single();
 
   if (!post) {
     return {
@@ -88,13 +94,18 @@ export default async function BlogPost({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const draft = await draftMode();
 
-  const { data: post } = await supabase
+  let query = supabase
     .from("posts")
     .select("*")
-    .eq("slug", slug)
-    .eq("published", true)
-    .single();
+    .eq("slug", slug);
+
+  if (!draft.isEnabled) {
+    query = query.eq("published", true);
+  }
+
+  const { data: post } = await query.single();
 
   if (!post) return notFound();
 
@@ -147,9 +158,14 @@ export default async function BlogPost({
         <ArrowLeft className="w-4 h-4" /> Back to News
       </Link>
 
-
-
-
+      {draft.isEnabled && (
+        <div className="bg-amber-500/10 border border-amber-500/20 text-amber-500 px-4 py-3 rounded-lg mb-8 flex justify-between items-center">
+          <span className="font-medium text-sm">Draft Mode is active. You are viewing unpublished content.</span>
+          <a href={`/api/disable-draft?slug=${post.slug}`} className="text-xs bg-amber-500/20 hover:bg-amber-500/30 px-3 py-1.5 rounded-md transition-colors font-bold">
+            Disable Draft Mode
+          </a>
+        </div>
+      )}
 
       <h1 className="text-3xl md:text-5xl font-black leading-tight mb-4">{post.title}</h1>
 
