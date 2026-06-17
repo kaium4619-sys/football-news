@@ -149,7 +149,7 @@ export default async function TeamPage({ params }: PageProps) {
       >
         {/* subtle background crest watermark */}
         <div className="absolute inset-0 flex items-center justify-end pr-12 pointer-events-none opacity-[0.04]">
-          <Image src={team.logo} alt="" fill sizes="50vw" className="object-contain" />
+          <Image src={team.logo} alt="" fill sizes="50vw" className="object-cover object-top" />
         </div>
 
         <div className="container mx-auto px-4 py-12 relative z-10">
@@ -170,7 +170,7 @@ export default async function TeamPage({ params }: PageProps) {
               className="relative w-36 h-36 md:w-48 md:h-48 flex-shrink-0 rounded-3xl p-4 shadow-2xl border border-border/30"
               style={{ background: `${team.primaryColor}18` }}
             >
-              <Image src={team.logo} alt={team.name} fill sizes="192px" priority className="object-contain p-3" />
+              <Image src={team.logo} alt={team.name} fill sizes="192px" priority className="object-cover object-top p-3" />
             </div>
 
             {/* headline info */}
@@ -318,7 +318,7 @@ export default async function TeamPage({ params }: PageProps) {
                           alt={player.name}
                           fill
                           sizes="(max-width: 640px) 100vw, 33vw"
-                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                          className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
                         <div className="absolute bottom-0 left-0 right-0 p-4">

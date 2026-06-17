@@ -46,7 +46,7 @@ export default function CompetitionsPage() {
             <div className="relative z-10 flex flex-col md:flex-row items-center gap-10">
               <div className="relative w-48 h-48 md:w-64 md:h-64 drop-shadow-[0_0_30px_rgba(204,255,0,0.3)] group-hover:scale-105 transition-transform flex items-center justify-center bg-muted/20 rounded-[32px]">
                 {worldCup.logo ? (
-                  <Image src={worldCup.logo} alt="FIFA World Cup 2026" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain" />
+                  <Image src={worldCup.logo} alt="FIFA World Cup 2026" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain p-4" />
                 ) : (
                   <WorldCupLogo className="w-32 h-32" />
                 )}
@@ -88,7 +88,7 @@ export default function CompetitionsPage() {
             {FAMOUS_PLAYERS.map(player => (
               <Link href={`/players/${slugify(player.name)}`} key={player.id} className="flex-shrink-0 w-64 bg-card border border-border rounded-[32px] p-6 group hover:border-primary/50 hover:-translate-y-1 transition-all block">
                 <div className="relative w-full aspect-square rounded-2xl overflow-hidden mb-6">
-                  <Image src={player.image} alt={player.name} fill sizes="(max-width: 640px) 50vw, 25vw" className="object-cover group-hover:scale-110 transition-transform duration-500" />
+                  <Image src={player.image} alt={player.name} fill sizes="(max-width: 640px) 50vw, 25vw" className="object-cover object-top group-hover:scale-110 transition-transform duration-500" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                     <span className="text-[11px] font-black text-primary uppercase tracking-widest">View Profile</span>
                   </div>
@@ -118,7 +118,7 @@ export default function CompetitionsPage() {
                 <Link key={comp.id} href={`/competitions/${slugify(comp.name)}`} className="group flex items-center gap-4 bg-card border border-border rounded-2xl p-4 hover:border-primary/50 transition-all">
                   <div className="relative w-12 h-12 flex-shrink-0 group-hover:scale-110 transition-transform flex items-center justify-center bg-muted/20 rounded-xl">
                     {comp.logo ? (
-                      <Image src={comp.logo} alt={comp.name} fill sizes="64px" className="object-contain" />
+                      <Image src={comp.logo} alt={comp.name} fill sizes="64px" className="object-contain p-1" />
                     ) : (
                       <Trophy className="w-6 h-6 text-muted-foreground" />
                     )}
@@ -143,7 +143,7 @@ export default function CompetitionsPage() {
                 <Link key={comp.id} href={`/competitions/${slugify(comp.name)}`} className="group flex items-center gap-4 bg-card border border-border rounded-2xl p-4 hover:border-primary/50 transition-all">
                   <div className="relative w-12 h-12 flex-shrink-0 group-hover:scale-110 transition-transform flex items-center justify-center bg-muted/20 rounded-xl">
                     {comp.logo ? (
-                      <Image src={comp.logo} alt={comp.name} fill sizes="64px" className="object-contain" />
+                      <Image src={comp.logo} alt={comp.name} fill sizes="64px" className="object-contain p-1" />
                     ) : (
                       <Trophy className="w-6 h-6 text-muted-foreground" />
                     )}

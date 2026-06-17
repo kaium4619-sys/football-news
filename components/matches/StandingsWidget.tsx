@@ -84,8 +84,8 @@ export function StandingsWidget({ leagueId = 39 }: { leagueId?: number }) {
                       </td>
                       <td className="px-2 py-3" title={standing.team.name}>
                         <div className="flex items-center gap-2">
-                          <div className="relative w-5 h-5 flex-shrink-0">
-                            <Image src={standing.team.logo} alt={standing.team.name} fill sizes="20px" className="object-contain" />
+                          <div className="relative w-7 h-7 flex-shrink-0">
+                            <Image src={standing.team.logo} alt={standing.team.name} fill sizes="28px" className="object-contain" />
                           </div>
                           <span className="font-bold truncate max-w-[100px] md:max-w-none cursor-help">{standing.team.name}</span>
                         </div>

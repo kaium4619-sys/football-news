@@ -159,7 +159,7 @@ export default async function Home() {
                   <Link key={post.id} href={`/news/${post.slug}`} className="group flex flex-col gap-3">
                     <div className="relative aspect-video rounded-xl overflow-hidden border border-border">
                       {post.image_url ? (
-                        <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                        <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover object-top transition-transform duration-500 group-hover:scale-105" />
                       ) : (
                         <div className="w-full h-full bg-muted" />
                       )}

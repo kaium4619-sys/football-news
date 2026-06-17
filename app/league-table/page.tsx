@@ -57,7 +57,7 @@ export default async function LeagueTablePage({
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
                       <div className="relative w-6 h-6 flex-shrink-0">
-                        <img src={team.team.logo} alt={team.team.name} className="object-contain w-full h-full" />
+                        <img src={team.team.logo} alt={team.team.name} className="object-cover object-top w-full h-full" />
                       </div>
                       <span className="font-bold">{team.team.name}</span>
                     </div>

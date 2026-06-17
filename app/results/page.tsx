@@ -112,7 +112,7 @@ export default function ResultsPage() {
                               alt={group.league.name}
                               fill
                               sizes="24px"
-                              className="object-contain"
+                              className="object-cover object-top"
                             />
                           </div>
                         )}

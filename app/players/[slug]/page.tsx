@@ -145,7 +145,7 @@ export default async function PlayerPage({ params }: PageProps) {
                 alt={playerInfo.name}
                 fill
                 sizes="(max-width: 640px) 192px, 256px"
-                className="object-cover group-hover:scale-110 transition-transform duration-700"
+                className="object-cover object-top group-hover:scale-110 transition-transform duration-700"
               />
             </div>
 

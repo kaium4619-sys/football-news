@@ -92,7 +92,7 @@ export default async function MatchDetailsPage({ params }: { params: Promise<{ i
               <div className="flex flex-col items-center gap-4 flex-1">
                 <div className="w-24 h-24 md:w-32 md:h-32 bg-white/5 rounded-3xl p-4 flex items-center justify-center border border-white/10 shadow-2xl">
                   {match.homeTeam.crest ? (
-                    <Image src={match.homeTeam.crest} alt={match.homeTeam.name} width={128} height={128} className="w-full h-full object-contain drop-shadow-xl" />
+                    <Image src={match.homeTeam.crest} alt={match.homeTeam.name} width={128} height={128} className="w-full h-full object-cover object-top drop-shadow-xl" />
                   ) : (
                     <Shield className="w-12 h-12 text-muted-foreground opacity-50" />
                   )}
@@ -116,7 +116,7 @@ export default async function MatchDetailsPage({ params }: { params: Promise<{ i
               <div className="flex flex-col items-center gap-4 flex-1">
                 <div className="w-24 h-24 md:w-32 md:h-32 bg-white/5 rounded-3xl p-4 flex items-center justify-center border border-white/10 shadow-2xl">
                   {match.awayTeam.crest ? (
-                    <Image src={match.awayTeam.crest} alt={match.awayTeam.name} width={128} height={128} className="w-full h-full object-contain drop-shadow-xl" />
+                    <Image src={match.awayTeam.crest} alt={match.awayTeam.name} width={128} height={128} className="w-full h-full object-cover object-top drop-shadow-xl" />
                   ) : (
                     <Shield className="w-12 h-12 text-muted-foreground opacity-50" />
                   )}

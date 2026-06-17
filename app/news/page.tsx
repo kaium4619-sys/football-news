@@ -81,7 +81,7 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
         {featuredPost && (
           <Link href={`/news/${featuredPost.slug}`} className="group relative rounded-3xl overflow-hidden aspect-[16/9] md:aspect-[21/9] border border-border">
             {featuredPost.image_url ? (
-              <Image src={featuredPost.image_url} alt={featuredPost.title} fill sizes="100vw" priority className="object-cover transition-transform duration-700 group-hover:scale-105" />
+              <Image src={featuredPost.image_url} alt={featuredPost.title} fill sizes="100vw" priority className="object-cover object-top transition-transform duration-700 group-hover:scale-105" />
             ) : (
               <div className="w-full h-full bg-muted" />
             )}
@@ -104,7 +104,7 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
                   <Link key={post.id} href={`/news/${post.slug}`} className="flex flex-col gap-4 group">
                     <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-border">
                       {post.image_url ? (
-                        <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover object-top group-hover:scale-105 transition-transform duration-500" />
                       ) : (
                         <div className="w-full h-full bg-muted" />
                       )}
@@ -133,7 +133,7 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
                 {posts?.slice(0, 3).map(post => (
                   <Link key={post.id} href={`/news/${post.slug}`} className="flex gap-4 items-center group">
                     <div className="w-12 h-12 rounded-xl bg-muted/30 flex-shrink-0 overflow-hidden relative">
-                      {post.image_url && <Image src={post.image_url} alt={post.title} fill className="object-cover" />}
+                      {post.image_url && <Image src={post.image_url} alt={post.title} fill className="object-cover object-top" />}
                     </div>
                     <div className="flex flex-col">
                       <span className="font-bold text-sm leading-tight group-hover:text-primary transition-colors line-clamp-2">{post.title}</span>

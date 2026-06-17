@@ -68,7 +68,7 @@ export default function SearchPage() {
                 >
                   <div className="flex items-center gap-4">
                     <div className="relative w-10 h-10 bg-muted rounded-full overflow-hidden border border-border">
-                      <Image src={team.team.logo} alt={team.team.name} fill className="object-contain p-1" />
+                      <Image src={team.team.logo} alt={team.team.name} fill className="object-cover object-top p-1" />
                     </div>
                     <span className="font-bold group-hover:text-primary transition-colors">{team.team.name}</span>
                   </div>
@@ -99,7 +99,7 @@ export default function SearchPage() {
                 >
                   <div className="flex items-center gap-4">
                     <div className="relative w-10 h-10 bg-muted rounded-full overflow-hidden border border-border">
-                      <Image src={league.league.logo} alt={league.league.name} fill className="object-contain p-1" />
+                      <Image src={league.league.logo} alt={league.league.name} fill className="object-cover object-top p-1" />
                     </div>
                     <span className="font-bold group-hover:text-primary transition-colors">{league.league.name}</span>
                   </div>

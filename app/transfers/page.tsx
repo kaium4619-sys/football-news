@@ -49,7 +49,7 @@ export default async function TransfersPage() {
           {featuredPost && (
             <Link href={`/news/${featuredPost.slug}`} className="group relative rounded-3xl overflow-hidden aspect-[16/9] md:aspect-[21/9] border border-border">
               {featuredPost.image_url ? (
-                <Image src={featuredPost.image_url} alt={featuredPost.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                <Image src={featuredPost.image_url} alt={featuredPost.title} fill className="object-cover object-top transition-transform duration-700 group-hover:scale-105" />
               ) : (
                 <div className="w-full h-full bg-muted" />
               )}
@@ -73,7 +73,7 @@ export default async function TransfersPage() {
                 <Link key={post.id} href={`/news/${post.slug}`} className="flex flex-col gap-4 group">
                   <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-border">
                     {post.image_url ? (
-                      <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                      <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover object-top group-hover:scale-105 transition-transform duration-500" />
                     ) : (
                       <div className="w-full h-full bg-muted" />
                     )}
@@ -119,12 +119,12 @@ export default async function TransfersPage() {
                   </div>
                   <div className="flex items-center gap-3 bg-background p-3 rounded-lg border border-border">
                     <div className="flex flex-col items-center gap-1 flex-1">
-                      <Image src={transfer.teams.from.logo} alt={transfer.teams.from.name} width={24} height={24} className="object-contain" />
+                      <Image src={transfer.teams.from.logo} alt={transfer.teams.from.name} width={24} height={24} className="object-cover object-top" />
                       <span className="text-[10px] text-muted-foreground font-bold uppercase truncate max-w-full">{transfer.teams.from.name}</span>
                     </div>
                     <ArrowRight className="w-4 h-4 text-muted-foreground flex-shrink-0" />
                     <div className="flex flex-col items-center gap-1 flex-1">
-                      <Image src={transfer.teams.to.logo} alt={transfer.teams.to.name} width={24} height={24} className="object-contain" />
+                      <Image src={transfer.teams.to.logo} alt={transfer.teams.to.name} width={24} height={24} className="object-cover object-top" />
                       <span className="text-[10px] text-muted-foreground font-bold uppercase truncate max-w-full">{transfer.teams.to.name}</span>
                     </div>
                   </div>
