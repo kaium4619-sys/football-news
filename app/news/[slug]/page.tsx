@@ -186,7 +186,7 @@ export default async function BlogPost({
           <img
             src={post.image_url}
             alt={post.title}
-            className="w-full max-h-[520px] object-cover object-top block"
+            className="w-full h-auto block"
           />
         </div>
       )}
