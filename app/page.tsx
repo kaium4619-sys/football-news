@@ -80,21 +80,29 @@ export default async function Home() {
           {featuredPost && (
             <section className="relative rounded-2xl overflow-hidden aspect-[4/3] md:aspect-[21/9] group block cursor-pointer border border-border">
               <Link href={`/news/${featuredPost.slug}`} className="absolute inset-0 z-10">
-                <div className="relative w-full h-full">
+                <div className="relative w-full h-full bg-black">
                   {featuredPost.image_url ? (
-                    <Image
-                      src={featuredPost.image_url}
-                      alt={featuredPost.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 66vw"
-                      priority
-                      className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                    />
+                    <>
+                      <Image 
+                        src={featuredPost.image_url} 
+                        alt="" 
+                        fill 
+                        className="object-cover blur-3xl opacity-60 scale-110" 
+                      />
+                      <Image
+                        src={featuredPost.image_url}
+                        alt={featuredPost.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 66vw"
+                        priority
+                        className="object-contain object-center transition-transform duration-700 group-hover:scale-105 z-0"
+                      />
+                    </>
                   ) : (
                     <div className="w-full h-full bg-muted" />
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
-                  <div className="absolute bottom-0 left-0 p-6 md:p-8 w-full flex flex-col gap-3">
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent z-10" />
+                  <div className="absolute bottom-0 left-0 p-6 md:p-8 w-full flex flex-col gap-3 z-20">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-bold uppercase tracking-wider w-max">
                       <Flame className="w-3.5 h-3.5" /> Breaking
                     </span>
@@ -122,9 +130,12 @@ export default async function Home() {
               {topStories.length > 0 ? (
                 topStories.map(post => (
                   <Link key={post.id} href={`/news/${post.slug}`} className="group flex flex-col gap-3">
-                    <div className="relative aspect-[16/9] rounded-xl overflow-hidden border border-border">
+                    <div className="relative aspect-[16/9] rounded-xl overflow-hidden border border-border bg-black">
                       {post.image_url ? (
-                        <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover object-top transition-transform duration-500 group-hover:scale-105" />
+                        <>
+                          <Image src={post.image_url} alt="" fill className="object-cover blur-2xl opacity-50 scale-110" />
+                          <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain object-center transition-transform duration-500 group-hover:scale-105 z-10" />
+                        </>
                       ) : (
                         <div className="w-full h-full bg-muted" />
                       )}
@@ -157,13 +168,16 @@ export default async function Home() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {transferPosts.slice(0, 3).map(post => (
                   <Link key={post.id} href={`/news/${post.slug}`} className="group flex flex-col gap-3">
-                    <div className="relative aspect-video rounded-xl overflow-hidden border border-border">
+                    <div className="relative aspect-video rounded-xl overflow-hidden border border-border bg-black">
                       {post.image_url ? (
-                        <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover object-top transition-transform duration-500 group-hover:scale-105" />
+                        <>
+                          <Image src={post.image_url} alt="" fill className="object-cover blur-2xl opacity-50 scale-110" />
+                          <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-contain object-center transition-transform duration-500 group-hover:scale-105 z-10" />
+                        </>
                       ) : (
                         <div className="w-full h-full bg-muted" />
                       )}
-                      <div className="absolute top-2 left-2 bg-primary text-primary-foreground text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded">Transfer</div>
+                      <div className="absolute top-2 left-2 bg-primary text-primary-foreground text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded z-20">Transfer</div>
                     </div>
                     <div>
                       <h3 className="text-sm font-bold leading-tight group-hover:text-primary transition-colors line-clamp-2">{post.title}</h3>

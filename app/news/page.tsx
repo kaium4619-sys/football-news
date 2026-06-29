@@ -79,14 +79,17 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
 
         {/* Featured Post */}
         {featuredPost && (
-          <Link href={`/news/${featuredPost.slug}`} className="group relative rounded-3xl overflow-hidden aspect-[16/9] md:aspect-[21/9] border border-border">
+          <Link href={`/news/${featuredPost.slug}`} className="group relative rounded-3xl overflow-hidden aspect-[16/9] md:aspect-[21/9] border border-border bg-black">
             {featuredPost.image_url ? (
-              <Image src={featuredPost.image_url} alt={featuredPost.title} fill sizes="100vw" priority className="object-cover object-top transition-transform duration-700 group-hover:scale-105" />
+              <>
+                <Image src={featuredPost.image_url} alt="" fill className="object-cover blur-3xl opacity-60 scale-110" />
+                <Image src={featuredPost.image_url} alt={featuredPost.title} fill sizes="100vw" priority className="object-contain object-center transition-transform duration-700 group-hover:scale-105 z-10" />
+              </>
             ) : (
               <div className="w-full h-full bg-muted" />
             )}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-            <div className="absolute bottom-0 left-0 p-4 sm:p-6 md:p-12 w-full max-w-4xl flex flex-col gap-3">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent z-20" />
+            <div className="absolute bottom-0 left-0 p-4 sm:p-6 md:p-12 w-full max-w-4xl flex flex-col gap-3 z-30">
               <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-white leading-tight line-clamp-3 md:line-clamp-none">{featuredPost.title}</h2>
               {featuredPost.meta_description && (
                 <p className="text-white/70 text-sm sm:text-base hidden md:block line-clamp-2">{featuredPost.meta_description}</p>
@@ -102,9 +105,12 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {otherPosts.map(post => (
                   <Link key={post.id} href={`/news/${post.slug}`} className="flex flex-col gap-4 group">
-                    <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-border">
+                    <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-border bg-black">
                       {post.image_url ? (
-                        <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                        <>
+                          <Image src={post.image_url} alt="" fill className="object-cover blur-2xl opacity-50 scale-110" />
+                          <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain object-center group-hover:scale-105 transition-transform duration-500 z-10" />
+                        </>
                       ) : (
                         <div className="w-full h-full bg-muted" />
                       )}
@@ -133,7 +139,7 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
                 {posts?.slice(0, 3).map(post => (
                   <Link key={post.id} href={`/news/${post.slug}`} className="flex gap-4 items-center group">
                     <div className="w-12 h-12 rounded-xl bg-muted/30 flex-shrink-0 overflow-hidden relative">
-                      {post.image_url && <Image src={post.image_url} alt={post.title} fill className="object-cover object-top" />}
+                      {post.image_url && <Image src={post.image_url} alt={post.title} fill className="object-cover object-center" />}
                     </div>
                     <div className="flex flex-col">
                       <span className="font-bold text-sm leading-tight group-hover:text-primary transition-colors line-clamp-2">{post.title}</span>
