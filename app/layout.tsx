@@ -76,7 +76,7 @@ export default function RootLayout({
         <Script
           id="adsense-init"
           strategy="afterInteractive"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4539617495578445"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2787814744586061"
           crossOrigin="anonymous"
         />
       </head>
