@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 };
 import { createClient } from "@supabase/supabase-js";
 import NewsletterForm from "@/components/NewsletterForm";
+import { proxyImageUrl } from "@/lib/utils";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -81,8 +82,8 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
           <Link href={`/news/${featuredPost.slug}`} className="group relative rounded-3xl overflow-hidden aspect-[16/9] md:aspect-[21/9] border border-border bg-black">
             {featuredPost.image_url ? (
               <>
-                <Image src={featuredPost.image_url} alt="" fill className="object-cover blur-3xl opacity-60 scale-110" />
-                <Image src={featuredPost.image_url} alt={featuredPost.title} fill sizes="100vw" priority className="object-contain object-center transition-transform duration-700 group-hover:scale-105 z-10" />
+                <Image src={proxyImageUrl(featuredPost.image_url)} alt="" fill className="object-cover blur-3xl opacity-60 scale-110" />
+                <Image src={proxyImageUrl(featuredPost.image_url)} alt={featuredPost.title} fill sizes="100vw" priority className="object-contain object-center transition-transform duration-700 group-hover:scale-105 z-10" />
               </>
             ) : (
               <div className="w-full h-full bg-muted" />
@@ -107,8 +108,8 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
                     <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-border bg-black">
                       {post.image_url ? (
                         <>
-                          <Image src={post.image_url} alt="" fill className="object-cover blur-2xl opacity-50 scale-110" />
-                          <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain object-center group-hover:scale-105 transition-transform duration-500 z-10" />
+                          <Image src={proxyImageUrl(post.image_url)} alt="" fill className="object-cover blur-2xl opacity-50 scale-110" />
+                          <Image src={proxyImageUrl(post.image_url)} alt={post.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain object-center group-hover:scale-105 transition-transform duration-500 z-10" />
                         </>
                       ) : (
                         <div className="w-full h-full bg-muted" />
@@ -138,7 +139,7 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
                 {posts?.slice(0, 3).map(post => (
                   <Link key={post.id} href={`/news/${post.slug}`} className="flex gap-4 items-center group">
                     <div className="w-12 h-12 rounded-xl bg-muted/30 flex-shrink-0 overflow-hidden relative">
-                      {post.image_url && <Image src={post.image_url} alt={post.title} fill className="object-cover object-center" />}
+                      {post.image_url && <Image src={proxyImageUrl(post.image_url)} alt={post.title} fill className="object-cover object-center" />}
                     </div>
                     <div className="flex flex-col">
                       <span className="font-bold text-sm leading-tight group-hover:text-primary transition-colors line-clamp-2">{post.title}</span>

@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 import { ArrowRight, TrendingUp, RefreshCcw } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
 import { MOCK_TRANSFERS } from "@/lib/api-mock";
+import { proxyImageUrl } from "@/lib/utils";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -50,8 +51,8 @@ export default async function TransfersPage() {
             <Link href={`/news/${featuredPost.slug}`} className="group relative rounded-3xl overflow-hidden aspect-[16/9] md:aspect-[21/9] border border-border">
               {featuredPost.image_url && (
                 <>
-                  <Image src={featuredPost.image_url} alt="" fill className="object-cover blur-3xl opacity-60 scale-110" />
-                  <Image src={featuredPost.image_url} alt={featuredPost.title} fill className="object-contain object-center transition-transform duration-700 group-hover:scale-105 z-10" />
+                  <Image src={proxyImageUrl(featuredPost.image_url)} alt="" fill className="object-cover blur-3xl opacity-60 scale-110" />
+                  <Image src={proxyImageUrl(featuredPost.image_url)} alt={featuredPost.title} fill className="object-contain object-center transition-transform duration-700 group-hover:scale-105 z-10" />
                 </>
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
@@ -75,8 +76,8 @@ export default async function TransfersPage() {
                   <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-border">
                     {post.image_url && (
                       <>
-                        <Image src={post.image_url} alt="" fill className="object-cover blur-2xl opacity-50 scale-110" />
-                        <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain object-center group-hover:scale-105 transition-transform duration-500 z-10" />
+                        <Image src={proxyImageUrl(post.image_url)} alt="" fill className="object-cover blur-2xl opacity-50 scale-110" />
+                        <Image src={proxyImageUrl(post.image_url)} alt={post.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain object-center group-hover:scale-105 transition-transform duration-500 z-10" />
                       </>
                     )}
                   </div>

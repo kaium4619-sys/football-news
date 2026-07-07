@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Clock, Tag } from "lucide-react";
 import { formatTag, getTagLink, getPrimaryCategory } from "@/lib/tag-utils";
+import { proxyImageUrl } from "@/lib/utils";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -184,7 +185,7 @@ export default async function BlogPost({
         <div className="w-full rounded-2xl overflow-hidden mb-8 border border-border">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={post.image_url}
+            src={proxyImageUrl(post.image_url)}
             alt={post.title}
             className="w-full h-auto block"
           />
@@ -362,8 +363,8 @@ export default async function BlogPost({
                 <div className="relative w-24 h-24 rounded-xl overflow-hidden border border-border flex-shrink-0 bg-muted">
                   {relatedPost.image_url && (
                     <>
-                      <Image src={relatedPost.image_url} alt="" fill className="object-cover blur-xl opacity-50 scale-110" />
-                      <Image src={relatedPost.image_url} alt={relatedPost.title} fill className="object-contain object-center group-hover:scale-105 transition-transform duration-500 z-10" />
+                      <Image src={proxyImageUrl(relatedPost.image_url)} alt="" fill className="object-cover blur-xl opacity-50 scale-110" />
+                      <Image src={proxyImageUrl(relatedPost.image_url)} alt={relatedPost.title} fill className="object-contain object-center group-hover:scale-105 transition-transform duration-500 z-10" />
                     </>
                   )}
                 </div>

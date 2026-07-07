@@ -8,6 +8,7 @@ import { fetchLiveMatches, fetchRecentFixtures } from "@/lib/api-football";
 import { StandingsWidget } from "@/components/matches/StandingsWidget";
 import { WorldCup2026GroupTables } from "@/components/competitions/WorldCup2026GroupTables";
 import { slugify } from "@/lib/slugify";
+import { proxyImageUrl } from "@/lib/utils";
 
 export const revalidate = 60; // Cache for 60 seconds
 
@@ -232,8 +233,8 @@ export default async function CompetitionPage({ params }: { params: Promise<{ sl
                       {post.image_url && (
                         <div className="relative w-full h-32 rounded-xl overflow-hidden mb-2">
                           <>
-                            <Image src={post.image_url} alt="" fill className="object-cover blur-2xl opacity-50 scale-110" />
-                            <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 640px) 100vw, 50vw" className="object-contain object-center group-hover:scale-105 transition-transform duration-500 z-10" />
+                            <Image src={proxyImageUrl(post.image_url)} alt="" fill className="object-cover blur-2xl opacity-50 scale-110" />
+                            <Image src={proxyImageUrl(post.image_url)} alt={post.title} fill sizes="(max-width: 640px) 100vw, 50vw" className="object-contain object-center group-hover:scale-105 transition-transform duration-500 z-10" />
                           </>
                         </div>
                       )}

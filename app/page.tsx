@@ -13,6 +13,7 @@ import { ArrowRight, Flame } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
 import { fetchFootballData } from "@/lib/football-data";
 import { getPrimaryCategory } from "@/lib/tag-utils";
+import { proxyImageUrl } from "@/lib/utils";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -82,7 +83,7 @@ export default async function Home() {
               {/* Blurred background layer */}
               {featuredPost.image_url && (
                 <Image
-                  src={featuredPost.image_url}
+                  src={proxyImageUrl(featuredPost.image_url)}
                   alt=""
                   fill
                   className="object-cover blur-3xl opacity-60 scale-110"
@@ -91,7 +92,7 @@ export default async function Home() {
               {/* Foreground image */}
               {featuredPost.image_url && (
                 <Image
-                  src={featuredPost.image_url}
+                  src={proxyImageUrl(featuredPost.image_url)}
                   alt={featuredPost.title}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 66vw"
@@ -134,8 +135,8 @@ export default async function Home() {
                     <div className="relative aspect-[16/9] rounded-xl overflow-hidden border border-border bg-black">
                       {post.image_url ? (
                         <>
-                          <Image src={post.image_url} alt="" fill className="object-cover blur-2xl opacity-50 scale-110" />
-                          <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain object-center transition-transform duration-500 group-hover:scale-105 z-10" />
+                          <Image src={proxyImageUrl(post.image_url)} alt="" fill className="object-cover blur-2xl opacity-50 scale-110" />
+                          <Image src={proxyImageUrl(post.image_url)} alt={post.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain object-center transition-transform duration-500 group-hover:scale-105 z-10" />
                         </>
                       ) : (
                         <div className="w-full h-full bg-muted" />
@@ -172,8 +173,8 @@ export default async function Home() {
                     <div className="relative aspect-video rounded-xl overflow-hidden border border-border bg-black">
                       {post.image_url ? (
                         <>
-                          <Image src={post.image_url} alt="" fill className="object-cover blur-2xl opacity-50 scale-110" />
-                          <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-contain object-center transition-transform duration-500 group-hover:scale-105 z-10" />
+                          <Image src={proxyImageUrl(post.image_url)} alt="" fill className="object-cover blur-2xl opacity-50 scale-110" />
+                          <Image src={proxyImageUrl(post.image_url)} alt={post.title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-contain object-center transition-transform duration-500 group-hover:scale-105 z-10" />
                         </>
                       ) : (
                         <div className="w-full h-full bg-muted" />
