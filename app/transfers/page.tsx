@@ -52,7 +52,7 @@ export default async function TransfersPage() {
               {featuredPost.image_url && (
                 <>
                   <Image src={proxyImageUrl(featuredPost.image_url)} alt="" fill className="object-cover blur-3xl opacity-60 scale-110" />
-                  <Image src={proxyImageUrl(featuredPost.image_url)} alt={featuredPost.title} fill className="object-contain object-center transition-transform duration-700 group-hover:scale-105 z-10" />
+                  <Image src={proxyImageUrl(featuredPost.image_url)} alt={featuredPost.title} fill className="object-cover object-center transition-transform duration-700 group-hover:scale-105 z-10" />
                 </>
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />

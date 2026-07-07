@@ -83,7 +83,7 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
             {featuredPost.image_url ? (
               <>
                 <Image src={proxyImageUrl(featuredPost.image_url)} alt="" fill className="object-cover blur-3xl opacity-60 scale-110" />
-                <Image src={proxyImageUrl(featuredPost.image_url)} alt={featuredPost.title} fill sizes="100vw" priority className="object-contain object-center transition-transform duration-700 group-hover:scale-105 z-10" />
+                <Image src={proxyImageUrl(featuredPost.image_url)} alt={featuredPost.title} fill sizes="100vw" priority className="object-cover object-center transition-transform duration-700 group-hover:scale-105 z-10" />
               </>
             ) : (
               <div className="w-full h-full bg-muted" />
