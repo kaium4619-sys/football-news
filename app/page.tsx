@@ -95,7 +95,7 @@ export default async function Home() {
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 66vw"
                         priority
-                        className="object-contain object-center transition-transform duration-700 group-hover:scale-105 z-0"
+                        className="object-contain object-center transition-transform duration-700 group-hover:scale-105 z-[5]"
                       />
                     </>
                   ) : (
