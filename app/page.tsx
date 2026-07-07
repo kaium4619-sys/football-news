@@ -78,45 +78,46 @@ export default async function Home() {
 
           {/* Featured Hero Story */}
           {featuredPost && (
-            <section className="relative rounded-2xl overflow-hidden aspect-[4/3] md:aspect-[21/9] group block cursor-pointer border border-border">
-              <Link href={`/news/${featuredPost.slug}`} className="absolute inset-0 z-10">
-                <div className="relative w-full h-full bg-black">
-                  {featuredPost.image_url ? (
-                    <>
-                      <Image
-                        src={featuredPost.image_url}
-                        alt=""
-                        fill
-                        className="object-cover blur-3xl opacity-60 scale-110"
-                      />
-                      <Image
-                        src={featuredPost.image_url}
-                        alt={featuredPost.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 66vw"
-                        priority
-                        className="object-contain object-center transition-transform duration-700 group-hover:scale-105 z-[5]"
-                      />
-                    </>
-                  ) : (
-                    <div className="w-full h-full bg-muted" />
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent z-10" />
-                  <div className="absolute bottom-0 left-0 p-6 md:p-8 w-full flex flex-col gap-3 z-20">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-bold uppercase tracking-wider w-max">
-                      <Flame className="w-3.5 h-3.5" /> Breaking
-                    </span>
-                    <h1 className="text-2xl md:text-4xl font-black tracking-tight text-foreground leading-tight max-w-3xl">
-                      {featuredPost.title}
-                    </h1>
-                    <p className="text-muted-foreground line-clamp-2 md:text-lg max-w-2xl">
-                      {featuredPost.meta_description || "Read more about the latest football news and updates."}
-                    </p>
-                  </div>
+            <section className="relative rounded-2xl overflow-hidden aspect-[4/3] md:aspect-[21/9] group border border-border bg-black">
+              {/* Blurred background layer */}
+              {featuredPost.image_url && (
+                <Image
+                  src={featuredPost.image_url}
+                  alt=""
+                  fill
+                  className="object-cover blur-3xl opacity-60 scale-110"
+                />
+              )}
+              {/* Foreground image */}
+              {featuredPost.image_url && (
+                <Image
+                  src={featuredPost.image_url}
+                  alt={featuredPost.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 66vw"
+                  priority
+                  className="object-contain object-center transition-transform duration-700 group-hover:scale-105 z-10"
+                />
+              )}
+              {/* Gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-20" />
+              {/* Clickable link + text */}
+              <Link href={`/news/${featuredPost.slug}`} className="absolute inset-0 z-30 flex flex-col justify-end p-6 md:p-8">
+                <div className="flex flex-col gap-3 max-w-3xl">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-bold uppercase tracking-wider w-max">
+                    <Flame className="w-3.5 h-3.5" /> Breaking
+                  </span>
+                  <h1 className="text-2xl md:text-4xl font-black tracking-tight text-white leading-tight">
+                    {featuredPost.title}
+                  </h1>
+                  <p className="text-white/70 line-clamp-2 md:text-lg">
+                    {featuredPost.meta_description || "Read more about the latest football news and updates."}
+                  </p>
                 </div>
               </Link>
             </section>
           )}
+
 
           {/* Top Stories Grid */}
           <section>
