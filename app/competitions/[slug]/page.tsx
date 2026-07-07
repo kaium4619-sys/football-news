@@ -231,7 +231,10 @@ export default async function CompetitionPage({ params }: { params: Promise<{ sl
                     <Link key={post.id} href={`/news/${post.slug}`} className="group flex flex-col gap-3 p-4 bg-card border border-border rounded-2xl hover:border-primary/50 transition-all">
                       {post.image_url && (
                         <div className="relative w-full h-32 rounded-xl overflow-hidden mb-2">
-                          <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 640px) 100vw, 50vw" className="object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                          <>
+                            <Image src={post.image_url} alt="" fill className="object-cover blur-2xl opacity-50 scale-110" />
+                            <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 640px) 100vw, 50vw" className="object-contain object-center group-hover:scale-105 transition-transform duration-500 z-10" />
+                          </>
                         </div>
                       )}
                       <h3 className="font-bold text-sm leading-snug line-clamp-2 group-hover:text-primary transition-colors">{post.title}</h3>

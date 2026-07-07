@@ -360,7 +360,12 @@ export default async function BlogPost({
             {relatedPosts.map((relatedPost) => (
               <Link key={relatedPost.id} href={`/news/${relatedPost.slug}`} className="flex gap-4 group items-center">
                 <div className="relative w-24 h-24 rounded-xl overflow-hidden border border-border flex-shrink-0 bg-muted">
-                  {relatedPost.image_url && <Image src={relatedPost.image_url} alt={relatedPost.title} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-500" />}
+                  {relatedPost.image_url && (
+                    <>
+                      <Image src={relatedPost.image_url} alt="" fill className="object-cover blur-xl opacity-50 scale-110" />
+                      <Image src={relatedPost.image_url} alt={relatedPost.title} fill className="object-contain object-center group-hover:scale-105 transition-transform duration-500 z-10" />
+                    </>
+                  )}
                 </div>
                 <div className="flex flex-col gap-1">
                   <span className="text-primary text-[10px] font-bold uppercase tracking-widest">

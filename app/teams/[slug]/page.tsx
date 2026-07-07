@@ -313,15 +313,18 @@ export default async function TeamPage({ params }: PageProps) {
                       className="rounded-2xl border border-border bg-card overflow-hidden group hover:border-primary/40 hover:-translate-y-1 transition-all block"
                     >
                       <div className="relative w-full aspect-square bg-muted/20">
-                        <Image
-                          src={player.image}
-                          alt={player.name}
-                          fill
-                          sizes="(max-width: 640px) 100vw, 33vw"
-                          className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-                        <div className="absolute bottom-0 left-0 right-0 p-4">
+                          <>
+                            <Image src={player.image} alt="" fill className="object-cover blur-2xl opacity-50 scale-110" />
+                            <Image
+                              src={player.image}
+                              alt={player.name}
+                              fill
+                              sizes="(max-width: 640px) 100vw, 33vw"
+                              className="object-contain object-center group-hover:scale-105 transition-transform duration-500 z-10"
+                            />
+                          </>
+                        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-20" />
+                        <div className="absolute bottom-0 left-0 right-0 p-4 z-30">
                           <p className="font-black text-base leading-tight">{player.name}</p>
                           <div className="flex items-center justify-between mt-1">
                             <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-widest">{player.nationality}</span>

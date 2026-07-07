@@ -17,16 +17,16 @@ export default function ResultsPage() {
     const today = new Date();
     const yesterday = new Date(today);
     yesterday.setDate(yesterday.getDate() - 1);
-    
+
     const dateKey = matchDate.toISOString().split("T")[0];
     let dateLabel = dateKey;
-    
+
     if (dateKey === today.toISOString().split("T")[0]) dateLabel = "Today";
     else if (dateKey === yesterday.toISOString().split("T")[0]) dateLabel = "Yesterday";
     else dateLabel = matchDate.toLocaleDateString(undefined, { weekday: 'long', month: 'short', day: 'numeric' });
 
     if (!acc[dateLabel]) acc[dateLabel] = {};
-    
+
     const leagueId = match.league.id;
     if (!acc[dateLabel][leagueId]) {
       acc[dateLabel][leagueId] = { league: match.league, matches: [] };
@@ -97,9 +97,9 @@ export default function ResultsPage() {
               {Object.entries(groupedByDate).map(([dateLabel, leagueGroups]) => (
                 <div key={dateLabel} className="space-y-8">
                   <div className="sticky top-[64px] z-10 bg-background/95 backdrop-blur py-3 border-b border-border/50">
-                     <h2 className="text-2xl font-black uppercase tracking-tight text-primary">
-                       {dateLabel}
-                     </h2>
+                    <h2 className="text-2xl font-black uppercase tracking-tight text-primary">
+                      {dateLabel}
+                    </h2>
                   </div>
                   {Object.values(leagueGroups).map((group) => (
                     <section key={group.league.id}>

@@ -44,14 +44,15 @@ export default async function TransfersPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
         <div className="lg:col-span-8 flex flex-col gap-10">
-          
+
           {/* Featured Post */}
           {featuredPost && (
             <Link href={`/news/${featuredPost.slug}`} className="group relative rounded-3xl overflow-hidden aspect-[16/9] md:aspect-[21/9] border border-border">
-              {featuredPost.image_url ? (
-                <Image src={featuredPost.image_url} alt={featuredPost.title} fill className="object-cover object-top transition-transform duration-700 group-hover:scale-105" />
-              ) : (
-                <div className="w-full h-full bg-muted" />
+              {featuredPost.image_url && (
+                <>
+                  <Image src={featuredPost.image_url} alt="" fill className="object-cover blur-3xl opacity-60 scale-110" />
+                  <Image src={featuredPost.image_url} alt={featuredPost.title} fill className="object-contain object-center transition-transform duration-700 group-hover:scale-105 z-10" />
+                </>
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
               <div className="absolute bottom-0 left-0 p-8 md:p-12 w-full max-w-4xl flex flex-col gap-4">
@@ -72,10 +73,11 @@ export default async function TransfersPage() {
               otherPosts.map(post => (
                 <Link key={post.id} href={`/news/${post.slug}`} className="flex flex-col gap-4 group">
                   <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-border">
-                    {post.image_url ? (
-                      <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover object-top group-hover:scale-105 transition-transform duration-500" />
-                    ) : (
-                      <div className="w-full h-full bg-muted" />
+                    {post.image_url && (
+                      <>
+                        <Image src={post.image_url} alt="" fill className="object-cover blur-2xl opacity-50 scale-110" />
+                        <Image src={post.image_url} alt={post.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain object-center group-hover:scale-105 transition-transform duration-500 z-10" />
+                      </>
                     )}
                   </div>
                   <div className="flex flex-col gap-2">
@@ -101,7 +103,7 @@ export default async function TransfersPage() {
             <h3 className="text-lg font-black uppercase mb-6 flex items-center gap-2">
               <TrendingUp className="w-5 h-5 text-primary" /> Latest Rumours & Deals
             </h3>
-            
+
             <div className="space-y-6">
               {MOCK_TRANSFERS.map((transfer, idx) => (
                 <div key={idx} className="flex flex-col gap-3 p-4 rounded-xl bg-muted/20 border border-border/50">
@@ -109,11 +111,10 @@ export default async function TransfersPage() {
                     <div className="flex items-center gap-2">
                       <span className="font-bold text-sm">{transfer.player.name}</span>
                     </div>
-                    <span className={`text-[10px] font-black uppercase px-2 py-1 rounded-full ${
-                      transfer.details.status === "confirmed" ? "bg-green-500/20 text-green-500" :
+                    <span className={`text-[10px] font-black uppercase px-2 py-1 rounded-full ${transfer.details.status === "confirmed" ? "bg-green-500/20 text-green-500" :
                       transfer.details.status === "talks" ? "bg-yellow-500/20 text-yellow-500" :
-                      "bg-blue-500/20 text-blue-500"
-                    }`}>
+                        "bg-blue-500/20 text-blue-500"
+                      }`}>
                       {transfer.details.status}
                     </span>
                   </div>

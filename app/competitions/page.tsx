@@ -88,7 +88,10 @@ export default function CompetitionsPage() {
             {FAMOUS_PLAYERS.map(player => (
               <Link href={`/players/${slugify(player.name)}`} key={player.id} className="flex-shrink-0 w-64 bg-card border border-border rounded-[32px] p-6 group hover:border-primary/50 hover:-translate-y-1 transition-all block">
                 <div className="relative w-full aspect-square rounded-2xl overflow-hidden mb-6">
-                  <Image src={player.image} alt={player.name} fill sizes="(max-width: 640px) 50vw, 25vw" className="object-cover object-top group-hover:scale-110 transition-transform duration-500" />
+                  <>
+                    <Image src={player.image} alt="" fill className="object-cover blur-2xl opacity-50 scale-110" />
+                    <Image src={player.image} alt={player.name} fill sizes="(max-width: 640px) 50vw, 25vw" className="object-contain object-center group-hover:scale-110 transition-transform duration-500 z-10" />
+                  </>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                     <span className="text-[11px] font-black text-primary uppercase tracking-widest">View Profile</span>
                   </div>

@@ -18,15 +18,15 @@ const supabase = createClient(
 
 const NEWS_CATEGORIES = [
   { label: "All", tag: null },
-  { label: "Transfers",        tag: "topic:transfers" },
-  { label: "Premier League",   tag: "competition:39" },
+  { label: "Transfers", tag: "topic:transfers" },
+  { label: "Premier League", tag: "competition:39" },
   { label: "Champions League", tag: "competition:2" },
-  { label: "La Liga",          tag: "competition:140" },
-  { label: "Serie A",          tag: "competition:135" },
-  { label: "Bundesliga",       tag: "competition:78" },
-  { label: "World Cup",        tag: "competition:1" },
-  { label: "International",    tag: "topic:matches" },
-  { label: "Ligue 1",          tag: "competition:61" },
+  { label: "La Liga", tag: "competition:140" },
+  { label: "Serie A", tag: "competition:135" },
+  { label: "Bundesliga", tag: "competition:78" },
+  { label: "World Cup", tag: "competition:1" },
+  { label: "International", tag: "topic:matches" },
+  { label: "Ligue 1", tag: "competition:61" },
 ];
 
 export const dynamic = "force-dynamic";
@@ -67,9 +67,8 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
               <Link
                 key={cat.label}
                 href={`/news${cat.tag ? `?category=${cat.label}` : ''}`}
-                className={`px-5 py-2 rounded-full text-sm font-bold transition-all whitespace-nowrap ${
-                  selectedCat.label === cat.label ? "bg-primary text-primary-foreground" : "bg-card border border-border hover:border-primary/50"
-                }`}
+                className={`px-5 py-2 rounded-full text-sm font-bold transition-all whitespace-nowrap ${selectedCat.label === cat.label ? "bg-primary text-primary-foreground" : "bg-card border border-border hover:border-primary/50"
+                  }`}
               >
                 {cat.label}
               </Link>

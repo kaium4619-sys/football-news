@@ -140,13 +140,16 @@ export default async function PlayerPage({ params }: PageProps) {
           <div className="flex flex-col md:flex-row items-center md:items-end gap-8 relative z-20">
             {/* Player Avatar */}
             <div className="relative w-48 h-48 sm:w-64 sm:h-64 rounded-full border-4 border-background shadow-2xl overflow-hidden bg-muted/20 flex-shrink-0 group">
-              <Image
-                src={playerInfo.image}
-                alt={playerInfo.name}
-                fill
-                sizes="(max-width: 640px) 192px, 256px"
-                className="object-cover object-top group-hover:scale-110 transition-transform duration-700"
-              />
+              <>
+                <Image src={playerInfo.image} alt="" fill className="object-cover blur-2xl opacity-50 scale-110" />
+                <Image
+                  src={playerInfo.image}
+                  alt={playerInfo.name}
+                  fill
+                  sizes="(max-width: 640px) 192px, 256px"
+                  className="object-contain object-center group-hover:scale-110 transition-transform duration-700 z-10"
+                />
+              </>
             </div>
 
             {/* Player Info */}

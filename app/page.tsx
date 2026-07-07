@@ -83,11 +83,11 @@ export default async function Home() {
                 <div className="relative w-full h-full bg-black">
                   {featuredPost.image_url ? (
                     <>
-                      <Image 
-                        src={featuredPost.image_url} 
-                        alt="" 
-                        fill 
-                        className="object-cover blur-3xl opacity-60 scale-110" 
+                      <Image
+                        src={featuredPost.image_url}
+                        alt=""
+                        fill
+                        className="object-cover blur-3xl opacity-60 scale-110"
                       />
                       <Image
                         src={featuredPost.image_url}
