@@ -23,109 +23,109 @@ const GROUPS: Group[] = [
 	{
 		group: "Group A",
 		teams: [
-			{ name: "Mexico", played: 1, win: 1, draw: 0, lose: 0, goalsFor: 2, goalsAgainst: 1, goalDiff: 1, points: 3 },
-			{ name: "South Korea", played: 1, win: 1, draw: 0, lose: 0, goalsFor: 1, goalsAgainst: 0, goalDiff: 1, points: 3 },
-			{ name: "Czech Republic", played: 1, win: 0, draw: 0, lose: 1, goalsFor: 1, goalsAgainst: 2, goalDiff: -1, points: 0 },
-			{ name: "South Africa", played: 1, win: 0, draw: 0, lose: 1, goalsFor: 0, goalsAgainst: 1, goalDiff: -2, points: 0 },
+			{ name: "Mexico", played: 3, win: 3, draw: 0, lose: 0, goalsFor: 6, goalsAgainst: 0, goalDiff: 6, points: 9 },
+			{ name: "South Africa", played: 3, win: 1, draw: 1, lose: 1, goalsFor: 2, goalsAgainst: 3, goalDiff: -1, points: 4 },
+			{ name: "South Korea", played: 3, win: 1, draw: 0, lose: 2, goalsFor: 2, goalsAgainst: 3, goalDiff: -1, points: 3 },
+			{ name: "Czech Republic", played: 3, win: 0, draw: 1, lose: 2, goalsFor: 2, goalsAgainst: 6, goalDiff: -4, points: 1 },
 		],
 	},
 	{
 		group: "Group B",
 		teams: [
-			{ name: "Switzerland", played: 1, win: 0, draw: 1, lose: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0, points: 1 },
-			{ name: "Canada", played: 1, win: 0, draw: 1, lose: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0, points: 1 },
-			{ name: "Bosnia & Herzegovina", played: 1, win: 0, draw: 1, lose: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0, points: 1 },
-			{ name: "Qatar", played: 1, win: 0, draw: 1, lose: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0, points: 1 },
+			{ name: "Switzerland", played: 3, win: 2, draw: 1, lose: 0, goalsFor: 7, goalsAgainst: 3, goalDiff: 4, points: 7 },
+			{ name: "Canada", played: 3, win: 1, draw: 1, lose: 1, goalsFor: 8, goalsAgainst: 3, goalDiff: 5, points: 4 },
+			{ name: "Bosnia & Herzegovina", played: 3, win: 1, draw: 1, lose: 1, goalsFor: 5, goalsAgainst: 6, goalDiff: -1, points: 4 },
+			{ name: "Qatar", played: 3, win: 0, draw: 1, lose: 2, goalsFor: 2, goalsAgainst: 10, goalDiff: -8, points: 1 },
 		],
 	},
 	{
 		group: "Group C",
 		teams: [
-			{ name: "Scotland", played: 1, win: 1, draw: 0, lose: 0, goalsFor: 4, goalsAgainst: 0, goalDiff: 1, points: 3 },
-			{ name: "Brazil", played: 1, win: 0, draw: 1, lose: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0, points: 1 },
-			{ name: "Morocco", played: 1, win: 0, draw: 1, lose: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0, points: 1 },
-			{ name: "Haiti", played: 1, win: 0, draw: 0, lose: 1, goalsFor: 0, goalsAgainst: 4, goalDiff: -1, points: 0 },
+			{ name: "Brazil", played: 3, win: 2, draw: 1, lose: 0, goalsFor: 7, goalsAgainst: 1, goalDiff: 6, points: 7 },
+			{ name: "Morocco", played: 3, win: 2, draw: 1, lose: 0, goalsFor: 6, goalsAgainst: 3, goalDiff: 3, points: 7 },
+			{ name: "Scotland", played: 3, win: 1, draw: 0, lose: 2, goalsFor: 1, goalsAgainst: 4, goalDiff: -3, points: 3 },
+			{ name: "Haiti", played: 3, win: 0, draw: 0, lose: 3, goalsFor: 2, goalsAgainst: 8, goalDiff: -6, points: 0 },
 		],
 	},
 	{
 		group: "Group D",
 		teams: [
-			{ name: "United States", played: 1, win: 1, draw: 0, lose: 0, goalsFor: 2, goalsAgainst: 1, goalDiff: 3, points: 3 },
-			{ name: "Australia", played: 1, win: 1, draw: 0, lose: 0, goalsFor: 2, goalsAgainst: 0, goalDiff: 2, points: 3 },
-			{ name: "Türkiye", played: 1, win: 0, draw: 0, lose: 1, goalsFor: 0, goalsAgainst: 2, goalDiff: -2, points: 0 },
-			{ name: "Paraguay", played: 1, win: 0, draw: 0, lose: 1, goalsFor: 1, goalsAgainst: 2, goalDiff: -3, points: 0 },
+			{ name: "United States", played: 3, win: 2, draw: 0, lose: 1, goalsFor: 8, goalsAgainst: 4, goalDiff: 4, points: 6 },
+			{ name: "Australia", played: 3, win: 1, draw: 1, lose: 1, goalsFor: 2, goalsAgainst: 2, goalDiff: 0, points: 4 },
+			{ name: "Paraguay", played: 3, win: 1, draw: 1, lose: 1, goalsFor: 2, goalsAgainst: 4, goalDiff: -2, points: 4 },
+			{ name: "Türkiye", played: 3, win: 1, draw: 0, lose: 2, goalsFor: 3, goalsAgainst: 5, goalDiff: -2, points: 3 },
 		],
 	},
 	{
 		group: "Group E",
 		teams: [
-			{ name: "Germany", played: 1, win: 1, draw: 0, lose: 0, goalsFor: 7, goalsAgainst: 1, goalDiff: 6, points: 3 },
-			{ name: "Ivory Coast", played: 1, win: 1, draw: 0, lose: 0, goalsFor: 1, goalsAgainst: 0, goalDiff: 1, points: 3 },
-			{ name: "Ecuador", played: 1, win: 0, draw: 0, lose: 1, goalsFor: 0, goalsAgainst: 1, goalDiff: -1, points: 0 },
-			{ name: "Curaçao", played: 1, win: 0, draw: 0, lose: 1, goalsFor: 1, goalsAgainst: 7, goalDiff: -6, points: 0 },
+			{ name: "Germany", played: 3, win: 2, draw: 0, lose: 1, goalsFor: 10, goalsAgainst: 4, goalDiff: 6, points: 6 },
+			{ name: "Ivory Coast", played: 3, win: 2, draw: 0, lose: 1, goalsFor: 4, goalsAgainst: 2, goalDiff: 2, points: 6 },
+			{ name: "Ecuador", played: 3, win: 1, draw: 1, lose: 1, goalsFor: 2, goalsAgainst: 2, goalDiff: 0, points: 4 },
+			{ name: "Curaçao", played: 3, win: 0, draw: 1, lose: 2, goalsFor: 1, goalsAgainst: 9, goalDiff: -8, points: 1 },
 		],
 	},
 	{
 		group: "Group F",
 		teams: [
-			{ name: "Sweden", played: 1, win: 1, draw: 0, lose: 0, goalsFor: 5, goalsAgainst: 1, goalDiff: 4, points: 3 },
-			{ name: "Japan", played: 1, win: 0, draw: 1, lose: 0, goalsFor: 2, goalsAgainst: 2, goalDiff: 0, points: 1 },
-			{ name: "Netherlands", played: 1, win: 0, draw: 1, lose: 0, goalsFor: 2, goalsAgainst: 2, goalDiff: 0, points: 1 },
-			{ name: "Tunisia", played: 1, win: 0, draw: 0, lose: 1, goalsFor: 1, goalsAgainst: 5, goalDiff: -4, points: 0 },
+			{ name: "Netherlands", played: 3, win: 2, draw: 1, lose: 0, goalsFor: 10, goalsAgainst: 4, goalDiff: 6, points: 7 },
+			{ name: "Japan", played: 3, win: 1, draw: 2, lose: 0, goalsFor: 7, goalsAgainst: 3, goalDiff: 4, points: 5 },
+			{ name: "Sweden", played: 3, win: 1, draw: 1, lose: 1, goalsFor: 7, goalsAgainst: 7, goalDiff: 0, points: 4 },
+			{ name: "Tunisia", played: 3, win: 0, draw: 0, lose: 3, goalsFor: 2, goalsAgainst: 12, goalDiff: -10, points: 0 },
 		],
 	},
 	{
 		group: "Group G",
 		teams: [
-			{ name: "Belgium", played: 1, win: 0, draw: 1, lose: 0, goalsFor: 1, goalsAgainst: 1, goalDiff: 0, points: 1 },
-			{ name: "Egypt", played: 1, win: 0, draw: 1, lose: 0, goalsFor: 1, goalsAgainst: 1, goalDiff: 0, points: 1 },
-			{ name: "Iran", played: 1, win: 0, draw: 1, lose: 0, goalsFor: 1, goalsAgainst: 1, goalDiff: 0, points: 1 },
-			{ name: "New Zealand", played: 1, win: 0, draw: 1, lose: 0, goalsFor: 1, goalsAgainst: 1, goalDiff: 0, points: 1 },
+			{ name: "Belgium", played: 3, win: 1, draw: 2, lose: 0, goalsFor: 6, goalsAgainst: 2, goalDiff: 4, points: 5 },
+			{ name: "Egypt", played: 3, win: 1, draw: 2, lose: 0, goalsFor: 5, goalsAgainst: 3, goalDiff: 2, points: 5 },
+			{ name: "Iran", played: 3, win: 0, draw: 3, lose: 0, goalsFor: 3, goalsAgainst: 3, goalDiff: 0, points: 3 },
+			{ name: "New Zealand", played: 3, win: 0, draw: 1, lose: 2, goalsFor: 4, goalsAgainst: 10, goalDiff: -6, points: 1 },
 		],
 	},
 	{
 		group: "Group H",
 		teams: [
-			{ name: "Spain", played: 1, win: 0, draw: 1, lose: 0, goalsFor: 2, goalsAgainst: 2, goalDiff: 0, points: 1 },
-			{ name: "Cape Verde", played: 1, win: 0, draw: 1, lose: 0, goalsFor: 2, goalsAgainst: 2, goalDiff: 0, points: 1 },
-			{ name: "Uruguay", played: 1, win: 0, draw: 1, lose: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0, points: 1 },
-			{ name: "Saudi Arabia", played: 1, win: 0, draw: 1, lose: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0, points: 1 },
+			{ name: "Spain", played: 3, win: 2, draw: 1, lose: 0, goalsFor: 5, goalsAgainst: 0, goalDiff: 5, points: 7 },
+			{ name: "Cape Verde", played: 3, win: 0, draw: 3, lose: 0, goalsFor: 2, goalsAgainst: 2, goalDiff: 0, points: 3 },
+			{ name: "Uruguay", played: 3, win: 0, draw: 2, lose: 1, goalsFor: 3, goalsAgainst: 4, goalDiff: -1, points: 2 },
+			{ name: "Saudi Arabia", played: 3, win: 0, draw: 2, lose: 1, goalsFor: 1, goalsAgainst: 5, goalDiff: -4, points: 2 },
 		],
 	},
 	{
 		group: "Group I",
 		teams: [
-			{ name: "Norway", played: 1, win: 1, draw: 0, lose: 0, goalsFor: 4, goalsAgainst: 1, goalDiff: 3, points: 3 },
-			{ name: "France", played: 1, win: 1, draw: 0, lose: 0, goalsFor: 2, goalsAgainst: 0, goalDiff: 2, points: 3 },
-			{ name: "Senegal", played: 1, win: 0, draw: 0, lose: 1, goalsFor: 0, goalsAgainst: 2, goalDiff: -2, points: 0 },
-			{ name: "Iraq", played: 1, win: 0, draw: 0, lose: 1, goalsFor: 1, goalsAgainst: 4, goalDiff: -3, points: 0 },
+			{ name: "France", played: 3, win: 3, draw: 0, lose: 0, goalsFor: 10, goalsAgainst: 2, goalDiff: 8, points: 9 },
+			{ name: "Norway", played: 3, win: 2, draw: 0, lose: 1, goalsFor: 8, goalsAgainst: 7, goalDiff: 1, points: 6 },
+			{ name: "Senegal", played: 3, win: 1, draw: 0, lose: 2, goalsFor: 8, goalsAgainst: 6, goalDiff: 2, points: 3 },
+			{ name: "Iraq", played: 3, win: 0, draw: 0, lose: 3, goalsFor: 1, goalsAgainst: 12, goalDiff: -11, points: 0 },
 		],
 	},
 	{
 		group: "Group J",
 		teams: [
-			{ name: "Argentina", played: 1, win: 1, draw: 0, lose: 0, goalsFor: 3, goalsAgainst: 0, goalDiff: 3, points: 3 },
-			{ name: "Austria", played: 1, win: 0, draw: 1, lose: 0, goalsFor: 1, goalsAgainst: 1, goalDiff: 0, points: 1 },
-			{ name: "Jordan", played: 1, win: 0, draw: 1, lose: 0, goalsFor: 1, goalsAgainst: 1, goalDiff: 0, points: 1 },
-			{ name: "Algeria", played: 1, win: 0, draw: 0, lose: 1, goalsFor: 0, goalsAgainst: 3, goalDiff: -3, points: 0 },
+			{ name: "Argentina", played: 3, win: 3, draw: 0, lose: 0, goalsFor: 8, goalsAgainst: 1, goalDiff: 7, points: 9 },
+			{ name: "Austria", played: 3, win: 1, draw: 1, lose: 1, goalsFor: 6, goalsAgainst: 6, goalDiff: 0, points: 4 },
+			{ name: "Algeria", played: 3, win: 1, draw: 1, lose: 1, goalsFor: 5, goalsAgainst: 7, goalDiff: -2, points: 4 },
+			{ name: "Jordan", played: 3, win: 0, draw: 0, lose: 3, goalsFor: 3, goalsAgainst: 8, goalDiff: -5, points: 0 },
 		],
 	},
 	{
 		group: "Group K",
 		teams: [
-			{ name: "Portugal", played: 1, win: 1, draw: 0, lose: 0, goalsFor: 3, goalsAgainst: 1, goalDiff: 2, points: 3 },
-			{ name: "Colombia", played: 1, win: 1, draw: 0, lose: 0, goalsFor: 1, goalsAgainst: 0, goalDiff: 1, points: 3 },
-			{ name: "Uzbekistan", played: 1, win: 0, draw: 0, lose: 1, goalsFor: 0, goalsAgainst: 1, goalDiff: -1, points: 0 },
-			{ name: "DR Congo", played: 1, win: 0, draw: 0, lose: 1, goalsFor: 1, goalsAgainst: 3, goalDiff: -2, points: 0 },
+			{ name: "Colombia", played: 3, win: 2, draw: 1, lose: 0, goalsFor: 4, goalsAgainst: 1, goalDiff: 3, points: 7 },
+			{ name: "Portugal", played: 3, win: 1, draw: 2, lose: 0, goalsFor: 6, goalsAgainst: 1, goalDiff: 5, points: 5 },
+			{ name: "DR Congo", played: 3, win: 1, draw: 1, lose: 1, goalsFor: 4, goalsAgainst: 3, goalDiff: 1, points: 4 },
+			{ name: "Uzbekistan", played: 3, win: 0, draw: 0, lose: 3, goalsFor: 2, goalsAgainst: 11, goalDiff: -9, points: 0 },
 		],
 	},
 	{
 		group: "Group L",
 		teams: [
-			{ name: "England", played: 1, win: 1, draw: 0, lose: 0, goalsFor: 2, goalsAgainst: 0, goalDiff: 2, points: 3 },
-			{ name: "Croatia", played: 1, win: 0, draw: 1, lose: 0, goalsFor: 1, goalsAgainst: 1, goalDiff: 0, points: 1 },
-			{ name: "Ghana", played: 1, win: 0, draw: 1, lose: 0, goalsFor: 1, goalsAgainst: 1, goalDiff: 0, points: 1 },
-			{ name: "Panama", played: 1, win: 0, draw: 0, lose: 1, goalsFor: 0, goalsAgainst: 2, goalDiff: -2, points: 0 },
+			{ name: "England", played: 3, win: 2, draw: 1, lose: 0, goalsFor: 6, goalsAgainst: 2, goalDiff: 4, points: 7 },
+			{ name: "Croatia", played: 3, win: 2, draw: 0, lose: 1, goalsFor: 5, goalsAgainst: 5, goalDiff: 0, points: 6 },
+			{ name: "Ghana", played: 3, win: 1, draw: 1, lose: 1, goalsFor: 2, goalsAgainst: 2, goalDiff: 0, points: 4 },
+			{ name: "Panama", played: 3, win: 0, draw: 0, lose: 3, goalsFor: 0, goalsAgainst: 4, goalDiff: -4, points: 0 },
 		],
 	},
 ];
@@ -206,14 +206,14 @@ export function WorldCup2026GroupTables() {
 			<div className="flex items-center gap-3 mb-2">
 				<h2 className="text-2xl font-black uppercase tracking-tight">FIFA World Cup 2026 — Group Stage</h2>
 			</div>
-			<p className="text-xs text-muted-foreground mb-5 uppercase tracking-widest font-bold">After Matchday 1 · Updated June 17, 2026</p>
+			<p className="text-xs text-muted-foreground mb-5 uppercase tracking-widest font-bold">After Matchday 3 · Updated June 25, 2026</p>
 
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-5">
 				{GROUPS.map((g) => (
 					<div key={g.group} className="rounded-2xl border border-border bg-background overflow-hidden">
 						<div className="bg-muted/30 px-4 py-2.5 border-b border-border/50 flex items-center justify-between">
 							<h3 className="font-black tracking-tight text-sm uppercase text-foreground">{g.group}</h3>
-							<span className="text-[10px] text-muted-foreground uppercase font-bold tracking-widest">MD1</span>
+							<span className="text-[10px] text-muted-foreground uppercase font-bold tracking-widest">MD3</span>
 						</div>
 						<div className="overflow-x-auto">
 							<table className="w-full text-xs">
