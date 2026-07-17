@@ -223,18 +223,102 @@ export default async function BlogPost({
         .blog-content [style*="border:1px solid #e2e8f0"] {
           border-color: hsl(var(--border)) !important;
         }
-        .blog-content div {
+
+        /* Generic div styling — must NOT apply to table-related wrappers */
+        .blog-content > div:not(.table-scroll-wrapper),
+        .blog-content p + div:not(.table-scroll-wrapper) {
           background: hsl(var(--card));
-          border: 1px solid hsl(var(--border));        
+          border: 1px solid hsl(var(--border));
           border-radius: 12px;
-          padding: 16px 18px 16px 0px;
+          padding: 16px 18px;
           margin: 10px 0;
-          margin-top: 2px;
           font-size: 14px;
           color: hsl(var(--muted-foreground));
           line-height: 1.6;
-          margin-bottom: 0 !important;
         }
+
+        /* ===== TABLE STYLES ===== */
+        .blog-content.blog-content table {
+          width: 100% !important;
+          border-collapse: collapse !important;
+          margin: 2rem 0 !important;
+          font-size: 0.875rem !important;
+          border-radius: 12px !important;
+          overflow: hidden !important;
+          border: 1px solid hsl(var(--border)) !important;
+          display: table !important;
+        }
+
+        .blog-content.blog-content thead {
+          display: table-header-group !important;
+        }
+
+        .blog-content.blog-content tbody {
+          display: table-row-group !important;
+        }
+
+        .blog-content.blog-content tr {
+          display: table-row !important;
+        }
+
+        .blog-content.blog-content thead th {
+          display: table-cell !important;
+          padding: 12px 16px !important;
+          text-align: left !important;
+          font-weight: 700 !important;
+          font-size: 0.78rem !important;
+          text-transform: uppercase !important;
+          letter-spacing: 0.06em !important;
+          color: hsl(var(--foreground)) !important;
+          background-color: hsl(var(--primary) / 0.18) !important;
+          border-bottom: 2px solid hsl(var(--primary) / 0.5) !important;
+          border-right: 1px solid hsl(var(--border) / 0.5) !important;
+          white-space: nowrap !important;
+          vertical-align: middle !important;
+        }
+
+        .blog-content.blog-content thead th:last-child {
+          border-right: none !important;
+        }
+
+        .blog-content.blog-content tbody tr {
+          border-bottom: 1px solid hsl(var(--border)) !important;
+          transition: background 0.15s ease !important;
+        }
+
+        .blog-content.blog-content tbody tr:last-child {
+          border-bottom: none !important;
+        }
+
+        .blog-content.blog-content tbody tr:nth-child(odd) td {
+          background-color: transparent !important;
+        }
+
+        .blog-content.blog-content tbody tr:nth-child(even) td {
+          background-color: hsl(var(--muted) / 0.3) !important;
+        }
+
+        .blog-content.blog-content tbody tr:hover td {
+          background-color: hsl(var(--primary) / 0.08) !important;
+          color: hsl(var(--foreground)) !important;
+        }
+
+        .blog-content.blog-content td {
+          display: table-cell !important;
+          padding: 10px 16px !important;
+          color: hsl(var(--muted-foreground)) !important;
+          vertical-align: middle !important;
+          line-height: 1.5 !important;
+          border-right: 1px solid hsl(var(--border) / 0.4) !important;
+          font-size: 0.875rem !important;
+          margin: 0 !important;
+        }
+
+        .blog-content.blog-content td:last-child {
+          border-right: none !important;
+        }
+
+        /* ===== LIST STYLES ===== */
         .blog-content ul {
           display: grid !important;
           grid-template-columns: repeat(1, 1fr);
@@ -295,10 +379,6 @@ export default async function BlogPost({
           color: hsl(var(--foreground));
           font-weight: 700;
         }
-        .blog-content strong {
-          color: hsl(var(--foreground));
-          font-weight: 700;
-        }
         .blog-content blockquote {
           border-left: 3px solid hsl(var(--border));
           padding: 0.4rem 1rem;
@@ -326,13 +406,7 @@ export default async function BlogPost({
         }
       `}</style>
       <div
-        className="blog-content prose prose-invert prose-base md:prose-lg max-w-none
-          [&_h2]:text-foreground [&_h2]:font-black [&_h2]:text-xl md:[&_h2]:text-3xl [&_h2]:mt-8 [&_h2]:mb-4 [&_h2]:border-b [&_h2]:border-border [&_h2]:pb-2
-          [&_h3]:text-foreground [&_h3]:font-bold [&_h3]:text-lg [&_h3]:mt-6 [&_h3]:mb-3
-          [&_p]:text-muted-foreground [&_p]:leading-relaxed [&_p]:mb-4
-          [&_a]:text-primary [&_a]:underline
-          [&_blockquote]:border-l-4 [&_blockquote]:border-primary [&_blockquote]:pl-4 [&_blockquote]:text-muted-foreground [&_blockquote]:my-4
-          [&_strong]:text-foreground [&_strong]:font-bold"
+        className="blog-content prose prose-invert prose-base md:prose-lg max-w-none"
         dangerouslySetInnerHTML={{ __html: cleanContent(post.content) }}
       />
       {post.tags?.length > 0 && (
