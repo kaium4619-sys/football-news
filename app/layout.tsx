@@ -45,6 +45,9 @@ export const metadata: Metadata = {
     description: "The ultimate football platform for real-time live scores, breaking news, detailed match stats, and league tables from around the world.",
     creator: "@FootballPulse",
   },
+  other: {
+    monetag: "726d83e129a3ea82e005c07703b705d9",
+  },
 };
 
 export default function RootLayout({
