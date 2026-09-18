@@ -45,9 +45,7 @@ export const metadata: Metadata = {
     description: "The ultimate football platform for real-time live scores, breaking news, detailed match stats, and league tables from around the world.",
     creator: "@FootballPulse",
   },
-  other: {
-    monetag: "726d83e129a3ea82e005c07703b705d9",
-  },
+
 };
 
 export default function RootLayout({
@@ -82,20 +80,7 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2787814744586061"
           crossOrigin="anonymous"
         />
-        {/* Social Bar */}
-        <Script
-          id="social-bar"
-          strategy="afterInteractive"
-          src="https://pl30533575.effectivecpmnetwork.com/cd/4e/0d/cd4e0d0de3561b67b26102602258d9fb.js"
-        />
-        {/* Monetag Zone */}
-        <Script
-          id="monetag-zone"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `(function(s){s.dataset.zone='11420697',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`,
-          }}
-        />
+
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground pb-20 md:pb-0">
         <ThemeProvider

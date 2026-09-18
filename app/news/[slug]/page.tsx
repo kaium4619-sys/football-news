@@ -227,14 +227,15 @@ export default async function BlogPost({
         /* Generic div styling — must NOT apply to table-related wrappers */
         .blog-content > div:not(.table-scroll-wrapper),
         .blog-content p + div:not(.table-scroll-wrapper) {
-          background: hsl(var(--card));
+          background: linear-gradient(135deg, hsl(var(--card)) 0%, rgba(0,230,118,0.03) 100%);
           border: 1px solid hsl(var(--border));
-          border-radius: 12px;
-          padding: 16px 18px;
-          margin: 10px 0;
-          font-size: 14px;
+          border-radius: 14px;
+          padding: 18px 20px;
+          margin: 12px 0;
+          font-size: 14.5px;
           color: hsl(var(--muted-foreground));
-          line-height: 1.6;
+          line-height: 1.7;
+          transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         /* ===== TABLE STYLES ===== */
@@ -320,71 +321,80 @@ export default async function BlogPost({
 
         /* ===== LIST STYLES ===== */
         .blog-content ul {
-          display: grid !important;
-          grid-template-columns: repeat(1, 1fr);
-          gap: 12px;
+          display: flex !important;
+          flex-direction: column !important;
+          gap: 10px !important;
           list-style: none !important;
           padding: 0 !important;
           margin-bottom: 2rem !important;
         }
-        @media (min-width: 640px) {
-          .blog-content ul {
-            grid-template-columns: repeat(2, 1fr);  
-          }
-        }
-        @media (min-width: 768px) {
-          .blog-content ul { grid-template-columns: repeat(3, 1fr);
-          }
-        }
         .blog-content ul li {
-          background: hsl(var(--card));
+          position: relative;
+          background: linear-gradient(135deg, hsl(var(--card)) 0%, rgba(0,230,118,0.03) 100%);
           border: 1px solid hsl(var(--border));
+          border-left: 3px solid #00e676;
           border-radius: 12px;
-          padding: 16px;
-          font-size: 14px;
+          padding: 14px 18px 14px 20px;
+          font-size: 14.5px;
           color: hsl(var(--muted-foreground));
-          line-height: 1.6;
+          line-height: 1.75;
+          transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+          cursor: default;
+        }
+        .blog-content ul li:hover {
+          transform: translateX(4px);
+          box-shadow: 0 4px 24px rgba(0, 230, 118, 0.12);
+          border-color: rgba(0,230,118,0.35);
+          color: hsl(var(--foreground));
         }
         .blog-content ul li::before {
-          content: '🔴';
-          display: block;
-          margin-bottom: 8px;
+          content: '⚽';
+          display: inline-block;
+          margin-right: 10px;
+          font-size: 13px;
+          opacity: 0.85;
+          vertical-align: middle;
         }
         .blog-content h2 {
-          font-size: 1.5rem;
+          font-size: 1.4rem;
           font-weight: 900;
           color: hsl(var(--foreground));
-          margin-top: 3rem;
+          margin-top: 2.5rem;
           margin-bottom: 1rem;
           padding-bottom: 0.5rem;
-          border-bottom: 1px solid hsl(var(--border));
+          border-bottom: 2px solid rgba(0,230,118,0.25);
+          letter-spacing: -0.01em;
         }
         .blog-content h3 {
-          font-size: 1.25rem;
+          font-size: 1.15rem;
           font-weight: 700;
           color: hsl(var(--foreground));
-          margin-top: 2rem;
+          margin-top: 1.75rem;
           margin-bottom: 0.75rem;
         }
         .blog-content p {
           color: hsl(var(--muted-foreground));
-          line-height: 1.85;
+          line-height: 1.9;
           margin-bottom: 1.25rem;
+          font-size: 15px;
         }
         .blog-content a {
-          color: hsl(var(--primary));
+          color: #00e676;
           text-decoration: underline;
+          text-underline-offset: 3px;
         }
         .blog-content strong {
           color: hsl(var(--foreground));
           font-weight: 700;
         }
         .blog-content blockquote {
-          border-left: 3px solid hsl(var(--border));
-          padding: 0.4rem 1rem;
+          border-left: 3px solid #00e676;
+          background: rgba(0,230,118,0.05);
+          padding: 0.75rem 1.25rem;
           color: hsl(var(--muted-foreground));
           font-style: italic;
-          margin: 0.75rem 0;
+          margin: 1.5rem 0;
+          border-radius: 0 10px 10px 0;
         }
 
         .blog-content blockquote::before {
