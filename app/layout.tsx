@@ -80,6 +80,12 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2787814744586061"
           crossOrigin="anonymous"
         />
+        {/* Social Bar */}
+        <Script
+          id="social-bar"
+          strategy="afterInteractive"
+          src="https://pl30533575.profitableratecpmnetwork.com/cd/4e/0d/cd4e0d0de3561b67b26102602258d9fb.js"
+        />
 
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground pb-20 md:pb-0">
