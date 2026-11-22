@@ -22,12 +22,12 @@ export function Navbar() {
   };
 
   const linkClasses = (href: string) =>
-    `flex items-center gap-1 whitespace-nowrap transition-colors ${
+    `flex items-center gap-1 whitespace-nowrap transition-colors no-underline hover:no-underline ${
       activeLink(href) ? "text-primary font-bold" : "hover:text-primary"
     }`;
 
   const mobileLinkClasses = (href: string) =>
-    `flex flex-col items-center justify-center gap-1 transition-colors flex-1 h-full uppercase tracking-tighter ${
+    `flex flex-col items-center justify-center gap-1 transition-colors flex-1 h-full uppercase tracking-tighter no-underline hover:no-underline ${
       activeLink(href) ? "text-primary bg-primary/10" : "text-muted-foreground hover:text-primary"
     }`;
 

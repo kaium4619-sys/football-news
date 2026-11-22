@@ -43,6 +43,14 @@ body {
   @apply antialiased;
 }
 
+/* Remove underline from all links globally */
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+
 /* Custom Scrollbar for a premium feel */
 ::-webkit-scrollbar {
   width: 8px;
