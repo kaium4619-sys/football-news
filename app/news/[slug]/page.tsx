@@ -416,7 +416,7 @@ export default async function BlogPost({
         }
       `}</style>
       <div
-        className="blog-content prose prose-invert prose-base md:prose-lg max-w-none"
+        className="blog-content prose prose-invert prose-base md:prose-lg max-w-none prose-a:no-underline prose-a:decoration-transparent"
         dangerouslySetInnerHTML={{ __html: cleanContent(post.content) }}
       />
       {post.tags?.length > 0 && (

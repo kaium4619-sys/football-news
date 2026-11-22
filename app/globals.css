@@ -44,11 +44,11 @@ body {
 }
 
 /* Remove underline from all links globally */
-a {
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: none;
+a,
+a:hover,
+a:focus,
+a:visited {
+  text-decoration: none !important;
 }
 
 /* Custom Scrollbar for a premium feel */
