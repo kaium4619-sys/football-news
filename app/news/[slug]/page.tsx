@@ -231,13 +231,13 @@ export default async function BlogPost({
         /* Generic div styling — must NOT apply to table-related wrappers */
         .blog-content > div:not(.table-scroll-wrapper),
         .blog-content p + div:not(.table-scroll-wrapper) {
-          background: linear-gradient(135deg, hsl(var(--card)) 0%, rgba(0,230,118,0.03) 100%);
-          border: 1px solid hsl(var(--border));
+          background: var(--card);
+          border: 1px solid var(--border);
           border-radius: 14px;
           padding: 18px 20px;
           margin: 12px 0;
           font-size: 14.5px;
-          color: hsl(var(--muted-foreground));
+          color: var(--muted-foreground);
           line-height: 1.7;
           transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
@@ -334,22 +334,22 @@ export default async function BlogPost({
         }
         .blog-content ul li {
           position: relative;
-          background: linear-gradient(135deg, hsl(var(--card)) 0%, rgba(0,230,118,0.03) 100%);
-          border: 1px solid hsl(var(--border));
-          border-left: 3px solid #00e676;
+          background: var(--card);
+          border: 1px solid var(--border);
+          border-left: 3px solid var(--primary);
           border-radius: 12px;
           padding: 14px 18px 14px 20px;
           font-size: 14.5px;
-          color: hsl(var(--muted-foreground));
+          color: var(--muted-foreground);
           line-height: 1.75;
           transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, color 0.2s ease;
           cursor: default;
         }
         .blog-content ul li:hover {
           transform: translateX(4px);
-          box-shadow: 0 4px 24px rgba(0, 230, 118, 0.12);
-          border-color: rgba(0,230,118,0.35);
-          color: hsl(var(--foreground));
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+          border-color: var(--primary);
+          color: var(--foreground);
         }
         .blog-content ul li::before {
           content: '⚽';
@@ -362,40 +362,45 @@ export default async function BlogPost({
         .blog-content h2 {
           font-size: 1.4rem;
           font-weight: 900;
-          color: hsl(var(--foreground));
+          color: var(--foreground);
           margin-top: 2.5rem;
           margin-bottom: 1rem;
           padding-bottom: 0.5rem;
-          border-bottom: 2px solid rgba(0,230,118,0.25);
+          border-bottom: 2px solid var(--border);
           letter-spacing: -0.01em;
         }
         .blog-content h3 {
           font-size: 1.15rem;
           font-weight: 700;
-          color: hsl(var(--foreground));
+          color: var(--foreground);
           margin-top: 1.75rem;
           margin-bottom: 0.75rem;
         }
         .blog-content p {
-          color: hsl(var(--muted-foreground));
+          color: var(--muted-foreground);
           line-height: 1.9;
           margin-bottom: 1.25rem;
           font-size: 15px;
         }
         .blog-content a {
-          color: #00e676;
-          text-decoration: underline;
-          text-underline-offset: 3px;
+          color: var(--primary);
+          text-decoration: none !important;
+          font-weight: 600;
+          transition: opacity 0.2s ease;
+        }
+        .blog-content a:hover {
+          opacity: 0.8;
+          text-decoration: none !important;
         }
         .blog-content strong {
-          color: hsl(var(--foreground));
+          color: var(--foreground);
           font-weight: 700;
         }
         .blog-content blockquote {
-          border-left: 3px solid #00e676;
-          background: rgba(0,230,118,0.05);
+          border-left: 3px solid var(--primary);
+          background: var(--muted);
           padding: 0.75rem 1.25rem;
-          color: hsl(var(--muted-foreground));
+          color: var(--muted-foreground);
           font-style: italic;
           margin: 1.5rem 0;
           border-radius: 0 10px 10px 0;
@@ -420,7 +425,7 @@ export default async function BlogPost({
         }
       `}</style>
       <div
-        className="blog-content prose prose-invert prose-base md:prose-lg max-w-none prose-a:no-underline prose-a:decoration-transparent"
+        className="blog-content prose dark:prose-invert prose-base md:prose-lg max-w-none prose-a:no-underline prose-a:decoration-transparent"
         dangerouslySetInnerHTML={{ __html: cleanContent(post.content) }}
       />
       {post.tags?.length > 0 && (

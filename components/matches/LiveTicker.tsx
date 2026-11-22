@@ -69,7 +69,7 @@ export default function LiveTicker({ matches }: LiveTickerProps) {
     }
 
     // 3. Set precise animation parameters
-    const PIXELS_PER_SECOND = 60; 
+    const PIXELS_PER_SECOND = 60;
     setTimeout(() => {
       // Re-measure exact width after rendering if needed, but originalWidth is usually fine.
       // We animate exactly the width of ONE set to create a flawless reset
@@ -81,7 +81,8 @@ export default function LiveTicker({ matches }: LiveTickerProps) {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         :root {
           --ticker-bg: #ffffff;
           --text-white: #0f172a;
@@ -256,11 +257,11 @@ export default function LiveTicker({ matches }: LiveTickerProps) {
 
         <div className="ticker-viewport-exact">
           <div className="ticker-track-exact" ref={trackRef}>
-            
+
             {items.map((m, i) => (
               <Link key={`match-${m.id}-${i}`} href={`/matches/${m.id}`} className="match-item-exact">
                 {m.league && <span className="league-name-exact">{m.league.slice(0, 3)}</span>}
-                
+
                 {/* Home Team (Logo left, Name right) */}
                 <div className="team-exact">
                   {m.homeTeam.crest ? (
@@ -270,7 +271,7 @@ export default function LiveTicker({ matches }: LiveTickerProps) {
                   )}
                   <span className="team-name-exact">{m.homeTeam.shortName || m.homeTeam.name}</span>
                 </div>
-                
+
                 <div className="score-block-exact">
                   {m.homeScore != null && m.awayScore != null ? (
                     <span style={{ color: "white" }}>{m.homeScore} - {m.awayScore}</span>
@@ -278,7 +279,7 @@ export default function LiveTicker({ matches }: LiveTickerProps) {
                     <>- - -</>
                   )}
                 </div>
-                
+
                 {/* Away Team (Name left, Logo right) */}
                 <div className="team-exact">
                   <span className="team-name-exact">{m.awayTeam.shortName || m.awayTeam.name}</span>
@@ -288,7 +289,7 @@ export default function LiveTicker({ matches }: LiveTickerProps) {
                     <div className="team-logo-exact"></div>
                   )}
                 </div>
-                
+
                 <span className={m.isLive ? "status-live-exact" : "status-time-exact"}>
                   {m.status}
                 </span>

@@ -92,7 +92,7 @@ export function StandingsWidget({ leagueId = 39 }: { leagueId?: number }) {
                       </td>
                       <td className="px-2 py-3 text-center text-muted-foreground">{standing.all.played}</td>
                       <td className="px-2 py-3 text-center text-muted-foreground">
-                          <span className={cn(standing.goalsDiff > 0 ? "text-emerald-600 dark:text-green-400 font-bold" : (standing.goalsDiff < 0 ? "text-rose-600 dark:text-red-400 font-bold" : ""))}>
+                          <span className={cn(standing.goalsDiff > 0 ? "text-green-400" : (standing.goalsDiff < 0 ? "text-red-400" : ""))}>
                               {standing.goalsDiff > 0 ? `+${standing.goalsDiff}` : standing.goalsDiff}
                           </span>
                       </td>

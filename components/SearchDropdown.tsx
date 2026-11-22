@@ -53,7 +53,7 @@ export function SearchDropdown() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => { if (results) setIsOpen(true); }}
-          className="bg-card border border-border rounded-full pl-10 pr-10 py-1.5 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors w-64"
+          className="bg-card border border-border rounded-full pl-10 pr-10 py-1.5 text-xs focus:outline-none focus:border-primary transition-colors w-64"
         />
         {isLoading && (
           <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground animate-spin" />

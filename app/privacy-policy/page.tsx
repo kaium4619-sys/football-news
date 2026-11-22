@@ -15,7 +15,7 @@ export default function PrivacyPolicyPage() {
           <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tight mb-4">Privacy Policy</h1>
         </div>
 
-        <div className="prose prose-invert max-w-none flex flex-col gap-8 text-foreground/80 leading-relaxed prose-a:no-underline prose-a:decoration-transparent">
+        <div className="prose dark:prose-invert max-w-none flex flex-col gap-8 text-foreground/80 leading-relaxed prose-a:no-underline prose-a:decoration-transparent">
            <section className="flex flex-col gap-4">
               <h2 className="text-2xl font-bold text-foreground uppercase tracking-wide">1. Introduction</h2>
               <p>
