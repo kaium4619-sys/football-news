@@ -84,24 +84,11 @@ export default function LiveTicker({ matches }: LiveTickerProps) {
       <style dangerouslySetInnerHTML={{
         __html: `
         :root {
-          --ticker-bg: #ffffff;
-          --text-white: #0f172a;
-          --text-muted: #64748b;
-          --border-color: #e2e8f0;
-          --ticker-hover: rgba(0, 0, 0, 0.04);
-          --live-badge-bg: #2563eb;
-          --live-badge-text: #ffffff;
-          --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        .dark {
           --ticker-bg: #0b1120;
           --text-white: #ffffff;
           --text-muted: #8493a8;
           --border-color: rgba(255, 255, 255, 0.05);
-          --ticker-hover: rgba(255, 255, 255, 0.03);
-          --live-badge-bg: #00e676;
-          --live-badge-text: #060b14;
+          --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         .ticker-container-exact {
@@ -109,7 +96,6 @@ export default function LiveTicker({ matches }: LiveTickerProps) {
           width: 100%;
           height: 48px;
           background-color: var(--ticker-bg);
-          border-bottom: 1px solid var(--border-color);
           overflow: hidden;
           font-family: var(--font-stack);
           display: flex;
@@ -126,13 +112,13 @@ export default function LiveTicker({ matches }: LiveTickerProps) {
           justify-content: center;
           gap: 6px;
           padding: 0 20px;
-          background-color: var(--live-badge-bg);
+          background-color: #00e65b;
           z-index: 10;
-          box-shadow: 2px 0 10px rgba(0,0,0,0.15);
+          box-shadow: 4px 0 15px rgba(0,0,0,0.5);
         }
 
         .live-text-exact {
-          color: var(--live-badge-text);
+          color: #060b14;
           font-size: 11px;
           font-weight: 900;
           letter-spacing: 0.1em;
@@ -140,7 +126,7 @@ export default function LiveTicker({ matches }: LiveTickerProps) {
         }
 
         .live-icon-exact {
-          color: var(--live-badge-text);
+          color: #060b14;
         }
 
         /* Viewport takes full width so text slides all the way under the badge */
@@ -195,7 +181,7 @@ export default function LiveTicker({ matches }: LiveTickerProps) {
         }
 
         .match-item-exact:hover {
-          background: var(--ticker-hover);
+          background: rgba(255, 255, 255, 0.03);
         }
 
         .league-name-exact {
@@ -215,7 +201,7 @@ export default function LiveTicker({ matches }: LiveTickerProps) {
         .team-logo-exact {
           width: 16px;
           height: 16px;
-          background: transparent;
+          background: #1e293b;
           border-radius: 50%;
           object-fit: contain;
         }
@@ -245,7 +231,7 @@ export default function LiveTicker({ matches }: LiveTickerProps) {
         .status-live-exact {
           font-size: 11px;
           font-weight: 900;
-          color: var(--live-badge-bg);
+          color: #00e65b;
         }
       `}} />
 

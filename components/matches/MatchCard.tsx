@@ -10,7 +10,7 @@ export function MatchCard({ match, className }: { match: Match; className?: stri
   return (
     <Link 
       href={`/matches/${match.fixture.id}`} 
-      className={cn("block w-full overflow-hidden rounded-[14px] border border-border bg-card backdrop-blur-sm hover:border-primary/50 hover:bg-muted transition-all duration-300 group relative p-4 shadow-sm", className)}
+      className={cn("block w-full overflow-hidden rounded-[14px] border border-border dark:border-white/5 bg-card dark:bg-[#0c1527]/80 backdrop-blur-sm hover:border-primary/50 hover:bg-muted dark:hover:bg-[#0c1527] transition-all duration-300 group relative p-4 shadow-sm dark:shadow-lg", className)}
     >
       {/* Subtle glow effect for live matches inside the border */}
       {isLive && <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />}
@@ -48,11 +48,11 @@ export function MatchCard({ match, className }: { match: Match; className?: stri
                 <div className="w-full h-full bg-white/10 rounded-full" />
               )}
             </div>
-            <span className={cn("text-sm font-bold truncate tracking-tight", match.teams.home.winner ? "text-foreground" : "text-foreground/80")}>
+            <span className={cn("text-sm font-bold truncate tracking-tight", match.teams.home.winner ? "text-foreground dark:text-white" : "text-foreground/80 dark:text-white/80")}>
               {match.teams.home.name}
             </span>
           </div>
-          <div className="text-sm font-black flex-shrink-0 pl-3 font-mono text-foreground">
+          <div className="text-sm font-black flex-shrink-0 pl-3 font-mono text-foreground dark:text-white">
             {match.goals.home ?? '-'}
           </div>
         </div>
@@ -67,18 +67,18 @@ export function MatchCard({ match, className }: { match: Match; className?: stri
                 <div className="w-full h-full bg-white/10 rounded-full" />
               )}
             </div>
-            <span className={cn("text-sm font-bold truncate tracking-tight", match.teams.away.winner ? "text-foreground" : "text-foreground/80")}>
+            <span className={cn("text-sm font-bold truncate tracking-tight", match.teams.away.winner ? "text-foreground dark:text-white" : "text-foreground/80 dark:text-white/80")}>
               {match.teams.away.name}
             </span>
           </div>
-          <div className="text-sm font-black flex-shrink-0 pl-3 font-mono text-foreground">
+          <div className="text-sm font-black flex-shrink-0 pl-3 font-mono text-foreground dark:text-white">
             {match.goals.away ?? '-'}
           </div>
         </div>
       </div>
 
       {/* Divider & Footer */}
-      <div className="mt-4 pt-3 border-t border-border flex justify-end relative z-10">
+      <div className="mt-4 pt-3 border-t border-border dark:border-white/5 flex justify-end relative z-10">
         <span className="text-[9px] font-black text-muted-foreground uppercase tracking-widest flex items-center gap-1 group-hover:text-primary transition-colors">
           Match Centre <ArrowRight className="w-3 h-3" />
         </span>
