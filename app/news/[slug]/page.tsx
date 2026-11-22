@@ -23,6 +23,10 @@ function cleanContent(html: string): string {
     .replace(/<div[^>]*>\s*<\/div>/gi, '')
     .replace(/<p[^>]*>\s*<\/p>/gi, '')
     .replace(/^#\s+.+$/gm, "")
+    // Remove [source], [Source], [anything] text inside anchor tags
+    .replace(/(<a[^>]*>)\s*\[[^\]]*\]\s*(<\/a>)/gi, '$1$2')
+    // Also remove standalone [source] / [Source] / [anything in brackets] text anywhere
+    .replace(/\[\s*source\s*\]/gi, '')
     // Convert relative hrefs (not starting with /, http, #, mailto) to absolute paths
     .replace(/href="(?!\/|https?:|mailto:|#)([^"]+)"/gi, 'href="/$1"')
     .trim();
