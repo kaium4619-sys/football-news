@@ -57,10 +57,6 @@ export default async function Home() {
   ]);
 
   const tickerMatches: TickerMatch[] = (matchData?.matches ?? []).slice(0, 14).map(toTickerMatch);
-  const recentMatches: TickerMatch[] = (matchData?.matches ?? [])
-    .filter((m: any) => m.status === "FINISHED")
-    .slice(0, 5)
-    .map(toTickerMatch);
 
   const allPosts = posts ?? [];
   const transferPosts = allPosts.filter(p => (p.tags || []).includes("topic:transfers"));

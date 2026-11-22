@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Activity } from "lucide-react";
 
 export function Footer() {
   return (
