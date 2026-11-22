@@ -1,19 +1,30 @@
 @import "tailwindcss";
 
+/* Tell Tailwind v4 to use the .dark CLASS for dark: variants (required for next-themes) */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --primary: #00c853;
+  --primary-foreground: #ffffff;
+  --card: #f1f5f9;
+  --card-foreground: #0f172a;
+  --border: #cbd5e1;
+  --muted: #e2e8f0;
+  --muted-foreground: #64748b;
+  --accent: #f1f5f9;
+  --accent-foreground: #0f172a;
+}
+
+.dark {
   --background: #0f172a;
-  /* slate-900 */
   --foreground: #f8fafc;
-  /* slate-50 */
   --primary: #00e676;
-  /* Neon Green */
   --primary-foreground: #020617;
-  /* slate-950 */
   --card: #1e293b;
-  /* slate-800 */
   --card-foreground: #f8fafc;
   --border: #334155;
-  /* slate-700 */
   --muted: #334155;
   --muted-foreground: #94a3b8;
   --accent: #1e293b;
