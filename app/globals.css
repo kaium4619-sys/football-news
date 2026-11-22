@@ -72,8 +72,13 @@ a:visited {
 
 /* ── Infinite marquee ticker ──────────────────────────────── */
 @keyframes ticker-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 /* JS sets --ticker-duration via style; fallback = 30s */
@@ -89,8 +94,14 @@ a:visited {
 }
 
 /* Hide native scrollbar for date strips etc. */
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
 /* ── Blog Content Table Styles ────────────────────────────── */
 .blog-content table {
