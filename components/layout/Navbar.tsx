@@ -36,7 +36,9 @@ export function Navbar() {
       <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 flex-shrink-0">
-            <Image src="/logo.png" alt="Football Pulse Logo" width={40} height={40} className="object-contain rounded-full overflow-hidden" />
+            <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 flex items-center justify-center">
+              <Image src="/logo.png" alt="Football Pulse Logo" width={40} height={40} className="object-cover w-full h-full" />
+            </div>
             <span className="font-bold text-xl tracking-tight text-foreground">Football Pulse</span>
           </Link>
 
