@@ -7,15 +7,15 @@
 :root {
   --background: #f0f4f8;        /* soft blue-gray, easy on the eyes */
   --foreground: #0d1b2a;        /* near-black navy for sharp text */
-  --primary: #16a34a;           /* football green — good contrast on light */
+  --primary: #1a56db;           /* strong blue — clean, modern, readable on light */
   --primary-foreground: #ffffff;
   --card: #ffffff;              /* clean white cards */
   --card-foreground: #0d1b2a;
   --border: #d1d9e0;            /* subtle border */
   --muted: #e4eaf0;             /* slightly darker than background */
   --muted-foreground: #4a6080;  /* readable secondary text */
-  --accent: #e8f5e9;            /* light green tint for accents */
-  --accent-foreground: #14532d;
+  --accent: #e8f0fe;            /* light blue tint for accents */
+  --accent-foreground: #1e3a8a;
 }
 
 /* ── Dark Mode ──────────────────────────────────────────── */
