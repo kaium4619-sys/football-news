@@ -89,7 +89,7 @@ export default function LiveTicker({ matches }: LiveTickerProps) {
           --text-muted: #64748b;
           --border-color: #e2e8f0;
           --ticker-hover: #f1f5f9;
-          --live-badge-bg: #0f172a;
+          --live-badge-bg: #2563eb;
           --live-badge-text: #ffffff;
           --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
