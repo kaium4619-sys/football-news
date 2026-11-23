@@ -5,17 +5,25 @@
 
 /* ── Light Mode (default) ───────────────────────────────── */
 :root {
-  --background: #f8fafc;        /* crisp, modern slate-50 canvas */
-  --foreground: #0f172a;        /* deep navy / dark slate text */
-  --primary: #2563eb;           /* classic sports blue — clean, recognizable hyperlink & accent */
+  --background: #f8fafc;
+  /* crisp, modern slate-50 canvas */
+  --foreground: #0f172a;
+  /* deep navy / dark slate text */
+  --primary: #2563eb;
+  /* classic sports blue — clean, recognizable hyperlink & accent */
   --primary-foreground: #ffffff;
-  --card: #ffffff;              /* crisp white cards that pop against canvas */
+  --card: #ffffff;
+  /* crisp white cards that pop against canvas */
   --card-foreground: #0f172a;
-  --border: #e2e8f0;            /* slate-200 clean hairline border */
-  --muted: #f1f5f9;             /* slate-100 gentle background */
-  --muted-foreground: #64748b;  /* readable slate-500 secondary text */
-  --accent: #eff6ff;            /* blue-50 tint for active hover/states */
-  --accent-foreground: #1d4ed8; /* blue-700 deep contrast text */
+  --border: #e2e8f0;
+  /* slate-200 clean hairline border */
+  --muted: #f1f5f9;
+  /* slate-100 gentle background */
+  --muted-foreground: #64748b;
+  /* readable slate-500 secondary text */
+  --accent: #eff6ff;
+  /* blue-50 tint for active hover/states */
+  --accent-foreground: #1d4ed8;
 }
 
 /* ── Dark Mode ──────────────────────────────────────────── */
