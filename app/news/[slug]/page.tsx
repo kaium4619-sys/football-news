@@ -18,6 +18,11 @@ export const revalidate = 0; // always fetch fresh data
 function cleanContent(html: string): string {
   return html
     .replace(/<div[^>]*style="[^"]*text-align:center[^"]*"[^>]*>[\s\S]*?<\/div>/gi, '')
+    // Transform takeaway boxes ("What You Need to Know" list items) into styled elements
+    .replace(/<div[^>]*style="[^"]*margin:\s*20px 0 36px[^"]*"[^>]*>/gi, '<div class="takeaways-list">')
+    .replace(/<div[^>]*style="[^"]*display:\s*flex[^"]*gap:\s*14px[^"]*"[^>]*>/gi, '<div class="takeaway-item">')
+    .replace(/<span[^>]*style="[^"]*font-size:\s*1\.4em[^"]*"[^>]*>/gi, '<span class="takeaway-icon">')
+    .replace(/<span[^>]*style="[^"]*font-size:\s*0\.97em[^"]*"[^>]*>/gi, '<span class="takeaway-text">')
     .replace(/style="[^"]*"/gi, '')
     .replace(/style='[^']*'/gi, '')
     .replace(/<div[^>]*>\s*<\/div>/gi, '')
@@ -374,6 +379,65 @@ export default async function BlogPost({
           font-size: 13px;
           opacity: 0.85;
           vertical-align: middle;
+        }
+
+        /* ===== KEY TAKEAWAYS ("What You Need to Know") ===== */
+        .takeaways-list {
+          display: flex !important;
+          flex-direction: column !important;
+          gap: 12px !important;
+          margin: 1.5rem 0 2.25rem !important;
+          padding: 0 !important;
+        }
+        .takeaway-item {
+          display: flex !important;
+          align-items: flex-start !important;
+          gap: 14px !important;
+          background: var(--card) !important;
+          border: 1px solid var(--border) !important;
+          border-radius: 12px !important;
+          padding: 14px 18px !important;
+          font-size: 14.5px !important;
+          line-height: 1.75 !important;
+          color: var(--muted-foreground) !important;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+          transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, color 0.2s ease !important;
+          cursor: default;
+        }
+        .takeaway-item:hover {
+          transform: translateX(4px) !important;
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+          border-color: #2563eb !important;
+          color: var(--foreground) !important;
+        }
+        .dark .takeaway-item {
+          background: linear-gradient(135deg, hsl(var(--card)) 0%, rgba(0, 230, 118, 0.03) 100%) !important;
+          border: 1px solid hsl(var(--border)) !important;
+          box-shadow: none !important;
+        }
+        .dark .takeaway-item:hover {
+          transform: translateX(4px) !important;
+          box-shadow: 0 4px 24px rgba(0, 230, 118, 0.12) !important;
+          border-color: rgba(0, 230, 118, 0.35) !important;
+          color: hsl(var(--foreground)) !important;
+        }
+        .takeaway-icon {
+          font-size: 1.25rem !important;
+          flex-shrink: 0 !important;
+          line-height: 1.5 !important;
+          margin-top: 1px !important;
+          display: inline-block !important;
+        }
+        .takeaway-text {
+          font-size: 14.5px !important;
+          line-height: 1.75 !important;
+          color: inherit !important;
+        }
+
+        /* Fallback: any list container right after h2 with child divs */
+        .blog-content h2 + div:not(.table-scroll-wrapper) > div {
+          margin-bottom: 10px;
+          line-height: 1.75;
         }
         .blog-content h2 {
           font-size: 1.4rem;
