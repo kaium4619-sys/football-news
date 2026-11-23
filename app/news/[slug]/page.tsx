@@ -241,6 +241,11 @@ export default async function BlogPost({
           line-height: 1.7;
           transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
+        .dark .blog-content > div:not(.table-scroll-wrapper),
+        .dark .blog-content p + div:not(.table-scroll-wrapper) {
+          background: linear-gradient(135deg, hsl(var(--card)) 0%, rgba(0,230,118,0.03) 100%);
+          border: 1px solid hsl(var(--border));
+        }
 
         /* ===== TABLE STYLES ===== */
         .blog-content.blog-content table {
@@ -346,6 +351,8 @@ export default async function BlogPost({
           cursor: default;
         }
         .dark .blog-content ul li {
+          background: linear-gradient(135deg, hsl(var(--card)) 0%, rgba(0,230,118,0.03) 100%);
+          border: 1px solid hsl(var(--border));
           border-left: 3px solid #00e676;
         }
         .blog-content ul li:hover {
@@ -355,8 +362,10 @@ export default async function BlogPost({
           color: var(--foreground);
         }
         .dark .blog-content ul li:hover {
-          border-color: #00e676;
+          transform: translateX(4px);
           box-shadow: 0 4px 24px rgba(0, 230, 118, 0.12);
+          border-color: rgba(0,230,118,0.35);
+          color: hsl(var(--foreground));
         }
         .blog-content ul li::before {
           content: '⚽';
@@ -375,6 +384,9 @@ export default async function BlogPost({
           padding-bottom: 0.5rem;
           border-bottom: 2px solid var(--border);
           letter-spacing: -0.01em;
+        }
+        .dark .blog-content h2 {
+          border-bottom: 2px solid rgba(0,230,118,0.25);
         }
         .blog-content h3 {
           font-size: 1.15rem;
@@ -397,11 +409,16 @@ export default async function BlogPost({
         }
         .dark .blog-content a {
           color: #00e676;
-          text-decoration: none !important;
+          text-decoration: underline !important;
+          text-underline-offset: 3px;
         }
         .blog-content a:hover {
           opacity: 0.8;
           text-decoration: none !important;
+        }
+        .dark .blog-content a:hover {
+          opacity: 0.8;
+          text-decoration: underline !important;
         }
         .blog-content strong {
           color: var(--foreground);
