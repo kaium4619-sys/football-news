@@ -88,8 +88,8 @@ export default function LiveTicker({ matches }: LiveTickerProps) {
           --text-white: #0f172a;
           --text-muted: #64748b;
           --border-color: #e2e8f0;
-          --ticker-hover: rgba(0, 0, 0, 0.04);
-          --live-badge-bg: #00c853;
+          --ticker-hover: #f1f5f9;
+          --live-badge-bg: #16a34a;
           --live-badge-text: #ffffff;
           --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }

@@ -5,17 +5,17 @@
 
 /* ── Light Mode (default) ───────────────────────────────── */
 :root {
-  --background: #ffffff;        /* clean white background */
-  --foreground: #0f172a;        /* sharp slate-900 text */
-  --primary: #00c853;           /* original vibrant green */
+  --background: #f4f6f8;        /* soft modern sports gray canvas */
+  --foreground: #0f172a;        /* deep slate-900 sharp text */
+  --primary: #16a34a;           /* beautiful stadium green with rich contrast */
   --primary-foreground: #ffffff;
-  --card: #f8fafc;              /* clean subtle card */
+  --card: #ffffff;              /* crisp white cards that pop against canvas */
   --card-foreground: #0f172a;
-  --border: #e2e8f0;            /* slate-200 border */
-  --muted: #f1f5f9;             /* slate-100 muted */
-  --muted-foreground: #64748b;  /* readable secondary text */
-  --accent: #f1f5f9;            /* subtle accent */
-  --accent-foreground: #0f172a;
+  --border: #e2e8f0;            /* slate-200 clean hairline border */
+  --muted: #f8fafc;             /* gentle background for secondary items */
+  --muted-foreground: #64748b;  /* readable slate-500 secondary text */
+  --accent: #f0fdf4;            /* soft green tint for active hover/states */
+  --accent-foreground: #15803d; /* deep forest green */
 }
 
 /* ── Dark Mode ──────────────────────────────────────────── */
@@ -56,16 +56,23 @@ body {
   @apply antialiased;
 }
 
-/* Light mode — add soft shadow to cards for depth */
-:root .card,
-:root [class*="bg-card"],
-:root [class*="bg-muted"] {
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+/* Light mode only — modern card elevation & clean header */
+html:not(.dark) header {
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
 }
 
-/* Light mode — navbar/header subtle shadow */
-:root header {
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.07);
+html:not(.dark) footer {
+  background-color: #ffffff;
+}
+
+html:not(.dark) [class*="bg-card"] {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.03);
+}
+
+html:not(.dark) a[class*="bg-card"]:hover,
+html:not(.dark) div[class*="bg-card"]:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
 }
 
 /* Remove underline from all links globally */
