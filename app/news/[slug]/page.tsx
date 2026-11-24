@@ -473,8 +473,7 @@ export default async function BlogPost({
         }
         .dark .blog-content a {
           color: #00e676;
-          text-decoration: underline !important;
-          text-underline-offset: 3px;
+          text-decoration: none !important;
         }
         .blog-content a:hover {
           opacity: 0.8;
@@ -482,7 +481,7 @@ export default async function BlogPost({
         }
         .dark .blog-content a:hover {
           opacity: 0.8;
-          text-decoration: underline !important;
+          text-decoration: none !important;
         }
         .blog-content strong {
           color: var(--foreground);
