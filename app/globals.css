@@ -3,8 +3,25 @@
 /* Tell Tailwind v4 to use the .dark CLASS for dark: variants (required for next-themes) */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* ── Light Mode (default) ───────────────────────────────── */
-:root {
+/* ── Dark Mode (default) ────────────────────────────────── */
+:root,
+.dark {
+  --background: #0f172a;
+  --foreground: #f8fafc;
+  --primary: #00e676;
+  --primary-foreground: #020617;
+  --card: #1e293b;
+  --card-foreground: #f8fafc;
+  --border: #334155;
+  --muted: #334155;
+  --muted-foreground: #94a3b8;
+  --accent: #1e293b;
+  --accent-foreground: #f8fafc;
+}
+
+/* ── Light Mode ─────────────────────────────────────────── */
+.light,
+html:not(.dark) {
   --background: #f8fafc;
   /* crisp, modern slate-50 canvas */
   --foreground: #0f172a;
@@ -24,21 +41,6 @@
   --accent: #eff6ff;
   /* blue-50 tint for active hover/states */
   --accent-foreground: #1d4ed8;
-}
-
-/* ── Dark Mode ──────────────────────────────────────────── */
-.dark {
-  --background: #0f172a;
-  --foreground: #f8fafc;
-  --primary: #00e676;
-  --primary-foreground: #020617;
-  --card: #1e293b;
-  --card-foreground: #f8fafc;
-  --border: #334155;
-  --muted: #334155;
-  --muted-foreground: #94a3b8;
-  --accent: #1e293b;
-  --accent-foreground: #f8fafc;
 }
 
 @theme inline {

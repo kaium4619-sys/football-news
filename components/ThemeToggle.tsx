@@ -17,7 +17,7 @@ export function ThemeToggle() {
         className="p-2 rounded-full border border-border bg-card hover:bg-muted transition-colors flex items-center justify-center w-9 h-9 ml-2"
         aria-label="Toggle theme"
       >
-        <Sun className="h-[1.2rem] w-[1.2rem] text-muted-foreground" />
+        <Moon className="h-[1.2rem] w-[1.2rem] text-muted-foreground" />
       </button>
     );
   }
