@@ -87,12 +87,25 @@ export default function RootLayout({
           src="https://pl30533575.profitableratecpmnetwork.com/cd/4e/0d/cd4e0d0de3561b67b26102602258d9fb.js"
         />
 
+        {/* Force clean dark default if user had old light theme stored */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if (localStorage.getItem('theme') === 'light' && !localStorage.getItem('football-pulse-theme')) {
+                  localStorage.removeItem('theme');
+                }
+              } catch (_) {}
+            `,
+          }}
+        />
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground pb-20 md:pb-0">
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem={false}
+          storageKey="football-pulse-theme"
           disableTransitionOnChange
         >
           <script
